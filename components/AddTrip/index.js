@@ -50,7 +50,11 @@ const AddTrip = ({ navigation }) => {
           </Item>
           <Item floatingLabel last>
             <Label>Details</Label>
-            <Input onChangeText={(details) => setTrip({ ...trip, details })} />
+            <Input
+              multiline={true}
+              style={{ textAlignVertical: "top" }}
+              onChangeText={(details) => setTrip({ ...trip, details })}
+            />
           </Item>
         </Form>
         <AddTripButtonStyled block onPress={handleSubmit}>
