@@ -1,0 +1,84 @@
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import Swipeout from "react-native-swipeout";
+
+//Styles
+import {
+  ListItem,
+  Text,
+  Left,
+  Thumbnail,
+  Body,
+  Right,
+  Button,
+} from "native-base";
+import tripStore from "../../stores/tripStore";
+import { observer } from "mobx-react";
+
+const TripItem = ({ trip }) => {
+  const navigation = useNavigation();
+
+  const newTrip = {
+    title: trip.title,
+    image: trip.image,
+    details: trip.details,
+  };
+
+  const swipeoutBtns = [
+    {
+      text: "Duplicate",
+      backgroundColor: "blue",
+      underlayColor: "rgba(0, 0, 0, 1, 0.6)",
+      onPress: async () => {
+        await tripStore.tripCreate(newTrip);
+      },
+    },
+    {
+      text: "Delete",
+      backgroundColor: "red",
+      underlayColor: "rgba(0, 0, 0, 1, 0.6)",
+      onPress: async () => {
+        await tripStore.tripDelete(trip.id);
+      },
+    },
+  ];
+
+  //TODO: better swipe button width
+
+  return (
+    <Swipeout
+      backgroundColor="transparent"
+      right={swipeoutBtns}
+      buttonWidth={100}
+    >
+      <ListItem thumbnail>
+        <Left>
+          <Thumbnail
+            square
+            source={{
+              uri: trip.image
+                ? trip.image
+                : "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+            }}
+          />
+        </Left>
+        <Body>
+          <Text>{trip.title}</Text>
+          <Text note numberOfLines={1}>
+            {trip.details}
+          </Text>
+        </Body>
+        <Right>
+          <Button
+            onPress={() => navigation.navigate("Trip Detail", { trip: trip })}
+            transparent
+          >
+            <Text>View</Text>
+          </Button>
+        </Right>
+      </ListItem>
+    </Swipeout>
+  );
+};
+
+export default observer(TripItem);
