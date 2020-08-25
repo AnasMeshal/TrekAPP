@@ -8,6 +8,7 @@ export const GoBackIcon = styled(Icon)`
 
 export const IconWrapper = styled.View`
   background-color: #42d4f2;
+  opacity: 0.8;
   border-radius: 50;
   width: 15%;
   align-self: flex-end;
