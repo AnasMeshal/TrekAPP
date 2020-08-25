@@ -1,21 +1,32 @@
 import React from "react";
 
 //Styles
-import { CenterButton } from "./styles";
-import { Button, Text } from "native-base";
+import {
+  CenterButton,
+  SignInButtonStyled,
+  SignUpButtonStyled,
+  BackgroundImage,
+  Title,
+} from "./styles";
+import { Text, Button } from "native-base";
 
 const Home = ({ navigation }) => {
   return (
-    <CenterButton>
-      <Button
-        style={{ padding: "10%", alignSelf: "center" }}
-        onPress={() => navigation.navigate("Trips")}
-        light
-      >
-        <Text>Click Here to Skip</Text>
-      </Button>
-      <Text>Home</Text>
-    </CenterButton>
+    <BackgroundImage
+      source={{
+        uri:
+          "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
+      }}
+    >
+      <Title>Welcome to Trek</Title>
+
+      <SignInButtonStyled onPress={() => navigation.navigate("Trips")}>
+        <Text>Sign in</Text>
+      </SignInButtonStyled>
+      <SignUpButtonStyled onPress={() => navigation.navigate("Trips")}>
+        <Text>Sign up</Text>
+      </SignUpButtonStyled>
+    </BackgroundImage>
   );
 };
 

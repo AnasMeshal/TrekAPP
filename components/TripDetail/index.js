@@ -31,14 +31,22 @@ const TripDetail = ({ route }) => {
         placeholder={trip.title}
         placeholderTextColor="black"
         onChangeText={(title) => setUpdatedTrip({ ...updatedTrip, title })}
-        onEndEditing={() => tripStore.tripUpdate(updatedTrip)}
+        onEndEditing={async () => {
+          await tripStore.tripUpdate(updatedTrip);
+          console.log("TripDetail -> updatedTrip", updatedTrip);
+          console.log("TripDetail -> trip", trip);
+        }}
       />
       <TripDetails
         multiline={true}
         placeholder={trip.details}
         placeholderTextColor="grey"
         onChangeText={(details) => setUpdatedTrip({ ...updatedTrip, details })}
-        onEndEditing={() => tripStore.tripUpdate(updatedTrip)}
+        onEndEditing={async () => {
+          await tripStore.tripUpdate(updatedTrip);
+          console.log("TripDetail -> updatedTrip", updatedTrip);
+          console.log("TripDetail -> trip", trip);
+        }}
       />
     </ScrollView>
   );

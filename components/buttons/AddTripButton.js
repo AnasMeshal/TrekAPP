@@ -2,17 +2,19 @@ import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 //Styles
-import { IconStyled } from "./styles";
+import { IconStyled, IconWrapper } from "./styles";
 
 const AddTripButton = () => {
   const navigation = useNavigation();
 
   return (
-    <IconStyled
-      onPress={() => navigation.navigate("AddTrip")}
-      type="Ionicons"
-      name="add"
-    />
+    <IconWrapper>
+      <IconStyled
+        onPress={() => navigation.navigate("AddTrip")}
+        type="Ionicons"
+        name="add"
+      />
+    </IconWrapper>
   );
 };
 

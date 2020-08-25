@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import Swipeout from "react-native-swipeout";
 
 //Styles
@@ -15,9 +14,7 @@ import {
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
 
-const TripItem = ({ trip }) => {
-  const navigation = useNavigation();
-
+const TripItem = ({ trip, navigation }) => {
   const newTrip = {
     title: trip.title,
     image: trip.image,

@@ -1,17 +1,21 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
+
+//Styles
 import {
   Content,
   Form,
   Item,
   Label,
   Input,
-  Button,
   Text,
   Toast,
   Root,
 } from "native-base";
+import { AddTripButtonStyled } from "./styles";
+
+//Stores
 import tripStore from "../../stores/tripStore";
-import { observer } from "mobx-react";
 
 const AddTrip = ({ navigation }) => {
   const [trip, setTrip] = useState({
@@ -49,14 +53,9 @@ const AddTrip = ({ navigation }) => {
             <Input onChangeText={(details) => setTrip({ ...trip, details })} />
           </Item>
         </Form>
-        <Button
-          style={{ marginRight: "5%", marginLeft: "5%", marginTop: "5%" }}
-          block
-          primary
-          onPress={handleSubmit}
-        >
+        <AddTripButtonStyled block onPress={handleSubmit}>
           <Text>Add</Text>
-        </Button>
+        </AddTripButtonStyled>
       </Content>
     </Root>
   );

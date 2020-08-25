@@ -7,6 +7,7 @@ import { List, Content } from "native-base";
 //Stores
 import tripStore from "../../stores/tripStore";
 import TripItem from "../TripItem";
+import AddTripButton from "../buttons/AddTripButton";
 
 const TripList = ({ navigation }) => {
   const filteredTrip = tripStore.trips.map((trip) => (
@@ -14,9 +15,12 @@ const TripList = ({ navigation }) => {
   ));
 
   return (
-    <Content>
-      <List>{filteredTrip}</List>
-    </Content>
+    <>
+      <Content>
+        <List>{filteredTrip}</List>
+      </Content>
+      <AddTripButton />
+    </>
   );
 };
 
