@@ -1,16 +1,17 @@
 import React from "react";
-import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
 //components
 import Home from "../Home";
 import TripList from "../TripList";
 import AddTrip from "../AddTrip";
-import TripDetail from "../TripDetail";
-import TripTitle from "../TripDetail/TripTitle";
+import Signin from "../authentication/Signin";
+import Signup from "../authentication/Signup";
 
 //Buttons
-import GoBackButton from "../buttons/GoBackButton";
+import AddTripButton from "../buttons/AddTripButton";
+import TripDetail from "../TripDetail";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -22,40 +23,38 @@ const RootNavigator = () => {
         name="Trips"
         component={TripList}
         options={{
-          headerStyle: {
-            backgroundColor: "#42d4f2",
-          },
           title: "Choose a Trip",
-          headerTitleStyle: {
-            color: "white",
-          },
-          headerLeft: () => <GoBackButton />,
+          headerRight: () => <AddTripButton />,
         }}
       />
       <Screen
         name="Trip Detail"
         component={TripDetail}
-        options={{
-          headerStyle: {
-            backgroundColor: "#42d4f2",
-          },
-          headerTitle: () => <TripTitle />,
-          headerLeft: () => <GoBackButton />,
+        options={({ route }) => {
+          const { trip } = route.params;
+          return {
+            title: trip.title,
+          };
         }}
       />
       <Screen
         name="AddTrip"
         component={AddTrip}
         options={{
-          headerStyle: {
-            backgroundColor: "#42d4f2",
-          },
           title: "Add a Trip",
-          headerTitleStyle: {
-            color: "white",
-          },
-          headerLeft: () => <GoBackButton />,
         }}
+      />
+
+      <Screen
+        name="Signin"
+        component={Signin}
+        options={{ headerShown: false }}
+      />
+
+      <Screen
+        name="Signup"
+        component={Signup}
+        options={{ headerShown: false }}
       />
     </Navigator>
   );
