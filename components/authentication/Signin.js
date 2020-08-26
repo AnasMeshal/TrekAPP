@@ -13,6 +13,7 @@ import {
   AuthOther,
   BackgroundImage,
 } from "./styles";
+import { Text } from "native-base";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -33,6 +34,8 @@ const Signin = ({ navigation }) => {
       }}
     >
       <AuthTitle>Sign in</AuthTitle>
+
+      <Text>{authStore.error}</Text>
 
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}

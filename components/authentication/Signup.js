@@ -22,7 +22,13 @@ const Signup = ({ navigation }) => {
     password: "",
   });
 
+  const [error, setError] = useState("");
+
   const handleSubmit = async () => {
+    if (user.firstName === "") {
+      setError("Fill out first name");
+    }
+
     await authStore.signup(user);
     if (authStore.user) navigation.navigate("Trips");
   };
