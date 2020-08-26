@@ -13,6 +13,7 @@ import {
 } from "native-base";
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
+// REVIEW: Clean up your imports
 
 const TripItem = ({ trip, navigation }) => {
   const newTrip = {

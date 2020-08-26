@@ -8,6 +8,7 @@ import { List, Content, View } from "native-base";
 import tripStore from "../../stores/tripStore";
 import TripItem from "./TripItem";
 import AddTripButton from "../buttons/AddTripButton";
+// REVIEW: Clean up your imports
 
 const TripList = ({ navigation }) => {
   const filteredTrip = tripStore.trips.map((trip) => (

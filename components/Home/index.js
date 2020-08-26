@@ -9,6 +9,7 @@ import {
   Title,
 } from "./styles";
 import { Text, Button } from "native-base";
+// REVIEW: Clean up your imports
 
 const Home = ({ navigation }) => {
   return (

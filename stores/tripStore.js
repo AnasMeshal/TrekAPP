@@ -1,4 +1,4 @@
-//React
+//React >> REVIEW: No need for this
 import { decorate, observable } from "mobx";
 import instance from "./instance";
 

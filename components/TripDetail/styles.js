@@ -1,6 +1,7 @@
 //Styled components
 import styled from "styled-components";
 import { Button } from "native-base";
+// REVIEW: Clean up your imports
 
 export const TripImage = styled.Image`
   width: 100%;

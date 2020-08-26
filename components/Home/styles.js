@@ -1,6 +1,7 @@
 //Styled components
 import styled from "styled-components/native";
 import { Button, Text } from "native-base";
+// REVIEW: Clean up your imports
 
 export const BackgroundImage = styled.ImageBackground`
   width: 100%;

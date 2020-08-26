@@ -2,6 +2,8 @@
 import styled from "styled-components";
 import { Content, Button, Form } from "native-base";
 
+// REVIEW: Clean up your imports
+
 export const AddTripButtonStyled = styled(Button)`
   background-color: #42d4f2;
   margin-right: 5%;

@@ -5,6 +5,7 @@ import { TripImage, TripName, TripDetails } from "./styles";
 import { ScrollView } from "react-native";
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
+// REVIEW: Clean up your imports
 
 const TripDetail = ({ route }) => {
   const { trip } = route.params;
