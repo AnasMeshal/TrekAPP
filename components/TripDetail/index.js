@@ -33,8 +33,6 @@ const TripDetail = ({ route }) => {
         onChangeText={(title) => setUpdatedTrip({ ...updatedTrip, title })}
         onEndEditing={async () => {
           await tripStore.tripUpdate(updatedTrip);
-          console.log("TripDetail -> updatedTrip", updatedTrip);
-          console.log("TripDetail -> trip", trip);
         }}
       />
       <TripDetails
@@ -44,8 +42,6 @@ const TripDetail = ({ route }) => {
         onChangeText={(details) => setUpdatedTrip({ ...updatedTrip, details })}
         onEndEditing={async () => {
           await tripStore.tripUpdate(updatedTrip);
-          console.log("TripDetail -> updatedTrip", updatedTrip);
-          console.log("TripDetail -> trip", trip);
         }}
       />
     </ScrollView>

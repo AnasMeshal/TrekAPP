@@ -2,11 +2,11 @@ import React from "react";
 import { observer } from "mobx-react";
 
 //Styles
-import { List, Content } from "native-base";
+import { List, Content, View } from "native-base";
 
 //Stores
 import tripStore from "../../stores/tripStore";
-import TripItem from "../TripItem";
+import TripItem from "./TripItem";
 import AddTripButton from "../buttons/AddTripButton";
 
 const TripList = ({ navigation }) => {
@@ -17,7 +17,9 @@ const TripList = ({ navigation }) => {
   return (
     <>
       <Content>
-        <List>{filteredTrip}</List>
+        <View>
+          <List>{filteredTrip}</List>
+        </View>
       </Content>
       <AddTripButton />
     </>
