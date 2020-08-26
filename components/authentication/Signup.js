@@ -23,7 +23,7 @@ const Signup = ({ navigation }) => {
   });
 
   const [error, setError] = useState("");
-
+  ///TODO: SOFT ERRORS
   const handleSubmit = async () => {
     if (user.firstName === "") {
       setError("Fill out first name");
