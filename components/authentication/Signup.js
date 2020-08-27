@@ -27,7 +27,7 @@ const Signup = ({ navigation }) => {
   const handleSubmit = async () => {
     if (!user.firstName) {
       setError("Please fill out your first name");
-      console.log(error);
+      // console.log(error);
     } else if (!user.lastName) {
       setError("Please fill out your last name");
     } else if (!user.email) {

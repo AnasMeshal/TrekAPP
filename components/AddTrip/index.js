@@ -27,7 +27,7 @@ const AddTrip = ({ navigation }) => {
   const handleSubmit = async () => {
     if (trip.title !== "" /* && trip.image !== "" */ && trip.details !== "") {
       await tripStore.tripCreate(trip);
-      navigation.navigate("Trips");
+      navigation.navigate("Profile");
       Toast.show({
         text: "Trip Added",
       });

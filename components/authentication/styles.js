@@ -4,7 +4,7 @@ export const AuthButton = styled.TouchableOpacity`
   background-color: transparent;
   border: 1px;
   align-self: center;
-  border-radius: 50;
+  border-radius: 50px;
   border-color: white;
   padding: 15px 50px;
   margin-top: 20px;

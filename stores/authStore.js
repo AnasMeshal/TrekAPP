@@ -2,6 +2,7 @@ import { decorate, observable } from "mobx";
 import instance from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-community/async-storage";
+import profileStore from "./profileStore";
 
 class AuthStore {
   user = null;
@@ -12,6 +13,7 @@ class AuthStore {
     await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
+    await profileStore.fetchProfile(this.user);
   };
 
   signup = async (userData) => {

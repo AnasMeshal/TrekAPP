@@ -8,11 +8,12 @@ import TripList from "../TripList";
 import AddTrip from "../AddTrip";
 import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
+import Profile from "../Profile";
 
 //Buttons
-import AddTripButton from "../buttons/AddTripButton";
 import TripDetail from "../TripDetail";
 import GoBackButton from "../buttons/GoBackButton";
+import TempButton from "../buttons/TempButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -32,15 +33,34 @@ const RootNavigator = () => {
             color: "white",
           },
           headerLeft: () => <GoBackButton />,
+          headerRight: () => <TempButton />,
+        }}
+      />
+      <Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: "Profile",
+
+          headerStyle: {
+            backgroundColor: "#42d4f2",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
+          headerLeft: () => <GoBackButton />,
         }}
       />
       <Screen
         name="Trip Detail"
         component={TripDetail}
         options={({ route }) => {
-          const { trip } = route.params;
+          console.log("RootNavigator -> route", route);
+          const { notMyTrip } = route.params;
+          const { myTrip } = route.params;
+
           return {
-            title: trip.title,
+            title: myTrip ? myTrip.title : notMyTrip.title,
             headerStyle: {
               backgroundColor: "#42d4f2",
             },
