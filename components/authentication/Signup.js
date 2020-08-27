@@ -12,6 +12,7 @@ import {
   AuthOther,
   BackgroundImage,
 } from "./styles";
+import { Spinner } from "native-base";
 
 const Signup = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -75,6 +76,10 @@ const Signup = ({ navigation }) => {
           "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
       }}
     >
+      {/* 
+       //TODO
+      <Spinner />
+      {authStore.loading && <Spinner />} */}
       <AuthTitle>Sign up</AuthTitle>
       <AuthButtonText>{error}</AuthButtonText>
       <AuthTextInput
