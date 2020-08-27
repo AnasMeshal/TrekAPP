@@ -14,7 +14,7 @@ import {
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
 
-const TripItem = ({ trip, navigation }) => {
+const TripItem = ({ trip, navigation, isProfile }) => {
   const newTrip = {
     title: trip.title,
     image: trip.image,
@@ -40,41 +40,75 @@ const TripItem = ({ trip, navigation }) => {
     },
   ];
 
-  //TODO: better swipe button width
+  //TODO: better swipe button width and do it in one return
+  if (isProfile) {
+    return (
+      <Swipeout
+        backgroundColor="transparent"
+        right={swipeoutBtns}
+        buttonWidth={100}
+      >
+        <ListItem thumbnail>
+          <Left>
+            <Thumbnail
+              square
+              source={{
+                uri: trip.image
+                  ? trip.image
+                  : "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+              }}
+            />
+          </Left>
+          <Body>
+            <Text>{trip.title}</Text>
+            <Text note numberOfLines={1}>
+              {trip.details}
+            </Text>
+          </Body>
+          <Right>
+            <Button
+              onPress={() =>
+                navigation.navigate("Trip Detail", { myTrip: trip })
+              }
+              transparent
+            >
+              <Text>View</Text>
+            </Button>
+          </Right>
+        </ListItem>
+      </Swipeout>
+    );
+  }
 
   return (
-    <Swipeout
-      backgroundColor="transparent"
-      right={swipeoutBtns}
-      buttonWidth={100}
-    >
-      <ListItem thumbnail>
-        <Left>
-          <Thumbnail
-            square
-            source={{
-              uri: trip.image
-                ? trip.image
-                : "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
-            }}
-          />
-        </Left>
-        <Body>
-          <Text>{trip.title}</Text>
-          <Text note numberOfLines={1}>
-            {trip.details}
-          </Text>
-        </Body>
-        <Right>
-          <Button
-            onPress={() => navigation.navigate("Trip Detail", { trip: trip })}
-            transparent
-          >
-            <Text>View</Text>
-          </Button>
-        </Right>
-      </ListItem>
-    </Swipeout>
+    <ListItem thumbnail>
+      <Left>
+        <Thumbnail
+          square
+          source={{
+            uri: trip.image
+              ? trip.image
+              : "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+          }}
+        />
+      </Left>
+      <Body>
+        <Text>{trip.title}</Text>
+        <Text note numberOfLines={1}>
+          {trip.details}
+        </Text>
+      </Body>
+      <Right>
+        <Button
+          onPress={() =>
+            navigation.navigate("Trip Detail", { notMyTrip: trip })
+          }
+          transparent
+        >
+          <Text>View</Text>
+        </Button>
+      </Right>
+    </ListItem>
   );
 };
 

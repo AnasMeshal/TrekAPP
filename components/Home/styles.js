@@ -39,7 +39,7 @@ export const SignInButtonStyled = styled(Button)`
 export const SignUpButtonStyled = styled(Button)`
   background-color: #42d4f2;
   align-self: center;
-  border-radius: 50;
+  border-radius: 50px;
   padding-right: 40px;
   padding-left: 40px;
 `;

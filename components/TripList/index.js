@@ -10,21 +10,37 @@ import TripItem from "./TripItem";
 import AddTripButton from "../buttons/AddTripButton";
 import authStore from "../../stores/authStore";
 
-const TripList = ({ navigation }) => {
-  const filteredTrip = tripStore.trips
+const TripList = ({ navigation, isProfile }) => {
+  const profileTrips = tripStore.trips
     .filter((trip) => trip.userId === authStore.user.id)
+    .map((trip) => (
+      <TripItem isProfile trip={trip} navigation={navigation} key={trip.id} />
+    ));
+
+  const exploreTrips = tripStore.trips
+    .filter((trip) => trip.userId !== authStore.user.id)
     .map((trip) => (
       <TripItem trip={trip} navigation={navigation} key={trip.id} />
     ));
+
+  if (isProfile) {
+    return (
+      <>
+        <View>
+          <List>{profileTrips}</List>
+        </View>
+        <AddTripButton />
+      </>
+    );
+  }
 
   return (
     <>
       <Content>
         <View>
-          <List>{filteredTrip}</List>
+          <List>{exploreTrips}</List>
         </View>
       </Content>
-      <AddTripButton />
     </>
   );
 };

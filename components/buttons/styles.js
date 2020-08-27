@@ -10,7 +10,7 @@ export const GoBackIcon = styled(Icon)`
 export const IconWrapper = styled.View`
   background-color: #42d4f2;
   opacity: 0.8;
-  border-radius: 50;
+  border-radius: 50px;
   width: 15%;
   align-self: flex-end;
   position: absolute;
@@ -24,4 +24,13 @@ export const IconStyled = styled(Icon)`
   padding-right: 5%;
   padding-left: 5%;
   align-self: center;
+`;
+
+export const TempButtonStyled = styled(Icon)`
+  font-size: 40px;
+  color: white;
+  padding-right: 5%;
+  padding-left: 5%;
+  align-self: center;
+  margin-right: 10px;
 `;
