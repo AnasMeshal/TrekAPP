@@ -48,13 +48,13 @@ const RootNavigator = () => {
       <Screen
         name="Signin"
         component={Signin}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: "Account" }}
       />
 
       <Screen
         name="Signup"
         component={Signup}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: "Account" }}
       />
     </Navigator>
   );
