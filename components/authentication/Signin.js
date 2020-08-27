@@ -21,11 +21,38 @@ const Signin = ({ navigation }) => {
     password: "",
   });
 
+  const handleLogOut = () => {
+    authStore.signout();
+    navigation.navigate("Home");
+  };
+
+  const handleBack = async () => {
+    navigation.navigate("Trips");
+  };
+
   const handleSubmit = async () => {
     await authStore.signin(user);
-
     if (authStore.user) navigation.navigate("Trips");
   };
+
+  if (authStore.user) {
+    return (
+      <BackgroundImage
+        source={{
+          uri:
+            "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
+        }}
+      >
+        <AuthButton onPress={handleLogOut}>
+          <AuthButtonText>Log Out</AuthButtonText>
+        </AuthButton>
+        <AuthButton onPress={handleBack}>
+          <AuthButtonText>Back to Trips</AuthButtonText>
+        </AuthButton>
+      </BackgroundImage>
+    );
+  }
+
   return (
     <BackgroundImage
       source={{
