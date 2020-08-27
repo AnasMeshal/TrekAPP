@@ -25,7 +25,7 @@ export const SignInButtonStyled = styled(Button)`
   align-self: center;
   margin-top: 20px;
   margin-bottom: 30px;
-  border-radius: 50;
+  border-radius: 50px;
   padding-right: 40px;
   padding-left: 40px;
 `;
