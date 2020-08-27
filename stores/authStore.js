@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 class AuthStore {
   user = null;
   error = "";
+  loading = false;
 
   setUser = async (token) => {
     await AsyncStorage.setItem("myToken", token);
@@ -15,8 +16,10 @@ class AuthStore {
 
   signup = async (userData) => {
     try {
+      this.loading = true;
       const res = await instance.post("/signup", userData);
-      this.setUser(res.data.token);
+      await this.setUser(res.data.token);
+      this.loading = false;
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
     }
@@ -26,7 +29,7 @@ class AuthStore {
     try {
       const res = await instance.post("/signin", userData);
       this.error = "";
-      this.setUser(res.data.token);
+      await this.setUser(res.data.token);
     } catch (error) {
       if (error.message.includes("401")) {
         this.error = "Login info incorrect";
@@ -39,6 +42,7 @@ class AuthStore {
     delete instance.defaults.headers.common.Authorization;
     await AsyncStorage.removeItem("myToken");
     this.user = null;
+    this.loading = false;
   };
 
   checkForToken = async () => {
@@ -58,6 +62,7 @@ class AuthStore {
 decorate(AuthStore, {
   user: observable,
   error: observable,
+  loading: observable,
 });
 
 const authStore = new AuthStore();
