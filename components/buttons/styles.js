@@ -4,6 +4,7 @@ import { Icon } from "native-base";
 
 export const GoBackIcon = styled(Icon)`
   color: white;
+  margin-left: 10px;
 `;
 
 export const IconWrapper = styled.View`

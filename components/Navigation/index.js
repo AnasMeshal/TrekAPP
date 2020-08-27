@@ -12,6 +12,7 @@ import Signup from "../authentication/Signup";
 //Buttons
 import AddTripButton from "../buttons/AddTripButton";
 import TripDetail from "../TripDetail";
+import GoBackButton from "../buttons/GoBackButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -23,8 +24,14 @@ const RootNavigator = () => {
         name="Trips"
         component={TripList}
         options={{
+          headerStyle: {
+            backgroundColor: "#42d4f2",
+          },
           title: "Choose a Trip",
-          headerRight: () => <AddTripButton />,
+          headerTitleStyle: {
+            color: "white",
+          },
+          headerLeft: () => <GoBackButton />,
         }}
       />
       <Screen
@@ -34,6 +41,13 @@ const RootNavigator = () => {
           const { trip } = route.params;
           return {
             title: trip.title,
+            headerStyle: {
+              backgroundColor: "#42d4f2",
+            },
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerLeft: () => <GoBackButton />,
           };
         }}
       />
@@ -42,19 +56,27 @@ const RootNavigator = () => {
         component={AddTrip}
         options={{
           title: "Add a Trip",
+
+          headerStyle: {
+            backgroundColor: "#42d4f2",
+          },
+          headerTitleStyle: {
+            color: "white",
+          },
+          headerLeft: () => <GoBackButton />,
         }}
       />
 
       <Screen
         name="Signin"
         component={Signin}
-        options={{ headerShown: false, title: "Account" }}
+        options={{ headerShown: false }}
       />
 
       <Screen
         name="Signup"
         component={Signup}
-        options={{ headerShown: false, title: "Account" }}
+        options={{ headerShown: false }}
       />
     </Navigator>
   );
