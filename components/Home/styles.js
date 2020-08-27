@@ -1,4 +1,10 @@
 //Styled components
+
+/* TODO:
+ REDIRECT
+ close keyboard on return in details
+*/
+
 import styled from "styled-components/native";
 import { Button, Text } from "native-base";
 
@@ -25,7 +31,7 @@ export const SignInButtonStyled = styled(Button)`
   align-self: center;
   margin-top: 20px;
   margin-bottom: 30px;
-  border-radius: 50;
+  border-radius: 50px;
   padding-right: 40px;
   padding-left: 40px;
 `;
