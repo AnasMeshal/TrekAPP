@@ -20,7 +20,7 @@ const Signin = ({ navigation }) => {
     username: "",
     password: "",
   });
-
+  const [error, setError] = useState("");
   const handleLogOut = () => {
     authStore.signout();
     navigation.navigate("Home");
@@ -31,8 +31,14 @@ const Signin = ({ navigation }) => {
   };
 
   const handleSubmit = async () => {
+    if (!user.username) {
+      setError("Please fill out your username");
+    } else if (!user.password) {
+      setError("Please fill out your password");
+    }
     await authStore.signin(user);
     if (authStore.user) navigation.navigate("Trips");
+    if (authStore.user) setError("");
   };
 
   if (authStore.user) {
@@ -62,7 +68,9 @@ const Signin = ({ navigation }) => {
     >
       <AuthTitle>Sign in</AuthTitle>
 
-      <Text>{authStore.error}</Text>
+      {/* <Text>{authStore.error}</Text> */}
+
+      <AuthButtonText>{error}</AuthButtonText>
 
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
