@@ -1,4 +1,10 @@
 //Styled components
+
+/* TODO:
+ REDIRECT
+ close keyboard on return in details
+*/
+
 import styled from "styled-components/native";
 import { Button, Text } from "native-base";
 
