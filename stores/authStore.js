@@ -3,11 +3,13 @@ import instance from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-community/async-storage";
 import profileStore from "./profileStore";
+import { useNavigation, NavigationActions } from "@react-navigation/native";
 
 class AuthStore {
   user = null;
   error = "";
   loading = false;
+  // userLoading = false;
 
   setUser = async (token) => {
     await AsyncStorage.setItem("myToken", token);
@@ -29,9 +31,11 @@ class AuthStore {
 
   signin = async (userData) => {
     try {
+      this.loading = true;
       const res = await instance.post("/signin", userData);
       this.error = "";
       await this.setUser(res.data.token);
+      this.loading = false;
     } catch (error) {
       if (error.message.includes("401")) {
         this.error = "Login info incorrect";
@@ -54,6 +58,7 @@ class AuthStore {
       const user = decode(token);
       if (user.exp >= currentTime) {
         this.setUser(token);
+        // userLoading = true;
       } else {
         this.signout();
       }
@@ -65,6 +70,7 @@ decorate(AuthStore, {
   user: observable,
   error: observable,
   loading: observable,
+  // userLoading: observable,
 });
 
 const authStore = new AuthStore();
