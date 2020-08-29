@@ -1,5 +1,3 @@
-//TODO TOUCHABLE OPACITY OR HIGHLIGHT TO PRESS THE HWOLE LIST ITME
-//TODO STYLING LIBRARY MATERIAL UI
 import React from "react";
 import Swipeout from "react-native-swipeout";
 //TODO: SWITCH TO THIS https://github.com/jemise111/react-native-swipe-list-view
