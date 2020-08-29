@@ -2,6 +2,8 @@
 import { decorate, observable } from "mobx";
 import instance from "./instance";
 
+//TODO: SCROLL UP TO REFRESG
+
 class TripStore {
   trips = [];
   loading = true;
