@@ -9,30 +9,40 @@ import AddTrip from "../AddTrip";
 import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
 import Profile from "../Profile";
+import OtherProfile from "../OtherProfile";
 
 //Buttons
 import TripDetail from "../TripDetail";
 import GoBackButton from "../buttons/GoBackButton";
 import TempButton from "../buttons/TempButton";
+import LogOutButton from "../buttons/LogOutButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
+  // const user = authStore.user;
+  // console.log("RootNavigator -> user", user);
+
   return (
-    <Navigator initialRouteName="Home">
+    <Navigator
+      // initialRouteName={user !== undefined ? "Signin" : "Home"}
+      initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#42d4f2",
+        },
+        headerTitleStyle: {
+          color: "white",
+        },
+      }}
+    >
       <Screen name="Home" component={Home} options={{ headerShown: false }} />
       <Screen
         name="Trips"
         component={TripList}
         options={{
-          headerStyle: {
-            backgroundColor: "#42d4f2",
-          },
           title: "Choose a Trip",
-          headerTitleStyle: {
-            color: "white",
-          },
-          headerLeft: () => <GoBackButton />,
+          headerLeft: () => null,
           headerRight: () => <TempButton />,
         }}
       />
@@ -41,26 +51,17 @@ const RootNavigator = () => {
         component={Profile}
         options={{
           title: "Profile",
-
-          headerStyle: {
-            backgroundColor: "#42d4f2",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
           headerLeft: () => <GoBackButton />,
+          headerRight: () => <LogOutButton />,
         }}
       />
       <Screen
-        name="Trip Detail"
-        component={TripDetail}
+        name="OtherProfile"
+        component={OtherProfile}
         options={({ route }) => {
-          console.log("RootNavigator -> route", route);
-          const { notMyTrip } = route.params;
-          const { myTrip } = route.params;
-
+          const { defIsNotMyProfile } = route.params;
           return {
-            title: myTrip ? myTrip.title : notMyTrip.title,
+            title: defIsNotMyProfile.id,
             headerStyle: {
               backgroundColor: "#42d4f2",
             },
@@ -72,17 +73,22 @@ const RootNavigator = () => {
         }}
       />
       <Screen
+        name="Trip Detail"
+        component={TripDetail}
+        options={({ route }) => {
+          const { notMyTrip } = route.params;
+          const { myTrip } = route.params;
+          return {
+            title: myTrip ? myTrip.title : notMyTrip.title,
+            headerLeft: () => <GoBackButton />,
+          };
+        }}
+      />
+      <Screen
         name="AddTrip"
         component={AddTrip}
         options={{
           title: "Add a Trip",
-
-          headerStyle: {
-            backgroundColor: "#42d4f2",
-          },
-          headerTitleStyle: {
-            color: "white",
-          },
           headerLeft: () => <GoBackButton />,
         }}
       />
