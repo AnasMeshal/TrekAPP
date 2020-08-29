@@ -43,3 +43,12 @@ export const SignUpButtonStyled = styled(Button)`
   padding-right: 40px;
   padding-left: 40px;
 `;
+export const SkipButtonStyled = styled(Button)`
+  margin-right: auto;
+  margin-left: auto;
+  /* margin-top: 100px; */
+`;
+
+export const SkipTextStyled = styled(Text)`
+  font-weight: bold;
+`;

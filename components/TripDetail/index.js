@@ -3,16 +3,22 @@ import { observer } from "mobx-react";
 
 //Stores
 import tripStore from "../../stores/tripStore";
+import profileStore from "../../stores/profileStore";
 
 //Styles
 import { TripImage, TripName, TripDetails } from "./styles";
 import { ScrollView, Text } from "react-native";
+import { Button, Spinner } from "native-base";
 
-const TripDetail = ({ route }) => {
+const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
-  console.log("TripDetail -> myTrip", myTrip);
+  // console.log("TripDetail -> myTrip", myTrip);
   const { notMyTrip } = route.params;
-  console.log("TripDetail -> notMyTrip", notMyTrip);
+  // console.log("TripDetail -> notMyTrip", notMyTrip);
+
+  const isNotMyProfile = profileStore.notMyProfile;
+
+  if (profileStore.loading === true) return <Spinner />;
 
   if (myTrip) {
     const [updatedTrip, setUpdatedTrip] = useState({
@@ -66,6 +72,17 @@ const TripDetail = ({ route }) => {
       />
       <Text>{notMyTrip.title}</Text>
       <Text>{notMyTrip.details}</Text>
+      <Button
+        onPress={() =>
+          navigation.navigate("OtherProfile", {
+            defIsNotMyProfile: isNotMyProfile,
+          })
+        }
+      >
+        <Text>View Profile {isNotMyProfile.id}</Text>
+        {/* //TODO: ADD PROFILE NAME
+        <Text>{isNotMyProfile.id}</Text> */}
+      </Button>
     </ScrollView>
   );
 };

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 //Components
-import TripList from "../TripList";
 
 //Stores
 import profileStore from "../../stores/profileStore";
@@ -10,8 +9,11 @@ import profileStore from "../../stores/profileStore";
 //Styles
 import { ProfileImage, ProfileName, ProfileBio } from "./styles";
 import { ScrollView } from "react-native";
+import MyTripList from "../MyTripList";
+import authStore from "../../stores/authStore";
+import { Text } from "native-base";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const { profile } = profileStore;
 
   const [updatedProfile, setUpdatedProfile] = useState({
@@ -21,16 +23,17 @@ const Profile = () => {
     id: profile.id,
   });
 
-  return (
-    <ScrollView>
-      <ProfileImage
-        source={{
-          uri:
-            "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
-        }}
-      />
+  if (authStore.user) {
+    return (
+      <ScrollView>
+        <ProfileImage
+          source={{
+            uri:
+              "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
+          }}
+        />
 
-      {/* TODO profile name
+        {/* TODO profile name
        <ProfileName
         maxLength={40}
         blurOnSubmit={true}
@@ -44,18 +47,21 @@ const Profile = () => {
           await tripStore.tripUpdate(updatedProfile);
         }}
       /> */}
-      <ProfileBio
-        multiline={true}
-        placeholder={profile.bio}
-        placeholderTextColor="grey"
-        onChangeText={(bio) => setUpdatedProfile({ ...updatedProfile, bio })}
-        onEndEditing={async () => {
-          await profileStore.profileUpdate(updatedProfile);
-        }}
-      />
-      <TripList isProfile />
-    </ScrollView>
-  );
+        <ProfileBio
+          multiline={true}
+          placeholder={profile.bio}
+          placeholderTextColor="grey"
+          onChangeText={(bio) => setUpdatedProfile({ ...updatedProfile, bio })}
+          onEndEditing={async () => {
+            await profileStore.profileUpdate(updatedProfile);
+          }}
+        />
+        <MyTripList isProfile navigation={navigation} />
+      </ScrollView>
+    );
+  } else {
+    return <Text>Sign in</Text>;
+  }
 };
 
 export default observer(Profile);
