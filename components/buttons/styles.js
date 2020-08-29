@@ -1,6 +1,6 @@
 //Styled components
 import styled from "styled-components";
-import { Icon } from "native-base";
+import { Icon, Text, Button } from "native-base";
 
 export const GoBackIcon = styled(Icon)`
   color: white;
@@ -32,5 +32,10 @@ export const TempButtonStyled = styled(Icon)`
   padding-right: 5%;
   padding-left: 5%;
   align-self: center;
+  margin-right: 10px;
+`;
+
+export const LogOutStyled = styled(Icon)`
+  color: #ff362e;
   margin-right: 10px;
 `;

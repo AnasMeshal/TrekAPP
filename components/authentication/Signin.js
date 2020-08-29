@@ -13,7 +13,7 @@ import {
   AuthOther,
   BackgroundImage,
 } from "./styles";
-import { Text } from "native-base";
+import { Spinner } from "native-base";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -21,14 +21,20 @@ const Signin = ({ navigation }) => {
     password: "",
   });
   const [error, setError] = useState("");
-  const handleLogOut = () => {
-    authStore.signout();
-    navigation.navigate("Home");
-  };
-
-  const handleBack = async () => {
-    navigation.navigate("Trips");
-  };
+  if (
+    authStore.loading === true
+    //TODO: BE SIGN IN/UP ERRORS && authStore.error !== ""
+  )
+    return (
+      <BackgroundImage
+        source={{
+          uri:
+            "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
+        }}
+      >
+        <Spinner color="orange" />
+      </BackgroundImage>
+    );
 
   const handleSubmit = async () => {
     if (!user.username) {
@@ -37,27 +43,9 @@ const Signin = ({ navigation }) => {
       setError("Please fill out your password");
     }
     await authStore.signin(user);
-    if (authStore.user) navigation.navigate("Trips");
+    if (authStore.user) navigation.replace("Trips");
     if (authStore.user) setError("");
   };
-
-  if (authStore.user) {
-    return (
-      <BackgroundImage
-        source={{
-          uri:
-            "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-        }}
-      >
-        <AuthButton onPress={handleLogOut}>
-          <AuthButtonText>Log Out</AuthButtonText>
-        </AuthButton>
-        <AuthButton onPress={handleBack}>
-          <AuthButtonText>Back to Trips</AuthButtonText>
-        </AuthButton>
-      </BackgroundImage>
-    );
-  }
 
   return (
     <BackgroundImage
@@ -88,7 +76,7 @@ const Signin = ({ navigation }) => {
       <AuthButton onPress={handleSubmit}>
         <AuthButtonText>Sign in</AuthButtonText>
       </AuthButton>
-      <AuthOther onPress={() => navigation.navigate("Signup")}>
+      <AuthOther onPress={() => navigation.replace("Signup")}>
         New to Trek? Sign up.
       </AuthOther>
     </BackgroundImage>
