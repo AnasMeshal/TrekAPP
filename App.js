@@ -5,12 +5,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components";
 
 //Components
-import RootNavigator from "./components/Navigation";
+import BottomTab from "./components/Navigation/BottomTab";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <BottomTab />
     </NavigationContainer>
   );
 }
