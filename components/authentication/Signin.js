@@ -43,7 +43,7 @@ const Signin = ({ navigation }) => {
       setError("Please fill out your password");
     }
     await authStore.signin(user);
-    if (authStore.user) navigation.replace("Trips");
+    if (authStore.user) navigation.replace("Profile");
     if (authStore.user) setError("");
   };
 

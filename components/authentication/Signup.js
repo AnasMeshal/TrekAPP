@@ -49,7 +49,7 @@ const Signup = ({ navigation }) => {
       setError("Please fill out your password");
     }
     await authStore.signup(user);
-    if (authStore.user) navigation.navigate("Trips");
+    if (authStore.user) navigation.navigate("Profile");
     if (authStore.user) setError("");
   };
 
