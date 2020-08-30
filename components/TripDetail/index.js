@@ -18,8 +18,6 @@ const TripDetail = ({ route, navigation }) => {
 
   const isNotMyProfile = profileStore.notMyProfile;
 
-  if (profileStore.loading === true) return <Spinner />;
-
   if (myTrip) {
     const [updatedTrip, setUpdatedTrip] = useState({
       title: myTrip.title,
