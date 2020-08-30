@@ -26,16 +26,7 @@ export const IconStyled = styled(Icon)`
   align-self: center;
 `;
 
-export const TempButtonStyled = styled(Icon)`
-  font-size: 40px;
-  color: white;
-  padding-right: 5%;
-  padding-left: 5%;
-  align-self: center;
-  margin-right: 10px;
-`;
-
 export const LogOutStyled = styled(Icon)`
   color: #ff362e;
-  margin-right: 10px;
+  margin-left: 10px;
 `;
