@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Icon } from "native-base";
 
 export const AuthButton = styled.TouchableOpacity`
   background-color: transparent;
@@ -63,4 +64,12 @@ export const BackgroundImage = styled.ImageBackground`
 
 export const BackgroundTint = styled.View`
   background-color: rgba(0, 0, 0, 0.7);
+`;
+
+export const X = styled(Icon)`
+  position: absolute;
+  color: white;
+  top: 30px;
+  right: 5px;
+  font-size: 40px;
 `;
