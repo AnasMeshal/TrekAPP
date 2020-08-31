@@ -10,6 +10,11 @@ import TripItem from "./TripItem";
 import AddTripButton from "../buttons/AddTripButton";
 import authStore from "../../stores/authStore";
 
+/**
+ * This component should not exist
+ * it should be combined with the original TripList
+ */
+
 const TripList = ({ navigation, isProfile, otherProfileTrips }) => {
   if (!authStore.user) return null;
   //TODO RETURN NICE MESSAGE

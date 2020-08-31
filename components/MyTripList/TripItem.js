@@ -1,3 +1,7 @@
+/**
+ * I don't need to tell you how terrible practice it is to literally copy an entire file as it is
+ */
+
 import React from "react";
 import Swipeout from "react-native-swipeout";
 //TODO: SWITCH TO THIS https://github.com/jemise111/react-native-swipe-list-view

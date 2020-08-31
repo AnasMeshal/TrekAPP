@@ -12,6 +12,7 @@ import { Button, Spinner } from "native-base";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
+  // remove console logs and commented code like this
   // console.log("TripDetail -> myTrip", myTrip);
   const { notMyTrip } = route.params;
   // console.log("TripDetail -> notMyTrip", notMyTrip);
@@ -59,6 +60,13 @@ const TripDetail = ({ route, navigation }) => {
       </ScrollView>
     );
   }
+
+  /**
+   * I think you can set editable to false for TextInput.
+   * By doing that, you don't need this if statement and two returns.
+   * My comment is: Clean up this code.
+   * Look into this: https://dev.to/skptricks/react-native-enable-and-disable-textinput-programmatically-1b99#:~:text=If%20the%20value%20of%20editable,now%20enter%20value%20inside%20it.
+   */
 
   return (
     <ScrollView>

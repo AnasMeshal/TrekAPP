@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
-//components
+// Components
 import Home from "../Home";
 import TripList from "../TripList";
 import AddTrip from "../AddTrip";
@@ -10,9 +10,9 @@ import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
 import Profile from "../Profile";
 import OtherProfile from "../OtherProfile";
-
-//Buttons
 import TripDetail from "../TripDetail";
+
+// Buttons
 import GoBackButton from "../buttons/GoBackButton";
 import TempButton from "../buttons/TempButton";
 import LogOutButton from "../buttons/LogOutButton";

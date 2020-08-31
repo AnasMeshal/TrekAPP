@@ -4,6 +4,8 @@ import instance from "./instance";
 
 class ProfileStore {
   profile = [];
+  // call this userProfile
+  // Ask Laila if she thinks this is a good name or if she has a better one in mind.
   notMyProfile = [];
 
   //TODO SET LOADING TO FALSE ONCE YOU OPEN THE PROFILE
@@ -11,6 +13,7 @@ class ProfileStore {
 
   fetchProfile = async (user) => {
     try {
+      // Delete this method, you won't need it, youll pass the profile in the token payload
       const res = await instance.get("/profiles", user);
       this.profile = res.data;
     } catch (error) {
@@ -29,9 +32,10 @@ class ProfileStore {
 
   findNotMyProfile = async (userId) => {
     try {
+      // call this fetchProfile
       const res = await instance.post("/profiles", userId);
       this.notMyProfile = res.data;
-      return this.notMyProfile;
+      return this.notMyProfile; // no need to return
     } catch (error) {
       console.error("ProfileStore -> notMyProfile -> error", error);
     }

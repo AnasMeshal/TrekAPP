@@ -15,6 +15,8 @@ class AuthStore {
     await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
+
+    // no need for this. youll receive the profile object in the payload.
     await profileStore.fetchProfile(this.user);
   };
 
@@ -57,7 +59,7 @@ class AuthStore {
       const currentTime = Date.now() / 1000;
       const user = decode(token);
       if (user.exp >= currentTime) {
-        this.setUser(token);
+        this.setUser(token); // await
         // userLoading = true;
       } else {
         this.signout();

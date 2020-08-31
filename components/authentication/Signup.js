@@ -36,8 +36,10 @@ const Signup = ({ navigation }) => {
       </BackgroundImage>
     );
   const handleSubmit = async () => {
+    // again, remove the else's
     if (!user.firstName) {
       setError("Please fill out your first name");
+      // remove this commented console log
       // console.log(error);
     } else if (!user.lastName) {
       setError("Please fill out your last name");
@@ -49,6 +51,7 @@ const Signup = ({ navigation }) => {
       setError("Please fill out your password");
     }
     await authStore.signup(user);
+    // same comments here
     if (authStore.user) navigation.navigate("Trips");
     if (authStore.user) setError("");
   };

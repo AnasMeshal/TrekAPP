@@ -39,12 +39,21 @@ const Signin = ({ navigation }) => {
   const handleSubmit = async () => {
     if (!user.username) {
       setError("Please fill out your username");
-    } else if (!user.password) {
+    }
+    if (!user.password) {
       setError("Please fill out your password");
     }
+
+    /**
+     * Having the else is an issue because what if the username isn't empty but the password is?
+     * It won't set the error message for PW because the username isn't empty. So remove the else.
+     */
+
     await authStore.signin(user);
+    // combine the if-statements into one
     if (authStore.user) navigation.replace("Trips");
     if (authStore.user) setError("");
+    // probably have an else that responds properly.
   };
 
   return (
@@ -56,6 +65,7 @@ const Signin = ({ navigation }) => {
     >
       <AuthTitle>Sign in</AuthTitle>
 
+      {/* remove this line */}
       {/* <Text>{authStore.error}</Text> */}
 
       <AuthButtonText>{error}</AuthButtonText>

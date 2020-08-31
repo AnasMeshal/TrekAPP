@@ -12,7 +12,12 @@ import {
 } from "./styles";
 import { Text } from "native-base";
 
+// im not gonna add a space for every single comment in your code
+// but you should have a space after the // for your comments
+// instead of:
 //Stores
+// have:
+// Stores
 import authStore from "../../stores/authStore";
 import { observer } from "mobx-react";
 

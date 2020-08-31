@@ -1,9 +1,13 @@
 import React from "react";
 import { LogOutStyled } from "./styles";
 import authStore from "../../stores/authStore";
-import { Alert } from "react-native";
+import { Alert } from "react-native"; // remove unused imports
 import { useNavigation, NavigationActions } from "@react-navigation/native";
 import { observer } from "mobx-react";
+
+// Remove any code commented that you're not using.
+// Keep your master branch sacred and pure from
+// dirty code and excess comments.
 
 const LogOutButton = () => {
   const navigation = useNavigation();
