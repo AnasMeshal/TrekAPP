@@ -41,7 +41,7 @@ const RootNavigator = () => {
         name="Trips"
         component={TripList}
         options={{
-          title: "Choose a Trip",
+          title: "Explore Trips",
           headerLeft: () => null,
           headerRight: () => <TempButton />,
         }}
@@ -61,7 +61,7 @@ const RootNavigator = () => {
         options={({ route }) => {
           const { defIsNotMyProfile } = route.params;
           return {
-            title: defIsNotMyProfile.id,
+            title: defIsNotMyProfile.user.username,
             headerStyle: {
               backgroundColor: "#42d4f2",
             },
