@@ -1,14 +1,15 @@
 import React from "react";
+import { observer } from "mobx-react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-//Components
+// Components
 import Modal from "../Modal";
 import FirstTimeVisiting from "../FirstTimeVisiting";
 
-//Navigation
+// Navigation
 import BottomTab from "./BottomTab";
 
-//Stores
+// Stores
 import authStore from "../../stores/authStore";
 
 const { Navigator, Screen } = createStackNavigator();
@@ -18,9 +19,7 @@ const Main = () => {
     <Navigator
       headerMode="none"
       mode="modal"
-      initialRouteName={
-        authStore.user === null ? "FirstTimeVisiting" : "BottomTab"
-      }
+      initialRouteName={"FirstTimeVisiting" || "BottomTab"}
     >
       <Screen
         name="BottomTab"
@@ -28,9 +27,11 @@ const Main = () => {
         options={{ animationTypeForReplace: "pop" }}
       />
       <Screen name="Modal" component={Modal} />
-      <Screen name="FirstTimeVisiting" component={FirstTimeVisiting} />
+      {authStore.user === null && (
+        <Screen name="FirstTimeVisiting" component={FirstTimeVisiting} />
+      )}
     </Navigator>
   );
 };
 
-export default Main;
+export default observer(Main);
