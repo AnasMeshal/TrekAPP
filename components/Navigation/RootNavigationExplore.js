@@ -2,12 +2,12 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
-//components
+// Components
 import TripList from "../TripList";
 import AddTrip from "../AddTrip";
 import OtherProfile from "../OtherProfile";
 
-//Buttons
+// Buttons
 import TripDetail from "../TripDetail";
 import GoBackButton from "../buttons/GoBackButton";
 
