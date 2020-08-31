@@ -20,12 +20,7 @@ const Home = ({ navigation }) => {
   //TODO: MOVE THIS TO DEFAULT PAGE IN NAVIGATION
 
   return (
-    <BackgroundImage
-      source={{
-        uri:
-          "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-      }}
-    >
+    <BackgroundImage source={require("../../Signing.jpg")}>
       <Title>Welcome to Trek</Title>
 
       <SignInButtonStyled onPress={() => navigation.replace("Signin")}>

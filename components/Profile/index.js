@@ -47,6 +47,7 @@ const Profile = ({ navigation }) => {
           await tripStore.tripUpdate(updatedProfile);
         }}
       /> */}
+
         <ProfileBio
           multiline={true}
           placeholder={profile.bio}
