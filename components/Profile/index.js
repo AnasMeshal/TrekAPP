@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-//Components
+// Components
 
-//Stores
-import profileStore from "../../stores/profileStore";
+// Stores
+import authStore from "../../stores/authStore";
 
-//Styles
+// Styles
 import { ProfileImage, ProfileName, ProfileBio } from "./styles";
 import { ScrollView } from "react-native";
 import MyTripList from "../MyTripList";
-import authStore from "../../stores/authStore";
 import { Text } from "native-base";
 import Markdown from "react-native-simple-markdown";
 
 const Profile = ({ navigation }) => {
-  const { profile } = profileStore;
+  const userProfile = authStore.user.profile;
 
   const [updatedProfile, setUpdatedProfile] = useState({
     // name: profile.title,
-    image: profile.image,
-    bio: profile.bio,
-    id: profile.id,
+    image: userProfile.image,
+    bio: userProfile.bio,
+    id: userProfile.id,
   });
 
   if (authStore.user) {
@@ -34,7 +33,7 @@ const Profile = ({ navigation }) => {
           }}
         />
 
-        {/* TODO profile name
+        {/* TODO userProfile name
        <ProfileName
         maxLength={40}
         blurOnSubmit={true}
@@ -51,7 +50,7 @@ const Profile = ({ navigation }) => {
 
         <ProfileBio
           multiline={true}
-          placeholder={profile.bio}
+          placeholder={userProfile.bio}
           placeholderTextColor="grey"
           onChangeText={(bio) => setUpdatedProfile({ ...updatedProfile, bio })}
           onEndEditing={async () => {

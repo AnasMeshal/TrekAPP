@@ -22,8 +22,7 @@ const TripDetail = ({ route, navigation }) => {
   // console.log("TripDetail -> myTrip", myTrip);
   const { notMyTrip } = route.params;
   // console.log("TripDetail -> notMyTrip", notMyTrip);
-
-  const isNotMyProfile = profileStore.notMyProfile;
+  const { notMyProfile } = route.params;
 
   if (myTrip) {
     const [updatedTrip, setUpdatedTrip] = useState({
@@ -80,12 +79,12 @@ const TripDetail = ({ route, navigation }) => {
       <ProfileButton
         onPress={() =>
           navigation.navigate("OtherProfile", {
-            defIsNotMyProfile: isNotMyProfile,
+            defIsNotMyProfile: notMyProfile,
           })
         }
       >
         <ProfileButtonText>
-          View {isNotMyProfile.user.username}'s Profile
+          View {notMyProfile.user.username}'s Profile
         </ProfileButtonText>
       </ProfileButton>
     </ScrollView>
