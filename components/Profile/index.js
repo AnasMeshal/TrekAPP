@@ -19,16 +19,6 @@ import {
   SignInOrSignUpButton,
   StyledText,
 } from "./styles";
-
-import {
-  CenterButton,
-  SignInButtonStyled,
-  SignUpButtonStyled,
-  BackgroundImage,
-  Title,
-  SkipButtonStyled,
-  SkipTextStyled,
-} from "./styles";
 import { ScrollView } from "react-native";
 import { Text } from "native-base";
 
@@ -89,24 +79,9 @@ const Profile = ({ navigation }) => {
         <StyledText>
           You need to sign in or sign up to view your profile
         </StyledText>
-        <SignInOrSignUpButton onPress={() => navigation.navigate("Signin")}>
+        <SignInOrSignUpButton onPress={() => navigation.navigate("Modal")}>
           <Text>Sign in</Text>
         </SignInOrSignUpButton>
-        {/* <BackgroundImage
-          source={{
-            uri:
-              "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-          }}
-        >
-          <Title>Welcome to Trek</Title>
-
-          <SignInButtonStyled onPress={() => navigation.replace("Signin")}>
-            <Text>Sign in</Text>
-          </SignInButtonStyled>
-          <SignUpButtonStyled onPress={() => navigation.replace("Signup")}>
-            <Text>Sign up</Text>
-          </SignUpButtonStyled>
-        </BackgroundImage> */}
       </>
     );
   }
