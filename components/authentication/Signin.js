@@ -12,6 +12,8 @@ import {
   AuthButtonText,
   AuthOther,
   BackgroundImage,
+  SkipButtonStyled,
+  SkipTextStyled,
 } from "./styles";
 import { Spinner } from "native-base";
 
@@ -26,12 +28,7 @@ const Signin = ({ navigation }) => {
     //TODO: BE SIGN IN/UP ERRORS && authStore.error !== ""
   )
     return (
-      <BackgroundImage
-        source={{
-          uri:
-            "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-        }}
-      >
+      <BackgroundImage source={require("../../Signing.jpg")}>
         <Spinner color="orange" />
       </BackgroundImage>
     );
@@ -48,12 +45,7 @@ const Signin = ({ navigation }) => {
   };
 
   return (
-    <BackgroundImage
-      source={{
-        uri:
-          "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-      }}
-    >
+    <BackgroundImage source={require("../../Signing.jpg")}>
       <AuthTitle>Sign in</AuthTitle>
 
       {/* <Text>{authStore.error}</Text> */}
@@ -79,6 +71,9 @@ const Signin = ({ navigation }) => {
       <AuthOther onPress={() => navigation.replace("Signup")}>
         New to Trek? Sign up.
       </AuthOther>
+      <SkipButtonStyled transparent onPress={() => navigation.replace("Trips")}>
+        <SkipTextStyled>Skip Sign-In</SkipTextStyled>
+      </SkipButtonStyled>
     </BackgroundImage>
   );
 };
