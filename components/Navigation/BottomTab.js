@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 //Navigation
@@ -16,16 +17,6 @@ const BottomTab = () => {
       tabBarOptions={{
         showLabel: false,
       }}
-      // tabBarOptions={{
-      //   showIcon: true,
-      //   showLabel: false,
-      //   lazyLoad: true,
-      //   style: {
-      //     backgroundColor: "transparent",
-      //     borderTopWidth: 0,
-      //     position: "absolute",
-      //   },
-      // }}
       initialRouteName="Explore"
     >
       <Screen
@@ -50,4 +41,4 @@ const BottomTab = () => {
   );
 };
 
-export default BottomTab;
+export default observer(BottomTab);
