@@ -46,8 +46,8 @@ const TripItem = ({ trip, navigation, isProfile }) => {
     },
   ];
 
-  const view = () => {
-    profileStore.findNotMyProfile(notMyUserId),
+  const view = async () => {
+    await profileStore.findNotMyProfile(notMyUserId),
       navigation.push("Trip Detail", { notMyTrip: trip });
   };
 

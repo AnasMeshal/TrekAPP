@@ -16,7 +16,6 @@ import {
   ProfileButtonText,
 } from "./styles";
 import { ScrollView, Text } from "react-native";
-import { Button, Spinner } from "native-base";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
@@ -88,8 +87,6 @@ const TripDetail = ({ route, navigation }) => {
         <ProfileButtonText>
           View {isNotMyProfile.user.username}'s Profile
         </ProfileButtonText>
-        {/* //TODO: ADD PROFILE NAME
-        <Text>{isNotMyProfile.id}</Text> */}
       </ProfileButton>
     </ScrollView>
   );
