@@ -2,15 +2,12 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
-//components
-
+// Components
 import AddTrip from "../AddTrip";
-import Signin from "../authentication/Signin";
-import Signup from "../authentication/Signup";
 import Profile from "../Profile";
 import TripDetail from "../TripDetail";
 
-//Buttons
+// Buttons
 import GoBackButton from "../buttons/GoBackButton";
 import LogOutButton from "../buttons/LogOutButton";
 
@@ -48,17 +45,6 @@ const RootNavigatorProfile = () => {
         }}
       />
 
-      <Screen
-        name="Signin"
-        component={Signin}
-        options={{ headerShown: false }}
-      />
-
-      <Screen
-        name="Signup"
-        component={Signup}
-        options={{ headerShown: false }}
-      />
       <Screen
         name="Trip Detail"
         component={TripDetail}
