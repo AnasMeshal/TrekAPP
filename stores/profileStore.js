@@ -5,6 +5,7 @@ import instance from "./instance";
 class ProfileStore {
   profile = [];
   notMyProfile = [];
+  whoIsShowing = "SignIn";
 
   //TODO SET LOADING TO FALSE ONCE YOU OPEN THE PROFILE
   //TODO: IF SIGNED IN FOR TOO LONG DELETE TOKEN OR ELSE ERRORS
@@ -41,6 +42,7 @@ class ProfileStore {
 decorate(ProfileStore, {
   profile: observable,
   notMyProfile: observable,
+  whoIsShowing: observable,
 });
 
 const profileStore = new ProfileStore();

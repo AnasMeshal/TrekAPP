@@ -11,9 +11,11 @@ import {
   AuthButtonText,
   AuthOther,
   BackgroundImage,
+  X,
 } from "./styles";
 import { Spinner } from "native-base";
 import { observer } from "mobx-react";
+import profileStore from "../../stores/profileStore";
 
 const Signup = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -49,7 +51,7 @@ const Signup = ({ navigation }) => {
       setError("Please fill out your password");
     }
     await authStore.signup(user);
-    if (authStore.user) navigation.navigate("Trips");
+    if (authStore.user) navigation.replace("BottomTab");
     if (authStore.user) setError("");
   };
 
@@ -64,6 +66,11 @@ const Signup = ({ navigation }) => {
        //TODO
       <Spinner />
       {authStore.loading && <Spinner />} */}
+      <X
+        onPress={() => navigation.replace("BottomTab")}
+        name="close"
+        type="AntDesign"
+      />
       <AuthTitle>Sign up</AuthTitle>
       <AuthButtonText>{error}</AuthButtonText>
       <AuthTextInput
@@ -105,7 +112,7 @@ const Signup = ({ navigation }) => {
       <AuthButton onPress={handleSubmit}>
         <AuthButtonText>Sign up</AuthButtonText>
       </AuthButton>
-      <AuthOther onPress={() => navigation.replace("Signin")}>
+      <AuthOther onPress={() => (profileStore.whoIsShowing = "SignIn")}>
         Already have an account? Sign in.
       </AuthOther>
     </BackgroundImage>
