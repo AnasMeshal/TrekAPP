@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
+// Components
+
+// Stores
+import authStore from "../../stores/authStore";
+
+// Styles
+import { ProfileImage, ProfileName, ProfileBio } from "./styles";
+import { ScrollView } from "react-native";
+import MyTripList from "../MyTripList";
 //Buttons
 import AddTripButton from "../buttons/AddTripButton";
 
@@ -21,15 +30,16 @@ import {
 } from "./styles";
 import { ScrollView } from "react-native";
 import { Text } from "native-base";
+import Markdown from "react-native-simple-markdown";
 
 const Profile = ({ navigation }) => {
-  const { profile } = profileStore;
+  const userProfile = authStore.user.profile;
 
   const [updatedProfile, setUpdatedProfile] = useState({
     // name: profile.title,
-    image: profile.image,
-    bio: profile.bio,
-    id: profile.id,
+    image: userProfile.image,
+    bio: userProfile.bio,
+    id: userProfile.id,
   });
 
   if (authStore.user) {
@@ -43,6 +53,7 @@ const Profile = ({ navigation }) => {
             }}
           />
 
+          {/* TODO userProfile name
           {/* TODO profile name
        <ProfileName
         maxLength={40}
@@ -57,9 +68,10 @@ const Profile = ({ navigation }) => {
           await tripStore.tripUpdate(updatedProfile);
         }}
       /> */}
+
           <ProfileBio
             multiline={true}
-            placeholder={profile.bio}
+            placeholder={userProfile.bio}
             placeholderTextColor="grey"
             onChangeText={(bio) =>
               setUpdatedProfile({ ...updatedProfile, bio })
@@ -68,6 +80,20 @@ const Profile = ({ navigation }) => {
               await profileStore.profileUpdate(updatedProfile);
             }}
           />
+          {/* <Markdown>
+          #Markdown in react-native is so cool! {"\n\n"}
+          You can **emphasize** what you want, or just _suggest it_ 😏…{"\n"}
+          You can even [**link your
+          website**](https://twitter.com/Charles_Mangwa) or if you prefer:
+          [email somebody](mailto:email@somebody.com){"\n"}
+          Spice it up with some GIFs 💃: ![Some
+          GIF](https://media.giphy.com/media/dkGhBWE3SyzXW/giphy.gif){"\n"}
+          And even add a cool video 😎!{"\n"}
+          [![A cool video from
+          YT](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)](http://www.youtube.com/watch?v=dQw4w9WgXcQ)
+          [![Another one from
+          Vimeo](https://i.vimeocdn.com/video/399486266_640.jpg)](https://vimeo.com/57580368)
+        </Markdown> */}
           <MyTripList isProfile navigation={navigation} />
         </ScrollView>
         <AddTripButton />

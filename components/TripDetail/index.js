@@ -6,17 +6,23 @@ import tripStore from "../../stores/tripStore";
 import profileStore from "../../stores/profileStore";
 
 //Styles
-import { TripImage, TripName, TripDetails } from "./styles";
+import {
+  TripImage,
+  TripName,
+  TripDetails,
+  OtherTripName,
+  OtherTripDetails,
+  ProfileButton,
+  ProfileButtonText,
+} from "./styles";
 import { ScrollView, Text } from "react-native";
-import { Button, Spinner } from "native-base";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
   // console.log("TripDetail -> myTrip", myTrip);
   const { notMyTrip } = route.params;
   // console.log("TripDetail -> notMyTrip", notMyTrip);
-
-  const isNotMyProfile = profileStore.notMyProfile;
+  const { notMyProfile } = route.params;
 
   if (myTrip) {
     const [updatedTrip, setUpdatedTrip] = useState({
@@ -68,19 +74,19 @@ const TripDetail = ({ route, navigation }) => {
             "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
         }}
       />
-      <Text>{notMyTrip.title}</Text>
-      <Text>{notMyTrip.details}</Text>
-      <Button
+      <OtherTripName>{notMyTrip.title}</OtherTripName>
+      <OtherTripDetails>{notMyTrip.details}</OtherTripDetails>
+      <ProfileButton
         onPress={() =>
           navigation.navigate("OtherProfile", {
-            defIsNotMyProfile: isNotMyProfile,
+            defIsNotMyProfile: notMyProfile,
           })
         }
       >
-        <Text>View Profile {isNotMyProfile.id}</Text>
-        {/* //TODO: ADD PROFILE NAME
-        <Text>{isNotMyProfile.id}</Text> */}
-      </Button>
+        <ProfileButtonText>
+          View {notMyProfile.user.username}'s Profile
+        </ProfileButtonText>
+      </ProfileButton>
     </ScrollView>
   );
 };

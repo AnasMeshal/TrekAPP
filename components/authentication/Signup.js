@@ -11,6 +11,8 @@ import {
   AuthButtonText,
   AuthOther,
   BackgroundImage,
+  SkipButtonStyled,
+  SkipTextStyled,
   X,
 } from "./styles";
 import { Spinner } from "native-base";
@@ -28,12 +30,7 @@ const Signup = ({ navigation }) => {
   const [error, setError] = useState("");
   if (authStore.loading === true)
     return (
-      <BackgroundImage
-        source={{
-          uri:
-            "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-        }}
-      >
+      <BackgroundImage source={require("../../Signing.jpg")}>
         <Spinner color="orange" />
       </BackgroundImage>
     );
@@ -56,12 +53,7 @@ const Signup = ({ navigation }) => {
   };
 
   return (
-    <BackgroundImage
-      source={{
-        uri:
-          "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-      }}
-    >
+    <BackgroundImage source={require("../../Signing.jpg")}>
       {/* 
        //TODO
       <Spinner />
@@ -115,6 +107,9 @@ const Signup = ({ navigation }) => {
       <AuthOther onPress={() => (profileStore.whoIsShowing = "SignIn")}>
         Already have an account? Sign in.
       </AuthOther>
+      <SkipButtonStyled transparent onPress={() => navigation.replace("Trips")}>
+        <SkipTextStyled>Skip Sign-In</SkipTextStyled>
+      </SkipButtonStyled>
     </BackgroundImage>
   );
 };
