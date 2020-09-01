@@ -16,7 +16,7 @@ import {
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
 import profileStore from "../../stores/profileStore";
-import Navigation from "../Navigation";
+import Navigation from "../Navigation/RootNavigationExplore";
 
 const TripItem = ({ trip, navigation, isProfile }) => {
   const newTrip = {

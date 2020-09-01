@@ -8,7 +8,6 @@ class AuthStore {
   user = null;
   error = "";
   loading = false;
-  // userLoading = false;
 
   setUser = async (token) => {
     await AsyncStorage.setItem("myToken", token);
@@ -56,7 +55,6 @@ class AuthStore {
       const user = decode(token);
       if (user.exp >= currentTime) {
         this.setUser(token);
-        // userLoading = true;
       } else {
         this.signout();
       }
@@ -68,7 +66,6 @@ decorate(AuthStore, {
   user: observable,
   error: observable,
   loading: observable,
-  // userLoading: observable,
 });
 
 const authStore = new AuthStore();
