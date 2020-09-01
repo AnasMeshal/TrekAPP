@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { LogOutStyled } from "./styles";
 import authStore from "../../stores/authStore";
 import { Alert } from "react-native";
-import { useNavigation, NavigationActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { observer } from "mobx-react";
 
 const LogOutButton = () => {
+  const navigation = useNavigation();
   const handleLogOut = () => {
     Alert.alert(
       "Log Out",

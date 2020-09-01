@@ -9,7 +9,7 @@ import tripStore from "../../stores/tripStore";
 import TripItem from "./TripItem";
 import authStore from "../../stores/authStore";
 
-const TripList = ({ navigation, isProfile, otherProfileTrips }) => {
+const MyTripList = ({ navigation, isProfile, otherProfileTrips }) => {
   if (!authStore.user) return null;
   //TODO RETURN NICE MESSAGE
 
@@ -26,4 +26,4 @@ const TripList = ({ navigation, isProfile, otherProfileTrips }) => {
   );
 };
 
-export default observer(TripList);
+export default observer(MyTripList);
