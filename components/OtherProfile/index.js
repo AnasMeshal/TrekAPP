@@ -3,9 +3,15 @@ import { observer } from "mobx-react";
 
 // Components
 import TripList from "../TripList";
+import Markdown from "react-native-simple-markdown";
 
 // Styles
-import { ProfileImage, ProfileBio } from "./styles";
+import {
+  ProfileImage,
+  ProfileName,
+  ProfileNames,
+  StyledBioView,
+} from "./styles";
 import { ScrollView } from "react-native";
 import TripItem from "../TripList/TripItem";
 import tripStore from "../../stores/tripStore";
@@ -30,21 +36,25 @@ const OtherProfile = ({ route, navigation }) => {
         }}
       />
 
-      {/* TODO profile name
-       <ProfileName
-        maxLength={40}
-        blurOnSubmit={true}
-        multiline={true}
-        placeholder={trip.title}
-        placeholderTextColor="black"
-        onChangeText={(title) =>
-          setUpdatedProfile({ ...updatedProfile, title })
-        }
-        onEndEditing={async () => {
-          await tripStore.tripUpdate(updatedProfile);
-        }}
-      /> */}
-      <ProfileBio>{notMyProfile.bio}</ProfileBio>
+      <ProfileName>{notMyProfile.username}</ProfileName>
+      <ProfileNames>
+        {notMyProfile.firstName} {notMyProfile.lastName}
+      </ProfileNames>
+      <StyledBioView>
+        <Markdown
+          styles={{
+            text: {
+              fontSize: 25,
+              color: "grey",
+              textAlign: "center",
+              //TODO CENTER IT FOR REAL
+            },
+          }}
+          whitelist={["strong", "em"]}
+        >
+          {notMyProfile.bio}
+        </Markdown>
+      </StyledBioView>
       <TripList otherProfileTrips={otherProfileTrips} />
     </ScrollView>
   );

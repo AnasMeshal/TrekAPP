@@ -8,13 +8,22 @@ export const ProfileImage = styled.Image`
   align-self: center;
 `;
 
-export const ProfileName = styled.TextInput`
+export const ProfileName = styled(Text)`
   font-size: 40px;
   text-align: center;
   color: black;
   padding-right: 5px;
   padding-left: 5px;
   margin-top: 10px;
+  font-weight: bold;
+`;
+
+export const ProfileNames = styled(Text)`
+  font-size: 20px;
+  text-align: center;
+  color: black;
+  padding-right: 5px;
+  padding-left: 5px;
 `;
 
 export const ProfileBio = styled.TextInput`

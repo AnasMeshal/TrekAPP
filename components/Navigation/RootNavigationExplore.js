@@ -56,8 +56,8 @@ const RootNavigator = () => {
         component={TripDetail}
         options={({ route }) => {
           const { notMyTrip } = route.params;
-          const { notMyProfile } = route.params;
           return {
+            //TODO MARKDOWN
             title: notMyTrip.title,
             headerLeft: () => <GoBackButton />,
           };
