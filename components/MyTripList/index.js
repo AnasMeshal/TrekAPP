@@ -6,7 +6,7 @@ import { List, View } from "native-base";
 
 //Stores
 import tripStore from "../../stores/tripStore";
-import TripItem from "./TripItem";
+import TripItem from "../TripList/TripItem";
 import authStore from "../../stores/authStore";
 
 const MyTripList = ({ navigation, isProfile, otherProfileTrips }) => {
