@@ -38,9 +38,9 @@ const RootNavigator = () => {
         name="OtherProfile"
         component={OtherProfile}
         options={({ route }) => {
-          const { defIsNotMyProfile } = route.params;
+          const { notMyProfile } = route.params;
           return {
-            title: defIsNotMyProfile.user.username,
+            title: notMyProfile.username,
             headerStyle: {
               backgroundColor: "#42d4f2",
             },
@@ -56,10 +56,9 @@ const RootNavigator = () => {
         component={TripDetail}
         options={({ route }) => {
           const { notMyTrip } = route.params;
-          const { myTrip } = route.params;
           const { notMyProfile } = route.params;
           return {
-            title: myTrip ? myTrip.title : notMyTrip.title,
+            title: notMyTrip.title,
             headerLeft: () => <GoBackButton />,
           };
         }}
