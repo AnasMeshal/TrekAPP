@@ -30,8 +30,6 @@ import Markdown from "react-native-simple-markdown";
 const Profile = ({ navigation }) => {
   if (authStore.user) {
     const userProfile = authStore.user;
-    console.log("Profile -> userProfile", userProfile);
-
     const [updatedProfile, setUpdatedProfile] = useState({
       // name: profile.title,
       image: userProfile.profile.image || "defsauly",
@@ -104,6 +102,7 @@ const Profile = ({ navigation }) => {
           <Text>Sign in</Text>
         </SignInOrSignUpButton>
       </>
+      // <Text>Sign out</Text>
     );
   }
 };
