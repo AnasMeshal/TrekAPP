@@ -3,7 +3,7 @@
 import React from "react";
 import Swipeout from "react-native-swipeout";
 //TODO: SWITCH TO THIS https://github.com/jemise111/react-native-swipe-list-view
-//Styles
+// Styles
 import {
   ListItem,
   Text,
@@ -16,12 +16,6 @@ import {
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
 import profileStore from "../../stores/profileStore";
-import Navigation from "../Navigation";
-
-/**
- * I didn't review this component very closely
- * cuz i don't know how the swipe library youre using works exactly
- */
 
 const TripItem = ({ trip, navigation, isProfile }) => {
   const newTrip = {
@@ -30,7 +24,8 @@ const TripItem = ({ trip, navigation, isProfile }) => {
     details: trip.details,
   };
 
-  const notMyUserId = { userId: trip.userId };
+  const notMyUserId = trip.userId;
+  let notMyProfile = [];
 
   const swipeoutBtns = [
     {
@@ -51,12 +46,12 @@ const TripItem = ({ trip, navigation, isProfile }) => {
     },
   ];
 
-  // i have no idea what this is
-  // how is there a comma and it doesnt crash?
-  // a less meaningful name could not have been found.
-  const view = () => {
-    profileStore.findNotMyProfile(notMyUserId),
-      navigation.push("Trip Detail", { notMyTrip: trip });
+  const viewTrip = async () => {
+    notMyProfile = await profileStore.fetchProfile(notMyUserId);
+    navigation.push("Trip Detail", {
+      notMyProfile: notMyProfile,
+      notMyTrip: trip,
+    });
   };
 
   //TODO: better swipe button width and do it in one return
@@ -72,7 +67,9 @@ const TripItem = ({ trip, navigation, isProfile }) => {
             <Thumbnail
               square
               source={{
-                uri: trip.image || "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+                uri:
+                  trip.image ||
+                  "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
               }}
             />
           </Left>
@@ -103,7 +100,9 @@ const TripItem = ({ trip, navigation, isProfile }) => {
         <Thumbnail
           square
           source={{
-            uri: trip.image || "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+            uri:
+              trip.image ||
+              "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
           }}
         />
       </Left>
@@ -114,7 +113,7 @@ const TripItem = ({ trip, navigation, isProfile }) => {
         </Text>
       </Body>
       <Right>
-        <Button onPress={view} transparent>
+        <Button onPress={viewTrip} transparent>
           <Text>View</Text>
         </Button>
       </Right>

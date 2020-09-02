@@ -1,54 +1,70 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-//Components
-// so many components imported here they need a bigger header comment
+// Stores
+import authStore from "../../stores/authStore";
 
-//Stores
+// Buttons
+import AddTripButton from "../buttons/AddTripButton";
+
+// Components
+import MyTripList from "../MyTripList";
+
+// Stores
 import profileStore from "../../stores/profileStore";
 
-//Styles
-import { ProfileImage, ProfileName, ProfileBio } from "./styles";
+// Styles
+import {
+  ProfileImage,
+  ProfileName,
+  ProfileBio,
+  SignInOrSignUpButton,
+  StyledText,
+} from "./styles";
 import { ScrollView } from "react-native";
-import MyTripList from "../MyTripList";
-import authStore from "../../stores/authStore";
 import { Text } from "native-base";
-
-// organize the imports
+import Markdown from "react-native-simple-markdown";
 
 const Profile = ({ navigation }) => {
-  const { profile } = profileStore;
-
-  const [updatedProfile, setUpdatedProfile] = useState({
-    // the Profile doesn't have a name
-    // so in this screen, just display the user's username, or first/last name
-    // but it's not editable
-    // name: profile.title,
-    image: profile.image,
-    bio: profile.bio,
-    id: profile.id,
-    // if this is all the fields in the profile object,
-    // no need to write them one by one like this
-  });
-
-  /**
-   * In a case like this, where the if-statement is really long and the else is really short, 
-   * reverse the condition and put the else on top. like this:
-   * if (!authStore.user) return <Text>Sign in</Text>
-   * then here, without the else, write the larger main return.
-   */
-
-  if (authStore.user) {
+  if (!authStore.user) {
     return (
-      <ScrollView>
-        <ProfileImage
-          source={{
-            uri:
-              "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
-          }}
-        />
+      <>
+        <StyledText>
+          You need to sign in or sign up to view your profile
+        </StyledText>
+        <SignInOrSignUpButton onPress={() => navigation.navigate("Modal")}>
+          <Text>Sign in</Text>
+        </SignInOrSignUpButton>
+      </>
+    );
+  } else {
+    const userProfile = authStore.user;
+    const [updatedProfile, setUpdatedProfile] = useState({
+      // name: profile.title,
+      // the Profile doesn't have a name
+      // so in this screen, just display the user's username, or first/last name
+      // but it's not editable
+      // name: profile.title,
 
-        {/* TODO profile name
+      // if this is all the fields in the profile object,
+      // no need to write them one by one like this
+
+      image: userProfile.profile.image || "defsauly",
+      bio: userProfile.profile.bio || "defsauly",
+      id: userProfile.profile.id,
+    });
+    return (
+      <>
+        <ScrollView>
+          <ProfileImage
+            source={{
+              uri:
+                "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
+            }}
+          />
+          {/* //TODO PROFILE NAME */}
+          {/* TODO userProfile name
+          {/* TODO profile name
        <ProfileName
         maxLength={40}
         blurOnSubmit={true}
@@ -62,22 +78,38 @@ const Profile = ({ navigation }) => {
           await tripStore.tripUpdate(updatedProfile);
         }}
       /> */}
-        <ProfileBio
-          multiline={true}
-          placeholder={profile.bio}
-          placeholderTextColor="grey"
-          onChangeText={(bio) => setUpdatedProfile({ ...updatedProfile, bio })}
-          onEndEditing={async () => {
-            await profileStore.profileUpdate(updatedProfile);
-          }}
-          // just realized, should probably display a toast or something to inform the user that their profile has been updated.
-        />
-        <MyTripList isProfile navigation={navigation} />
-      </ScrollView>
+
+          <ProfileBio
+            multiline={true}
+            placeholder={userProfile.bio}
+            placeholderTextColor="grey"
+            onChangeText={(bio) =>
+              setUpdatedProfile({ ...updatedProfile, bio })
+            }
+            onEndEditing={async () => {
+              await profileStore.profileUpdate(updatedProfile);
+              //TODO SHOW TOAST
+            }}
+          />
+          {/* <Markdown>
+          #Markdown in react-native is so cool! {"\n\n"}
+          You can **emphasize** what you want, or just _suggest it_ 😏…{"\n"}
+          You can even [**link your
+          website**](https://twitter.com/Charles_Mangwa) or if you prefer:
+          [email somebody](mailto:email@somebody.com){"\n"}
+          Spice it up with some GIFs 💃: ![Some
+          GIF](https://media.giphy.com/media/dkGhBWE3SyzXW/giphy.gif){"\n"}
+          And even add a cool video 😎!{"\n"}
+          [![A cool video from
+          YT](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)](http://www.youtube.com/watch?v=dQw4w9WgXcQ)
+          [![Another one from
+          Vimeo](https://i.vimeocdn.com/video/399486266_640.jpg)](https://vimeo.com/57580368)
+        </Markdown> */}
+          <MyTripList isProfile navigation={navigation} />
+        </ScrollView>
+        <AddTripButton />
+      </>
     );
-  } else {
-    // shouldn't this be a button that takes the user to the signin page?
-    return <Text>Sign in</Text>;
   }
 };
 

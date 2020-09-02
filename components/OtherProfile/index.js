@@ -16,11 +16,10 @@ import tripStore from "../../stores/tripStore";
 // have only one profile component
 
 const OtherProfile = ({ route, navigation }) => {
-  const { defIsNotMyProfile } = route.params;
-  const { notMyProfile } = profileStore;
+  const { notMyProfile } = route.params;
 
   const otherProfileTrips = tripStore.trips
-    .filter((trip) => trip.userId === defIsNotMyProfile.userId)
+    .filter((trip) => trip.userId === notMyProfile.userId)
     .map((trip) => (
       <TripItem trip={trip} navigation={navigation} key={trip.id} />
     ));

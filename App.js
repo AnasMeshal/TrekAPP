@@ -6,12 +6,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { ThemeProvider } from "styled-components";
 
 //Components
-import RootNavigator from "./components/Navigation";
+import Main from "./components/Navigation/Main";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <Main />
     </NavigationContainer>
   );
 }
