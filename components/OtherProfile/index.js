@@ -47,6 +47,7 @@ const OtherProfile = ({ route, navigation }) => {
               fontSize: 25,
               color: "grey",
               textAlign: "center",
+              //TODO CENTER IT FOR REAL
             },
           }}
           whitelist={["strong", "em"]}
