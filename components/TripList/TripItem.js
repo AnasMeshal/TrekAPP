@@ -1,9 +1,9 @@
-//TODO TOUCHABLE OPACITY OR HIGHLIGHT TO PRESS THE HWOLE LIST ITME
+//TODO TOUCHABLE OPACITY OR HIGHLIGHT TO PRESS THE WHOLE LIST ITME
 //TODO STYLING LIBRARY MATERIAL UI
 import React from "react";
 import Swipeout from "react-native-swipeout";
 //TODO: SWITCH TO THIS https://github.com/jemise111/react-native-swipe-list-view
-//Styles
+// Styles
 import {
   ListItem,
   Text,
@@ -16,7 +16,6 @@ import {
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
 import profileStore from "../../stores/profileStore";
-import Navigation from "../Navigation/RootNavigationExplore";
 
 const TripItem = ({ trip, navigation, isProfile }) => {
   const newTrip = {
@@ -47,9 +46,8 @@ const TripItem = ({ trip, navigation, isProfile }) => {
     },
   ];
 
-  const view = async () => {
-    notMyProfile = await profileStore.findProfile(notMyUserId);
-    console.log("view -> notMyProfile", notMyProfile);
+  const viewTrip = async () => {
+    notMyProfile = await profileStore.fetchProfile(notMyUserId);
     navigation.push("Trip Detail", {
       notMyProfile: notMyProfile,
       notMyTrip: trip,
@@ -69,9 +67,9 @@ const TripItem = ({ trip, navigation, isProfile }) => {
             <Thumbnail
               square
               source={{
-                uri: trip.image
-                  ? trip.image
-                  : "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+                uri:
+                  trip.image ||
+                  "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
               }}
             />
           </Left>
@@ -102,9 +100,9 @@ const TripItem = ({ trip, navigation, isProfile }) => {
         <Thumbnail
           square
           source={{
-            uri: trip.image
-              ? trip.image
-              : "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+            uri:
+              trip.image ||
+              "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
           }}
         />
       </Left>
@@ -115,7 +113,7 @@ const TripItem = ({ trip, navigation, isProfile }) => {
         </Text>
       </Body>
       <Right>
-        <Button onPress={view} transparent>
+        <Button onPress={viewTrip} transparent>
           <Text>View</Text>
         </Button>
       </Right>

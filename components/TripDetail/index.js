@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 
 //Stores
 import tripStore from "../../stores/tripStore";
-import profileStore from "../../stores/profileStore";
 
 //Styles
 import {
@@ -15,7 +14,7 @@ import {
   ProfileButton,
   ProfileButtonText,
 } from "./styles";
-import { ScrollView, Text } from "react-native";
+import { ScrollView } from "react-native";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
@@ -63,6 +62,14 @@ const TripDetail = ({ route, navigation }) => {
       </ScrollView>
     );
   }
+
+  /**
+   * TODO
+   * I think you can set editable to false for TextInput.
+   * By doing that, you don't need this if statement and two returns.
+   * My comment is: Clean up this code.
+   * Look into this: https://dev.to/skptricks/react-native-enable-and-disable-textinput-programmatically-1b99#:~:text=If%20the%20value%20of%20editable,now%20enter%20value%20inside%20it.
+   */
 
   return (
     <ScrollView>

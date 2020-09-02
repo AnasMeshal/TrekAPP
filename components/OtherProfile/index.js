@@ -13,6 +13,8 @@ import { ScrollView } from "react-native";
 import TripItem from "../TripList/TripItem";
 import tripStore from "../../stores/tripStore";
 
+// have only one profile component
+
 const OtherProfile = ({ route, navigation }) => {
   const { notMyProfile } = route.params;
 

@@ -18,7 +18,7 @@ class ProfileStore {
     }
   };
 
-  findProfile = async (profileId) => {
+  fetchProfile = async (profileId) => {
     try {
       const res = await instance.get(`/profiles/${profileId}`);
       return res.data;

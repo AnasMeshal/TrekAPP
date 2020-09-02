@@ -9,10 +9,10 @@ import tripStore from "../../stores/tripStore";
 import TripItem from "../TripList/TripItem";
 import authStore from "../../stores/authStore";
 
-const MyTripList = ({ navigation, isProfile, otherProfileTrips }) => {
+const MyTripList = ({ navigation }) => {
   if (!authStore.user) return null;
   //TODO RETURN NICE MESSAGE
-
+  //(Tell mshary ali told us to do)
   const profileTrips = tripStore.trips
     .filter((trip) => trip.userId === authStore.user.id)
     .map((trip) => (

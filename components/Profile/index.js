@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-// Components
-
 // Stores
 import authStore from "../../stores/authStore";
 
@@ -28,10 +26,29 @@ import { Text } from "native-base";
 import Markdown from "react-native-simple-markdown";
 
 const Profile = ({ navigation }) => {
-  if (authStore.user) {
+  if (!authStore.user) {
+    return (
+      <>
+        <StyledText>
+          You need to sign in or sign up to view your profile
+        </StyledText>
+        <SignInOrSignUpButton onPress={() => navigation.navigate("Modal")}>
+          <Text>Sign in</Text>
+        </SignInOrSignUpButton>
+      </>
+    );
+  } else {
     const userProfile = authStore.user;
     const [updatedProfile, setUpdatedProfile] = useState({
       // name: profile.title,
+      // the Profile doesn't have a name
+      // so in this screen, just display the user's username, or first/last name
+      // but it's not editable
+      // name: profile.title,
+
+      // if this is all the fields in the profile object,
+      // no need to write them one by one like this
+
       image: userProfile.profile.image || "defsauly",
       bio: userProfile.profile.bio || "defsauly",
       id: userProfile.profile.id,
@@ -45,7 +62,7 @@ const Profile = ({ navigation }) => {
                 "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
             }}
           />
-
+          {/* //TODO PROFILE NAME */}
           {/* TODO userProfile name
           {/* TODO profile name
        <ProfileName
@@ -71,6 +88,7 @@ const Profile = ({ navigation }) => {
             }
             onEndEditing={async () => {
               await profileStore.profileUpdate(updatedProfile);
+              //TODO SHOW TOAST
             }}
           />
           {/* <Markdown>
@@ -91,18 +109,6 @@ const Profile = ({ navigation }) => {
         </ScrollView>
         <AddTripButton />
       </>
-    );
-  } else {
-    return (
-      <>
-        <StyledText>
-          You need to sign in or sign up to view your profile
-        </StyledText>
-        <SignInOrSignUpButton onPress={() => navigation.navigate("Modal")}>
-          <Text>Sign in</Text>
-        </SignInOrSignUpButton>
-      </>
-      // <Text>Sign out</Text>
     );
   }
 };

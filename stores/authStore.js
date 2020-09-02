@@ -2,7 +2,6 @@ import { decorate, observable } from "mobx";
 import instance from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-community/async-storage";
-import { useNavigation, NavigationActions } from "@react-navigation/native";
 
 class AuthStore {
   user = null;
@@ -54,7 +53,7 @@ class AuthStore {
       const currentTime = Date.now() / 1000;
       const user = decode(token);
       if (user.exp >= currentTime) {
-        this.setUser(token);
+        await this.setUser(token);
       } else {
         this.signout();
       }

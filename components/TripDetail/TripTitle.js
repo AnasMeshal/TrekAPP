@@ -9,3 +9,5 @@ const TripTitle = () => {
 };
 
 export default TripTitle;
+
+// say bye bye to this file. make it go 💥
