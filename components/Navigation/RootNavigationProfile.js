@@ -49,10 +49,9 @@ const RootNavigatorProfile = () => {
         name="Trip Detail"
         component={TripDetail}
         options={({ route }) => {
-          const { notMyTrip } = route.params;
           const { myTrip } = route.params;
           return {
-            title: myTrip ? myTrip.title : notMyTrip.title,
+            title: myTrip.title,
             headerLeft: () => <GoBackButton />,
           };
         }}

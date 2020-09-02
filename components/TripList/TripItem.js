@@ -25,7 +25,8 @@ const TripItem = ({ trip, navigation, isProfile }) => {
     details: trip.details,
   };
 
-  const notMyUserId = { userId: trip.userId };
+  const notMyUserId = trip.userId;
+  let notMyProfile = [];
 
   const swipeoutBtns = [
     {
@@ -46,9 +47,13 @@ const TripItem = ({ trip, navigation, isProfile }) => {
     },
   ];
 
-  const view = () => {
-    profileStore.findNotMyProfile(notMyUserId),
-      navigation.push("Trip Detail", { notMyTrip: trip });
+  const view = async () => {
+    notMyProfile = await profileStore.findProfile(notMyUserId);
+    console.log("view -> notMyProfile", notMyProfile);
+    navigation.push("Trip Detail", {
+      notMyProfile: notMyProfile,
+      notMyTrip: trip,
+    });
   };
 
   //TODO: better swipe button width and do it in one return

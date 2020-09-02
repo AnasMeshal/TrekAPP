@@ -19,7 +19,9 @@ const Main = () => {
     <Navigator
       headerMode="none"
       mode="modal"
-      initialRouteName={"FirstTimeVisiting" || "BottomTab"}
+      initialRouteName={
+        authStore.user === null ? "FirstTimeVisiting" : "BottomTab"
+      }
     >
       <Screen
         name="BottomTab"
