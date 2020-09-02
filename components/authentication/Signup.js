@@ -30,6 +30,7 @@ const Signup = ({ navigation }) => {
   const [error, setError] = useState("");
   if (authStore.loading === true)
     return (
+      // TODO FIX LOADING ERROR
       <BackgroundImage source={require("../../Signing.jpg")}>
         <Spinner color="orange" />
         <AuthButton onPress={() => navigation.goBack()}>
@@ -109,9 +110,9 @@ const Signup = ({ navigation }) => {
       <AuthOther onPress={() => (profileStore.whoIsShowing = "SignIn")}>
         Already have an account? Sign in.
       </AuthOther>
-      <SkipButtonStyled transparent onPress={() => navigation.replace("Trips")}>
+      {/* <SkipButtonStyled transparent onPress={() => navigation.replace("Trips")}>
         <SkipTextStyled>Skip Sign-In</SkipTextStyled>
-      </SkipButtonStyled>
+      </SkipButtonStyled> */}
     </BackgroundImage>
   );
 };
