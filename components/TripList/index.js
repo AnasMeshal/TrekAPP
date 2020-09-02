@@ -33,7 +33,7 @@ const TripList = ({ navigation, otherProfileTrips }) => {
   return (
     <Content>
       <View>
-        {/* TODO how to fix this? */}
+        {/* TODO how to optimize this? */}
         <List>{otherProfileTrips ? otherProfileTrips : exploreTrips}</List>
       </View>
     </Content>
