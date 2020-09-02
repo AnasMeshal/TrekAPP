@@ -19,9 +19,7 @@ import { ScrollView, Text } from "react-native";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
-  // console.log("TripDetail -> myTrip", myTrip);
   const { notMyTrip } = route.params;
-  // console.log("TripDetail -> notMyTrip", notMyTrip);
   const { notMyProfile } = route.params;
 
   if (myTrip) {
@@ -79,12 +77,12 @@ const TripDetail = ({ route, navigation }) => {
       <ProfileButton
         onPress={() =>
           navigation.navigate("OtherProfile", {
-            defIsNotMyProfile: notMyProfile,
+            notMyProfile: notMyProfile,
           })
         }
       >
         <ProfileButtonText>
-          View {notMyProfile.user.username}'s Profile
+          View {notMyProfile.username}'s Profile
         </ProfileButtonText>
       </ProfileButton>
     </ScrollView>
