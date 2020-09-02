@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 
-//Components
+// Components
 import TripList from "../TripList";
 
-//Stores
-import profileStore from "../../stores/profileStore";
-
-//Styles
+// Styles
 import { ProfileImage, ProfileBio } from "./styles";
 import { ScrollView } from "react-native";
 import TripItem from "../TripList/TripItem";
 import tripStore from "../../stores/tripStore";
 
-// have only one profile component
+// TODO have only one profile component
 
 const OtherProfile = ({ route, navigation }) => {
   const { notMyProfile } = route.params;

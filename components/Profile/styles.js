@@ -1,4 +1,4 @@
-//Styled components
+// Styled components
 import styled from "styled-components";
 import { Button, Text } from "native-base";
 
@@ -32,12 +32,12 @@ export const SignInOrSignUpButton = styled(Button)`
 `;
 
 export const StyledText = styled.Text`
-  margin-top: 55%
+  margin-top: 55%;
   text-align: center;
   font-size: 25px;
-  font-weight: bold
-  width: 90%
-  align-self : center;
+  font-weight: bold;
+  width: 90%;
+  align-self: center;
 `;
 
 export const BackgroundImage = styled.ImageBackground`

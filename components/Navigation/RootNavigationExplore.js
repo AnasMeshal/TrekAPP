@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
 // Components
-import Home from "../Home";
 import TripList from "../TripList";
 import AddTrip from "../AddTrip";
 import OtherProfile from "../OtherProfile";

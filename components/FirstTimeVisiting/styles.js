@@ -1,4 +1,4 @@
-//Styled components
+// Styled components
 import styled from "styled-components/native";
 import { Button, Text, Icon } from "native-base";
 

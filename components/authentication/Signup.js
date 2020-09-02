@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-//Stores
+// Stores
 import authStore from "../../stores/authStore";
 
-//Styles
+// Styles
 import {
   AuthTitle,
   AuthTextInput,
@@ -38,7 +38,7 @@ const Signup = ({ navigation }) => {
       </BackgroundImage>
     );
   const handleSubmit = async () => {
-    // again, remove the else's
+    // TODO remove the else's
     if (!user.firstName) {
       setError("Please fill out your first name");
     } else if (!user.lastName) {
@@ -118,7 +118,7 @@ const Signup = ({ navigation }) => {
 
 export default observer(Signup);
 
-//TODO IMPLEMENT PROPER SIGN IN
+// TODO IMPLEMENT PROPER SIGN IN
 /*import React, { useState } from "react";
 import { observer } from "mobx-react";
 

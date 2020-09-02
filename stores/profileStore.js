@@ -1,4 +1,4 @@
-//React
+// React
 import { decorate, observable } from "mobx";
 import instance from "./instance";
 import authStore from "./authStore";
@@ -6,8 +6,8 @@ import authStore from "./authStore";
 class ProfileStore {
   whoIsShowing = "SignIn";
 
-  //TODO SET LOADING TO FALSE ONCE YOU OPEN THE PROFILE
-  //TODO: IF SIGNED IN FOR TOO LONG DELETE TOKEN OR ELSE ERRORS
+  // TODO SET LOADING TO FALSE ONCE YOU OPEN THE PROFILE
+  // TODO: IF SIGNED IN FOR TOO LONG DELETE TOKEN OR ELSE ERRORS
 
   profileUpdate = async (updatedProfile) => {
     try {

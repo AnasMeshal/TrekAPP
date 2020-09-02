@@ -1,8 +1,8 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
-//ThemeProvider
-// not being used, either remove it or use it.
+// ThemeProvider
+// TODO ADD THEME
 import { ThemeProvider } from "styled-components";
 
 //Components

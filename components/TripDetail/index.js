@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-//Stores
+// Stores
 import tripStore from "../../stores/tripStore";
 
-//Styles
+// Styles
 import {
   TripImage,
   TripName,

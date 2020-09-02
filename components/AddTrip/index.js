@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-//Styles
+// Styles
 import {
   Content,
   Form,
@@ -14,7 +14,7 @@ import {
 } from "native-base";
 import { AddTripButtonStyled } from "./styles";
 
-//Stores
+// Stores
 import tripStore from "../../stores/tripStore";
 
 const AddTrip = ({ navigation }) => {

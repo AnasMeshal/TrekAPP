@@ -2,11 +2,11 @@ import React from "react";
 import { observer } from "mobx-react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-//Navigation
+// Navigation
 import RootNavigationProfile from "./RootNavigationProfile";
 import RootNavigationExplore from "./RootNavigationExplore";
 
-//Styles
+// Styles
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const { Navigator, Screen } = createBottomTabNavigator();

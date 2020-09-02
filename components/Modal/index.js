@@ -28,7 +28,7 @@ const Modal = ({ navigation }) => {
   const [error, setError] = useState("");
   if (
     authStore.loading === true
-    //TODO: BE SIGN IN/UP ERRORS && authStore.error !== ""
+    // TODO: BE SIGN IN/UP ERRORS && authStore.error !== ""
   )
     return (
       <BackgroundImage

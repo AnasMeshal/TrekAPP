@@ -18,7 +18,7 @@ const LogOutButton = () => {
         {
           text: "Log Out",
           onPress: async () => {
-            //TODO FIX LOGOUT AND BE CONSOLE WARNING
+            // TODO FIX LOGOUT AND BE CONSOLE WARNING
             await authStore.signout();
           },
         },

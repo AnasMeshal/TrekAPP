@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-//Styles
+// Styles
 import { GoBackIcon } from "./styles";
 
 const GoBackButton = () => {

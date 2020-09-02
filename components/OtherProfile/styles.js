@@ -1,4 +1,4 @@
-//Styled components
+// Styled components
 import styled from "styled-components";
 
 export const ProfileImage = styled.Image`
