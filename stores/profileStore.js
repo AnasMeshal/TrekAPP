@@ -4,8 +4,6 @@ import instance from "./instance";
 import authStore from "./authStore";
 
 class ProfileStore {
-  profile = [];
-  notMyProfile = [];
   whoIsShowing = "SignIn";
 
   //TODO SET LOADING TO FALSE ONCE YOU OPEN THE PROFILE
@@ -20,14 +18,10 @@ class ProfileStore {
     }
   };
 
-  findNotMyProfile = async (userId) => {
+  findProfile = async (profileId) => {
     try {
-      console.log("profileStore -> profile", profile);
-      const res = await instance.post("/profiles", userId);
-      console.log("profileStore -> profile", profile);
-      this.profile = res.data;
-      console.log("profileStore -> profile", profile);
-      return this.profile;
+      const res = await instance.get(`/profiles/${profileId}`);
+      return res.data;
     } catch (error) {
       console.error("profileStore -> profile -> error", error);
     }
@@ -35,8 +29,6 @@ class ProfileStore {
 }
 
 decorate(ProfileStore, {
-  profile: observable,
-  notMyProfile: observable,
   whoIsShowing: observable,
 });
 
