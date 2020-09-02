@@ -22,7 +22,7 @@ import {
   StyledText,
 } from "./styles";
 import { ScrollView } from "react-native";
-import { Text } from "native-base";
+import { Text, Toast, Root } from "native-base";
 import Markdown from "react-native-simple-markdown";
 
 const Profile = ({ navigation }) => {
@@ -53,8 +53,9 @@ const Profile = ({ navigation }) => {
       bio: userProfile.profile.bio || "defsauly",
       id: userProfile.profile.id,
     });
+
     return (
-      <>
+      <Root>
         <ScrollView>
           <ProfileImage
             source={{
@@ -81,14 +82,17 @@ const Profile = ({ navigation }) => {
 
           <ProfileBio
             multiline={true}
-            placeholder={userProfile.bio}
+            placeholder={userProfile.profile.bio}
             placeholderTextColor="grey"
             onChangeText={(bio) =>
               setUpdatedProfile({ ...updatedProfile, bio })
             }
             onEndEditing={async () => {
               await profileStore.profileUpdate(updatedProfile);
-              //TODO SHOW TOAST
+              Toast.show({
+                text: `Bio Has Been Changed to:
+                ${updatedProfile.bio}`,
+              });
             }}
           />
           {/* <Markdown>
@@ -108,7 +112,7 @@ const Profile = ({ navigation }) => {
           <MyTripList isProfile navigation={navigation} />
         </ScrollView>
         <AddTripButton />
-      </>
+      </Root>
     );
   }
 };

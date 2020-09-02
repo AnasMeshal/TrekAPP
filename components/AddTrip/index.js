@@ -1,3 +1,4 @@
+// TODO MAKE THIS MODAL
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
@@ -28,6 +29,7 @@ const AddTrip = ({ navigation }) => {
     if (trip.title !== "" /* && trip.image !== "" */ && trip.details !== "") {
       await tripStore.tripCreate(trip);
       navigation.navigate("Profile");
+      // TODO MAKE IT GLOBAL
       Toast.show({
         text: "Trip Added",
       });
