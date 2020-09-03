@@ -11,8 +11,6 @@ import TripDetail from "../TripDetail";
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
 
-import maps from "../geolocation/maps";
-
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
@@ -73,8 +71,6 @@ const RootNavigator = () => {
           headerLeft: () => <GoBackButton />,
         }}
       />
-
-      <Screen name="map" component={maps} options={{ headerShown: false }} />
     </Navigator>
   );
 };
