@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import AddTrip from "../AddTrip";
 import Profile from "../Profile";
 import TripDetail from "../TripDetail";
+import Maps from "../geolocation/Maps";
 
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
@@ -53,6 +54,16 @@ const RootNavigatorProfile = () => {
           return {
             title: myTrip.title,
             headerLeft: () => <GoBackButton />,
+          };
+        }}
+      />
+      <Screen
+        name="map"
+        component={Maps}
+        options={({ route }) => {
+          const { myTrip } = route.params;
+          return {
+            headerShown: false,
           };
         }}
       />

@@ -1,6 +1,9 @@
 // TODO MAKE THIS MODAL
 import React, { useState } from "react";
 import { observer } from "mobx-react";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
+const GOOGLE_API_KEY = "AIzaSyCTNtYbzzpuQ-cXpgxRgdt46tyQd7nr4jM";
 
 // Styles
 import {
@@ -23,6 +26,8 @@ const AddTrip = ({ navigation }) => {
     title: "",
     image: "",
     details: "",
+    latitude: "",
+    longitude: "",
   });
 
   const handleSubmit = async () => {
@@ -56,6 +61,23 @@ const AddTrip = ({ navigation }) => {
               multiline={true}
               style={{ textAlignVertical: "top" }}
               onChangeText={(details) => setTrip({ ...trip, details })}
+            />
+          </Item>
+          <Item>
+            <GooglePlacesAutocomplete
+              placeholder="Search"
+              fetchDetails={true}
+              onPress={(data, details = null) => {
+                setTrip({
+                  ...trip,
+                  latitude: details.geometry.location.lat,
+                  longitude: details.geometry.location.lng,
+                });
+              }}
+              query={{
+                key: GOOGLE_API_KEY,
+                language: "en",
+              }}
             />
           </Item>
         </Form>

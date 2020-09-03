@@ -40,8 +40,8 @@ const Profile = ({ navigation }) => {
   } else {
     const userProfile = authStore.user;
     const [updatedProfile, setUpdatedProfile] = useState({
-      image: userProfile.profile.image || "defsauly",
-      bio: userProfile.profile.bio || "defsauly",
+      image: userProfile.profile.image || "default",
+      bio: userProfile.profile.bio || "default",
       id: userProfile.profile.id,
     });
 
