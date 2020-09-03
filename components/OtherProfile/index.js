@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 
-//Components
+// Components
 import TripList from "../TripList";
+import Markdown from "react-native-simple-markdown";
 
-//Stores
-import profileStore from "../../stores/profileStore";
-
-//Styles
-import { ProfileImage, ProfileBio } from "./styles";
+// Styles
+import {
+  ProfileImage,
+  ProfileName,
+  ProfileNames,
+  StyledBioView,
+} from "./styles";
 import { ScrollView } from "react-native";
 import TripItem from "../TripList/TripItem";
 import tripStore from "../../stores/tripStore";
 
+// TODO have only one profile component
+
 const OtherProfile = ({ route, navigation }) => {
-  const { defIsNotMyProfile } = route.params;
-  const { notMyProfile } = profileStore;
+  const { notMyProfile } = route.params;
 
   const otherProfileTrips = tripStore.trips
-    .filter((trip) => trip.userId === defIsNotMyProfile.userId)
+    .filter((trip) => trip.userId === notMyProfile.userId)
     .map((trip) => (
       <TripItem trip={trip} navigation={navigation} key={trip.id} />
     ));
@@ -32,21 +36,25 @@ const OtherProfile = ({ route, navigation }) => {
         }}
       />
 
-      {/* TODO profile name
-       <ProfileName
-        maxLength={40}
-        blurOnSubmit={true}
-        multiline={true}
-        placeholder={trip.title}
-        placeholderTextColor="black"
-        onChangeText={(title) =>
-          setUpdatedProfile({ ...updatedProfile, title })
-        }
-        onEndEditing={async () => {
-          await tripStore.tripUpdate(updatedProfile);
-        }}
-      /> */}
-      <ProfileBio>{notMyProfile.bio}</ProfileBio>
+      <ProfileName>{notMyProfile.username}</ProfileName>
+      <ProfileNames>
+        {notMyProfile.firstName} {notMyProfile.lastName}
+      </ProfileNames>
+      <StyledBioView>
+        <Markdown
+          styles={{
+            text: {
+              fontSize: 25,
+              color: "grey",
+              textAlign: "center",
+              //TODO CENTER IT FOR REAL
+            },
+          }}
+          whitelist={["strong", "em"]}
+        >
+          {notMyProfile.bio}
+        </Markdown>
+      </StyledBioView>
       <TripList otherProfileTrips={otherProfileTrips} />
     </ScrollView>
   );

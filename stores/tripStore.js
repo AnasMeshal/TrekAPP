@@ -1,8 +1,8 @@
-//React
+// React
 import { decorate, observable } from "mobx";
 import instance from "./instance";
 
-//TODO: SCROLL UP TO REFRESG
+// TODO: SCROLL UP TO REFRESG
 
 class TripStore {
   trips = [];

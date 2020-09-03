@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-//Stores
+// Stores
 import authStore from "../../stores/authStore";
 
-//Styles
+// Styles
 import {
   AuthTitle,
   AuthTextInput,
@@ -11,9 +11,13 @@ import {
   AuthButtonText,
   AuthOther,
   BackgroundImage,
+  SkipButtonStyled,
+  SkipTextStyled,
+  X,
 } from "./styles";
 import { Spinner } from "native-base";
 import { observer } from "mobx-react";
+import profileStore from "../../stores/profileStore";
 
 const Signup = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -26,19 +30,20 @@ const Signup = ({ navigation }) => {
   const [error, setError] = useState("");
   if (authStore.loading === true)
     return (
-      <BackgroundImage
-        source={{
-          uri:
-            "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-        }}
-      >
+      // TODO FIX LOADING ERROR
+      <BackgroundImage source={require("../../Signing.jpg")}>
+        <X
+          onPress={() => navigation.replace("BottomTab")}
+          name="close"
+          type="AntDesign"
+        />
         <Spinner color="orange" />
       </BackgroundImage>
     );
   const handleSubmit = async () => {
+    // TODO remove the else's
     if (!user.firstName) {
       setError("Please fill out your first name");
-      // console.log(error);
     } else if (!user.lastName) {
       setError("Please fill out your last name");
     } else if (!user.email) {
@@ -49,21 +54,20 @@ const Signup = ({ navigation }) => {
       setError("Please fill out your password");
     }
     await authStore.signup(user);
-    if (authStore.user) navigation.navigate("Trips");
-    if (authStore.user) setError("");
+    if (authStore.user) {
+      navigation.replace("BottomTab");
+      setError("");
+    } else {
+    }
   };
 
   return (
-    <BackgroundImage
-      source={{
-        uri:
-          "https://i.pinimg.com/originals/81/fd/00/81fd00d4f4b7a7f5fe3049fbb4b668bc.jpg",
-      }}
-    >
-      {/* 
-       //TODO
-      <Spinner />
-      {authStore.loading && <Spinner />} */}
+    <BackgroundImage source={require("../../Signing.jpg")}>
+      <X
+        onPress={() => navigation.replace("BottomTab")}
+        name="close"
+        type="AntDesign"
+      />
       <AuthTitle>Sign up</AuthTitle>
       <AuthButtonText>{error}</AuthButtonText>
       <AuthTextInput
@@ -105,9 +109,12 @@ const Signup = ({ navigation }) => {
       <AuthButton onPress={handleSubmit}>
         <AuthButtonText>Sign up</AuthButtonText>
       </AuthButton>
-      <AuthOther onPress={() => navigation.replace("Signin")}>
+      <AuthOther onPress={() => (profileStore.whoIsShowing = "SignIn")}>
         Already have an account? Sign in.
       </AuthOther>
+      {/* <SkipButtonStyled transparent onPress={() => navigation.replace("Trips")}>
+        <SkipTextStyled>Skip Sign-In</SkipTextStyled>
+      </SkipButtonStyled> */}
     </BackgroundImage>
   );
 };

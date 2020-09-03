@@ -1,66 +1,84 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-//Components
+// Stores
+import authStore from "../../stores/authStore";
 
-//Stores
+// Buttons
+import AddTripButton from "../buttons/AddTripButton";
+
+// Components
+import MyTripList from "../MyTripList";
+
+// Stores
 import profileStore from "../../stores/profileStore";
 
-//Styles
-import { ProfileImage, ProfileName, ProfileBio } from "./styles";
+// Styles
+import {
+  ProfileImage,
+  ProfileName,
+  ProfileNames,
+  ProfileBio,
+  SignInOrSignUpButton,
+  StyledText,
+} from "./styles";
 import { ScrollView } from "react-native";
-import MyTripList from "../MyTripList";
-import authStore from "../../stores/authStore";
-import { Text } from "native-base";
+import { Text, Toast, Root } from "native-base";
 
 const Profile = ({ navigation }) => {
-  const { profile } = profileStore;
-
-  const [updatedProfile, setUpdatedProfile] = useState({
-    // name: profile.title,
-    image: profile.image,
-    bio: profile.bio,
-    id: profile.id,
-  });
-
-  if (authStore.user) {
+  if (!authStore.user) {
     return (
-      <ScrollView>
-        <ProfileImage
-          source={{
-            uri:
-              "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
-          }}
-        />
-
-        {/* TODO profile name
-       <ProfileName
-        maxLength={40}
-        blurOnSubmit={true}
-        multiline={true}
-        placeholder={trip.title}
-        placeholderTextColor="black"
-        onChangeText={(title) =>
-          setUpdatedProfile({ ...updatedProfile, title })
-        }
-        onEndEditing={async () => {
-          await tripStore.tripUpdate(updatedProfile);
-        }}
-      /> */}
-        <ProfileBio
-          multiline={true}
-          placeholder={profile.bio}
-          placeholderTextColor="grey"
-          onChangeText={(bio) => setUpdatedProfile({ ...updatedProfile, bio })}
-          onEndEditing={async () => {
-            await profileStore.profileUpdate(updatedProfile);
-          }}
-        />
-        <MyTripList isProfile navigation={navigation} />
-      </ScrollView>
+      <>
+        <StyledText>
+          You need to sign in or sign up to view your profile
+        </StyledText>
+        <SignInOrSignUpButton onPress={() => navigation.navigate("Modal")}>
+          <Text>Sign in</Text>
+        </SignInOrSignUpButton>
+      </>
     );
   } else {
-    return <Text>Sign in</Text>;
+    const userProfile = authStore.user;
+    const [updatedProfile, setUpdatedProfile] = useState({
+      image: userProfile.profile.image || "defsauly",
+      bio: userProfile.profile.bio || "defsauly",
+      id: userProfile.profile.id,
+    });
+
+    return (
+      <Root>
+        <ScrollView>
+          <ProfileImage
+            source={{
+              uri:
+                "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
+            }}
+          />
+          <ProfileName>{userProfile.username}</ProfileName>
+          <ProfileNames>
+            {userProfile.firstName} {userProfile.lastName}
+          </ProfileNames>
+
+          <ProfileBio
+            multiline={true}
+            placeholder={userProfile.profile.bio}
+            placeholderTextColor="grey"
+            onChangeText={(bio) =>
+              setUpdatedProfile({ ...updatedProfile, bio })
+            }
+            onEndEditing={async () => {
+              await profileStore.profileUpdate(updatedProfile);
+              Toast.show({
+                text: `Bio Has Been Changed to:
+                ${updatedProfile.bio}`,
+              });
+            }}
+          />
+          <MyTripList isProfile navigation={navigation} />
+        </ScrollView>
+        <AddTripButton />
+      </Root>
+    );
   }
 };
 

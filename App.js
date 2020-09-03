@@ -1,16 +1,17 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
-//ThemeProvider
+// ThemeProvider
+// TODO ADD THEME
 import { ThemeProvider } from "styled-components";
 
 //Components
-import RootNavigator from "./components/Navigation";
+import Main from "./components/Navigation/Main";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <Main />
     </NavigationContainer>
   );
 }

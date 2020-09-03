@@ -1,12 +1,6 @@
-//Styled components
-
-/* TODO:
- REDIRECT
- close keyboard on return in details
-*/
-
+// Styled components
 import styled from "styled-components/native";
-import { Button, Text } from "native-base";
+import { Button, Text, Icon } from "native-base";
 
 export const BackgroundImage = styled.ImageBackground`
   width: 100%;
@@ -51,4 +45,12 @@ export const SkipButtonStyled = styled(Button)`
 
 export const SkipTextStyled = styled(Text)`
   font-weight: bold;
+`;
+
+export const X = styled(Icon)`
+  position: absolute;
+  color: white;
+  top: 30px;
+  right: 5px;
+  font-size: 40px;
 `;

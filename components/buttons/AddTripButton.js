@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-//Styles
+// Styles
 import { IconStyled, IconWrapper } from "./styles";
 
 const AddTripButton = () => {

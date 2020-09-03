@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, Text, Icon } from "native-base";
+import { Icon } from "native-base";
 
 export const AuthButton = styled.TouchableOpacity`
   background-color: transparent;
@@ -64,16 +64,6 @@ export const BackgroundImage = styled.ImageBackground`
 
 export const BackgroundTint = styled.View`
   background-color: rgba(0, 0, 0, 0.7);
-`;
-
-export const SkipButtonStyled = styled(Button)`
-  margin-right: auto;
-  margin-left: auto;
-  /* margin-top: 100px; */
-`;
-
-export const SkipTextStyled = styled(Text)`
-  font-weight: bold;
 `;
 
 export const X = styled(Icon)`

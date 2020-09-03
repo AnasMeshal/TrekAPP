@@ -2,20 +2,16 @@ import { decorate, observable } from "mobx";
 import instance from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-community/async-storage";
-import profileStore from "./profileStore";
-import { useNavigation, NavigationActions } from "@react-navigation/native";
 
 class AuthStore {
   user = null;
   error = "";
   loading = false;
-  // userLoading = false;
 
   setUser = async (token) => {
     await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
-    await profileStore.fetchProfile(this.user);
   };
 
   signup = async (userData) => {
@@ -57,8 +53,7 @@ class AuthStore {
       const currentTime = Date.now() / 1000;
       const user = decode(token);
       if (user.exp >= currentTime) {
-        this.setUser(token);
-        // userLoading = true;
+        await this.setUser(token);
       } else {
         this.signout();
       }
@@ -70,10 +65,8 @@ decorate(AuthStore, {
   user: observable,
   error: observable,
   loading: observable,
-  // userLoading: observable,
 });
 
 const authStore = new AuthStore();
 authStore.checkForToken();
-
 export default authStore;

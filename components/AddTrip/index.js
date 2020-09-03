@@ -1,10 +1,11 @@
+// TODO MAKE THIS MODAL
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 const GOOGLE_API_KEY = "AIzaSyCTNtYbzzpuQ-cXpgxRgdt46tyQd7nr4jM";
 
-//Styles
+// Styles
 import {
   Content,
   Form,
@@ -17,7 +18,7 @@ import {
 } from "native-base";
 import { AddTripButtonStyled } from "./styles";
 
-//Stores
+// Stores
 import tripStore from "../../stores/tripStore";
 
 const AddTrip = ({ navigation }) => {
@@ -33,6 +34,7 @@ const AddTrip = ({ navigation }) => {
     if (trip.title !== "" /* && trip.image !== "" */ && trip.details !== "") {
       await tripStore.tripCreate(trip);
       navigation.navigate("Profile");
+      // TODO MAKE IT GLOBAL
       Toast.show({
         text: "Trip Added",
       });
