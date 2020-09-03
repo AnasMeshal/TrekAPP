@@ -7,8 +7,10 @@ import profileStore from "../../stores/profileStore";
 
 //Styles
 import { TripImage, TripName, TripDetails } from "./styles";
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, StyleSheet, View, Dimensions } from "react-native";
 import { Button, Spinner } from "native-base";
+import MapView from "react-native-maps";
+import Navigation from "../Navigation";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
@@ -56,6 +58,9 @@ const TripDetail = ({ route, navigation }) => {
             await tripStore.tripUpdate(updatedTrip);
           }}
         />
+        <Button onPress={() => navigation.navigate("map")}>
+          <Text>View on Map</Text>
+        </Button>
       </ScrollView>
     );
   }
