@@ -16,6 +16,7 @@ import TripDetail from "../TripDetail";
 import GoBackButton from "../buttons/GoBackButton";
 import TempButton from "../buttons/TempButton";
 import LogOutButton from "../buttons/LogOutButton";
+import maps from "../geolocation/maps";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -104,6 +105,7 @@ const RootNavigator = () => {
         component={Signup}
         options={{ headerShown: false }}
       />
+      <Screen name="map" component={maps} options={{ headerShown: false }} />
     </Navigator>
   );
 };
