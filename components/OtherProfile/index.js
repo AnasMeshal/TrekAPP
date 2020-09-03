@@ -44,7 +44,7 @@ const OtherProfile = ({ route, navigation }) => {
         <Markdown
           styles={{
             text: {
-              fontSize: 25,
+              fontSize: 23,
               color: "grey",
               textAlign: "center",
               //TODO CENTER IT FOR REAL
