@@ -8,7 +8,7 @@ import ListTripItem from "./ListTripItem";
 import tripStore from "../../stores/tripStore";
 
 // Styles
-import { Content, View, List, Text } from "native-base";
+import { Content, View, List } from "native-base";
 
 const ListTrip = ({ listTrip, navigation }) => {
   console.log("-------------------------------------------");
@@ -24,9 +24,7 @@ const ListTrip = ({ listTrip, navigation }) => {
   return (
     <Content>
       <View>
-        <List>
-          <Text>Hello</Text>
-        </List>
+        <List>{Trips}</List>
       </View>
     </Content>
   );
