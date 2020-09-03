@@ -6,9 +6,6 @@ import tripStore from "../../stores/tripStore";
 
 //Styles
 
-import MapView from "react-native-maps";
-import Navigation from "../Navigation";
-
 import {
   TripImage,
   TripName,
@@ -20,7 +17,7 @@ import {
   StyledView,
   StyledDetailView,
 } from "./styles";
-import { ScrollView, Text, StyleSheet, View, Dimensions } from "react-native";
+import { ScrollView, StyleSheet, View, Dimensions } from "react-native";
 import { Button, Text, Spinner } from "native-base";
 
 const TripDetail = ({ route, navigation }) => {
@@ -114,7 +111,9 @@ const TripDetail = ({ route, navigation }) => {
             <ProfileButton onPress={() => setEditable(true)}>
               <ProfileButtonText>Edit Trip</ProfileButtonText>
             </ProfileButton>
-            <Button onPress={() => navigation.navigate("map")}>
+            <Button
+              onPress={() => navigation.navigate("map", { myTrip: myTrip })}
+            >
               <Text>View on Map</Text>
             </Button>
           </>
