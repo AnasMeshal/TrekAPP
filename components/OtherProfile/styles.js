@@ -34,6 +34,8 @@ export const StyledBioView = styled(View)`
   display: flex;
   padding-right: auto;
   padding-left: auto;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;
