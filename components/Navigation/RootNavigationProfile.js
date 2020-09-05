@@ -6,7 +6,7 @@ import { observer } from "mobx-react";
 import AddTrip from "../AddTrip";
 import Profile from "../Profile";
 import TripDetail from "../TripDetail";
-import Maps from "../geolocation/Maps";
+import Maps from "../geolocation/maps";
 
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
