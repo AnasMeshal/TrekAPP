@@ -5,10 +5,13 @@ import { observer } from "mobx-react";
 // Components
 import Lists from "../Lists";
 import ListDetail from "../ListDetail";
+import TripDetail from "../TripDetail";
+import AddList from "../AddList";
 
 // Buttons
 import OpenDrawer from "../buttons/OpenDrawer";
 import GoBackButton from "../buttons/GoBackButton";
+import AddListButton from "../buttons/AddListButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -30,6 +33,7 @@ const RootNavigationList = () => {
         component={Lists}
         options={{
           title: "Lists",
+          headerLeft: () => <AddListButton />,
           headerRight: () => <OpenDrawer />,
         }}
       />
@@ -38,6 +42,21 @@ const RootNavigationList = () => {
         name="List Detail"
         component={ListDetail}
         options={{ headerLeft: () => <GoBackButton /> }}
+      />
+      <Screen
+        name="Trip Detail"
+        component={TripDetail}
+        options={{
+          headerLeft: () => <GoBackButton />,
+        }}
+      />
+
+      <Screen
+        name="Add List"
+        component={AddList}
+        options={{
+          headerLeft: () => <GoBackButton />,
+        }}
       />
     </Navigator>
   );

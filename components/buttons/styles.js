@@ -39,3 +39,9 @@ export const OpenDrawerIcon = styled(Icon)`
   margin-top: auto
   margin-bottom: auto
 `;
+
+export const AddListButtonStyle = styled(Icon)`
+  font-size: 40px;
+  align-self: center;
+  margin-left: 10px;
+`;
