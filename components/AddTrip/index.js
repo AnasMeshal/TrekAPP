@@ -1,9 +1,11 @@
 // TODO MAKE THIS MODAL
 import React, { useState } from "react";
 import { observer } from "mobx-react";
+
+//Google Autocomplete
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-const GOOGLE_API_KEY = "AIzaSyCTNtYbzzpuQ-cXpgxRgdt46tyQd7nr4jM";
+const GOOGLE_API_KEY = "API KEY HERE";
 
 // Styles
 import {
