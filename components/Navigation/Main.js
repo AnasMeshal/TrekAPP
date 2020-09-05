@@ -28,6 +28,7 @@ const Main = () => {
         component={BottomTab}
         options={{ animationTypeForReplace: "pop" }}
       />
+
       <Screen name="Modal" component={Modal} />
       {authStore.user === null && (
         <Screen name="FirstTimeVisiting" component={FirstTimeVisiting} />

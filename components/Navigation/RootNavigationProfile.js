@@ -11,6 +11,7 @@ import Maps from "../geolocation/Maps";
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
 import LogOutButton from "../buttons/LogOutButton";
+import OpenDrawer from "../buttons/OpenDrawer";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -32,7 +33,7 @@ const RootNavigatorProfile = () => {
         component={Profile}
         options={{
           title: "Profile",
-          headerRight: null,
+          headerRight: () => <OpenDrawer />,
           headerLeft: () => <LogOutButton />,
         }}
       />
