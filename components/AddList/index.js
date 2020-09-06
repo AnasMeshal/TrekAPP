@@ -3,16 +3,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 // Styles
-import {
-  Content,
-  Form,
-  Item,
-  Label,
-  Input,
-  Text,
-  Toast,
-  Root,
-} from "native-base";
+import { Content, Form, Item, Label, Input, Text, Toast } from "native-base";
 import { AddTripButtonStyled } from "./styles";
 
 // Stores
@@ -37,19 +28,17 @@ const AddList = ({ navigation }) => {
   };
 
   return (
-    <Root>
-      <Content>
-        <Form>
-          <Item floatingLabel>
-            <Label>Name</Label>
-            <Input onChangeText={(name) => setList({ ...list, name })} />
-          </Item>
-        </Form>
-        <AddTripButtonStyled block onPress={handleSubmit}>
-          <Text>Add</Text>
-        </AddTripButtonStyled>
-      </Content>
-    </Root>
+    <Content>
+      <Form>
+        <Item floatingLabel>
+          <Label>Name</Label>
+          <Input onChangeText={(name) => setList({ ...list, name })} />
+        </Item>
+      </Form>
+      <AddTripButtonStyled block onPress={handleSubmit}>
+        <Text>Add</Text>
+      </AddTripButtonStyled>
+    </Content>
   );
 };
 

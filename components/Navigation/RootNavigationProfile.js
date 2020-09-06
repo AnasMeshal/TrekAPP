@@ -11,7 +11,7 @@ import Maps from "../geolocation/maps";
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
 import LogOutButton from "../buttons/LogOutButton";
-import { Button, Toast, Icon, Root } from "native-base";
+import { Button, Toast, Icon, Root, Row } from "native-base";
 import tripStore from "../../stores/tripStore";
 import OpenDrawer from "../buttons/OpenDrawer";
 import AddTripToListButton from "../buttons/AddTripToListButton";
@@ -68,46 +68,52 @@ const RootNavigatorProfile = () => {
             // TODO  ADAPTIVE FAVORITE BUTTON
             headerRight: () =>
               myTrip.isFavorite === "T" ? (
-                <Button
-                  transparent
-                  onPress={async () => {
-                    await tripStore.tripUpdate({
-                      ...myTrip,
-                      isFavorite: "F",
-                    });
-                    Toast.show({
-                      text: `Removed ${myTrip.title} from Favorites`,
-                      type: "danger",
-                      position: "bottom",
-                    });
-                  }}
-                >
-                  <Icon
-                    type="Ionicons"
-                    name="ios-heart"
-                    style={{ color: "red", fontSize: 30, marginRight: 20 }}
-                  />
-                </Button>
+                <>
+                  <Button
+                    transparent
+                    onPress={async () => {
+                      await tripStore.tripUpdate({
+                        ...myTrip,
+                        isFavorite: "F",
+                      });
+                      Toast.show({
+                        text: `Removed ${myTrip.title} from Favorites`,
+                        type: "danger",
+                        position: "bottom",
+                      });
+                    }}
+                  >
+                    <Icon
+                      type="Ionicons"
+                      name="ios-heart"
+                      style={{ color: "red", fontSize: 30, marginRight: 20 }}
+                    />
+                  </Button>
+                  <AddTripToListButton myTrip={myTrip} />
+                </>
               ) : (
-                <Button
-                  transparent
-                  onPress={async () => {
-                    await tripStore.tripUpdate({
-                      ...myTrip,
-                      isFavorite: "T",
-                    });
-                    Toast.show({
-                      text: `Added ${myTrip.title} to Favorites`,
-                      type: "danger",
-                    });
-                  }}
-                >
-                  <Icon
-                    type="Ionicons"
-                    name="ios-heart-empty"
-                    style={{ color: "white", fontSize: 30, marginRight: 20 }}
-                  />
-                </Button>
+                <>
+                  <Button
+                    transparent
+                    onPress={async () => {
+                      await tripStore.tripUpdate({
+                        ...myTrip,
+                        isFavorite: "T",
+                      });
+                      Toast.show({
+                        text: `Added ${myTrip.title} to Favorites`,
+                        type: "danger",
+                      });
+                    }}
+                  >
+                    <Icon
+                      type="Ionicons"
+                      name="ios-heart-empty"
+                      style={{ color: "white", fontSize: 30, marginRight: 20 }}
+                    />
+                  </Button>
+                  <AddTripToListButton myTrip={myTrip} />
+                </>
               ),
           };
         }}
@@ -123,7 +129,7 @@ const RootNavigatorProfile = () => {
           // headerLeft: () => <GoBackButton navigation={navigation} />,
         }}
       />
-  <Stack.Screen
+      <Stack.Screen
         name="map"
         component={Maps}
         options={({ route }) => {
@@ -133,56 +139,8 @@ const RootNavigatorProfile = () => {
           };
         }}
       />
-    
     </Stack.Navigator>
   );
 };
 
 export default observer(RootNavigatorProfile);
-
-// {
-//   myTrip.isFavorite === "T" ? (
-//     <Button
-//       transparent
-//       onPress={async () => {
-//         await tripStore.tripUpdate({
-//           ...trip,
-//           isFavorite: "F",
-//         });
-//         Toast.show({
-//           text: `Removed ${trip.title} from Favorites`,
-//           type: "danger",
-//           position: "bottom",
-//         });
-//       }}
-//     >
-//       <Icon
-//         type="Ionicons"
-//         name="ios-heart"
-//         style={{ color: "red", fontSize: 40 }}
-//       />
-//     </Button>
-//   ) : (
-//     <Button
-//       transparent
-//       onPress={async () => {
-//         await tripStore.tripUpdate({
-//           ...trip,
-//           isFavorite: "T",
-//         });
-//         Toast.show({
-//           text: `Added ${trip.title} to Favorites`,
-//           type: "danger",
-//           position: "bottom",
-//         });
-//       }}
-//     >
-//       <Icon
-//         type="Ionicons"
-//         name="ios-heart-empty"
-//         // TODO ASK ABOUT ICON ANIMATIONS?
-//         style={{ color: "black", fontSize: 40 }}
-//       />
-//     </Button>
-//   );
-// },

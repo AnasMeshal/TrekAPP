@@ -27,7 +27,12 @@ const BottomTab = () => {
         component={RootNavigationExplore}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="earth" color={color} size={40} />
+            <MaterialCommunityIcons
+              name="earth"
+              color={color}
+              size={40}
+              style={{ marginTop: "7%" }}
+            />
           ),
         }}
       />
@@ -37,17 +42,12 @@ const BottomTab = () => {
         options={{
           //TODO ONCLICK OPEN KEYBOARD TO SEARCH
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={40} />
-          ),
-        }}
-      />
-
-<Tab.Screen
-        name="Profile"
-        component={RootNavigationProfile}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={40} />
+            <MaterialCommunityIcons
+              name="magnify"
+              color={color}
+              size={40}
+              style={{ marginTop: "7%" }}
+            />
           ),
         }}
       />
@@ -57,7 +57,12 @@ const BottomTab = () => {
         component={DrawerNavigation}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={40} />
+            <MaterialCommunityIcons
+              name="account"
+              color={color}
+              size={40}
+              style={{ marginTop: "7%" }}
+            />
           ),
         }}
       />

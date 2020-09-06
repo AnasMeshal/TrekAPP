@@ -1,5 +1,4 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
 // Components
@@ -14,11 +13,14 @@ import GoBackButton from "../buttons/GoBackButton";
 import AddListButton from "../buttons/AddListButton";
 import AddTripToListButton from "../buttons/AddTripToListButton";
 
-const { Navigator, Screen } = createStackNavigator();
+// Amazing Stack Navigator
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 const RootNavigationList = () => {
   return (
-    <Navigator
+    <Stack.Navigator
       initialRouteName="Lists"
       screenOptions={{
         headerStyle: {
@@ -29,7 +31,7 @@ const RootNavigationList = () => {
         },
       }}
     >
-      <Screen
+      <Stack.Screen
         name="Lists"
         component={Lists}
         options={{
@@ -39,30 +41,39 @@ const RootNavigationList = () => {
         }}
       />
 
-      <Screen
+      <Stack.Screen
         name="List Detail"
         component={ListDetail}
         options={{
-          headerLeft: () => <GoBackButton />,
+          headerTintColor: "white",
+          headerBackTitleVisible: false,
         }}
       />
-      <Screen
+      <Stack.Screen
         name="Trip Detail"
         component={TripDetail}
-        options={{
-          headerRight: () => <AddTripToListButton />,
-          headerLeft: () => <GoBackButton />,
+        options={({ route }) => {
+          const { myTrip } = route.params;
+          const { notMyTrip } = route.params;
+          return {
+            headerRight: () => (
+              <AddTripToListButton myTrip={myTrip} notMyTrip={notMyTrip} />
+            ),
+            headerTintColor: "white",
+            headerBackTitleVisible: false,
+          };
         }}
       />
 
-      <Screen
+      <Stack.Screen
         name="Add List"
         component={AddList}
         options={{
-          headerLeft: () => <GoBackButton />,
+          headerTintColor: "white",
+          headerBackTitleVisible: false,
         }}
       />
-    </Navigator>
+    </Stack.Navigator>
   );
 };
 
