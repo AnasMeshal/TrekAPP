@@ -34,6 +34,14 @@ export const ProfileButton = styled(Button)`
   align-items: center;
 `;
 
+export const DoneButton = styled(Button)`
+  background-color: green;
+  margin-top: 45px;
+  align-self: center;
+  width: 30%;
+  align-items: center;
+`;
+
 export const ProfileButtonText = styled(Text)`
   color: white;
   font-weight: bold;

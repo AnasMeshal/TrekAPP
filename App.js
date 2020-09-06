@@ -7,10 +7,13 @@ import { ThemeProvider } from "styled-components";
 
 //Components
 import Main from "./components/Navigation/Main";
+import { enableScreens } from "react-native-screens";
+import { Root } from "native-base";
 
 import { Root } from "native-base";
 
 export default function App() {
+  enableScreens();
   return (
     <Root>
       <NavigationContainer>

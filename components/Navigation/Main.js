@@ -1,6 +1,5 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { createStackNavigator } from "@react-navigation/stack";
 
 // Components
 import Modal from "../Modal";
@@ -12,28 +11,39 @@ import BottomTab from "./BottomTab";
 // Stores
 import authStore from "../../stores/authStore";
 
-const { Navigator, Screen } = createStackNavigator();
+// Amazing Navigator
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
+const Stack = createNativeStackNavigator();
 
 const Main = () => {
   return (
-    <Navigator
+    <Stack.Navigator
       headerMode="none"
       mode="modal"
       initialRouteName={
         authStore.user === null ? "FirstTimeVisiting" : "BottomTab"
       }
     >
-      <Screen
+      <Stack.Screen
         name="BottomTab"
         component={BottomTab}
-        options={{ animationTypeForReplace: "pop" }}
+        options={{ animationTypeForReplace: "pop", headerShown: false }}
+      />
+      <Stack.Screen
+        name="Modal"
+        component={Modal}
+        options={{ headerShown: false }}
       />
 
-      <Screen name="Modal" component={Modal} />
+      <Stack.Screen name="Modal" component={Modal} />
       {authStore.user === null && (
-        <Screen name="FirstTimeVisiting" component={FirstTimeVisiting} />
+        <Stack.Screen
+          name="FirstTimeVisiting"
+          component={FirstTimeVisiting}
+          options={{ headerShown: false }}
+        />
       )}
-    </Navigator>
+    </Stack.Navigator>
   );
 };
 

@@ -1,22 +1,25 @@
-//TODO TOUCHABLE OPACITY OR HIGHLIGHT TO PRESS THE WHOLE LIST ITME
 //TODO STYLING LIBRARY MATERIAL UI
 import React from "react";
 import Swipeout from "react-native-swipeout";
 //TODO: SWITCH TO THIS https://github.com/jemise111/react-native-swipe-list-view
+// TODO CHANGE VIEW BUTTON TO CITY OF TRIP/LOCATION?
 // Styles
 import {
   ListItem,
   Text,
   Left,
-  Thumbnail,
   Body,
   Right,
   Button,
+  Icon,
+  Toast,
+  Row,
 } from "native-base";
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
 import profileStore from "../../stores/profileStore";
 import Markdown from "react-native-simple-markdown";
+import { ImagePreview } from "./styles";
 
 const TripItem = ({ trip, navigation, isProfile }) => {
   const newTrip = {
@@ -34,7 +37,12 @@ const TripItem = ({ trip, navigation, isProfile }) => {
       backgroundColor: "blue",
       underlayColor: "rgba(0, 0, 0, 1, 0.6)",
       onPress: async () => {
-        await tripStore.tripCreate(newTrip);
+        await tripStore.tripCreate({ ...newTrip, isFavorite: trip.isFavorite }),
+          Toast.show({
+            text: `Duplicated ${trip.title}`,
+            type: "success",
+            position: "bottom",
+          });
       },
     },
     {
@@ -43,6 +51,11 @@ const TripItem = ({ trip, navigation, isProfile }) => {
       underlayColor: "rgba(0, 0, 0, 1, 0.6)",
       onPress: async () => {
         await tripStore.tripDelete(trip.id);
+        Toast.show({
+          text: `Deleted ${trip.title}`,
+          type: "danger",
+          position: "bottom",
+        });
       },
     },
   ];
@@ -73,7 +86,7 @@ const TripItem = ({ trip, navigation, isProfile }) => {
           thumbnail
         >
           <Left>
-            <Thumbnail
+            <ImagePreview
               square
               source={{
                 uri:
@@ -85,7 +98,7 @@ const TripItem = ({ trip, navigation, isProfile }) => {
           <Body>
             <Markdown
               styles={{
-                text: { fontSize: "16" },
+                text: { fontSize: 16 },
               }}
               whitelist={["strong", "em"]}
             >
@@ -106,14 +119,59 @@ const TripItem = ({ trip, navigation, isProfile }) => {
             </Markdown>
           </Body>
           <Right>
-            <Button
-              onPress={() => {
-                navigation.navigate("Trip Detail", { myTrip: trip });
-              }}
-              transparent
-            >
-              <Text>View</Text>
-            </Button>
+            <Row>
+              <Button
+                onPress={() => {
+                  navigation.navigate("Trip Detail", { myTrip: trip });
+                }}
+                transparent
+              >
+                <Text>View</Text>
+              </Button>
+              {trip.isFavorite === "T" ? (
+                <Button
+                  transparent
+                  onPress={async () => {
+                    await tripStore.tripUpdate({
+                      ...trip,
+                      isFavorite: "F",
+                    });
+                    Toast.show({
+                      text: `Removed ${trip.title} from Favorites`,
+                      type: "danger",
+                      position: "bottom",
+                    });
+                  }}
+                >
+                  <Icon
+                    type="Ionicons"
+                    name="ios-heart"
+                    style={{ color: "red", fontSize: 40 }}
+                  />
+                </Button>
+              ) : (
+                <Button
+                  transparent
+                  onPress={async () => {
+                    await tripStore.tripUpdate({
+                      ...trip,
+                      isFavorite: "T",
+                    });
+                    Toast.show({
+                      text: `Added ${trip.title} to Favorites`,
+                      type: "danger",
+                      position: "bottom",
+                    });
+                  }}
+                >
+                  <Icon
+                    type="Ionicons"
+                    name="ios-heart-empty"
+                    style={{ color: "black", fontSize: 40 }}
+                  />
+                </Button>
+              )}
+            </Row>
           </Right>
         </ListItem>
       </Swipeout>
@@ -123,7 +181,7 @@ const TripItem = ({ trip, navigation, isProfile }) => {
   return (
     <ListItem onPress={viewTrip} thumbnail>
       <Left>
-        <Thumbnail
+        <ImagePreview
           square
           source={{
             uri:
@@ -135,7 +193,7 @@ const TripItem = ({ trip, navigation, isProfile }) => {
       <Body>
         <Markdown
           styles={{
-            text: { fontSize: "16" },
+            text: { fontSize: 16 },
           }}
           whitelist={["strong", "em"]}
         >
@@ -156,9 +214,18 @@ const TripItem = ({ trip, navigation, isProfile }) => {
         </Markdown>
       </Body>
       <Right>
-        <Button onPress={viewTrip} transparent>
-          <Text>View</Text>
-        </Button>
+        <Row>
+          <Button onPress={viewTrip} transparent>
+            <Text>View</Text>
+          </Button>
+          {trip.isFavorite === "T" && (
+            <Icon
+              type="Ionicons"
+              name="ios-heart"
+              style={{ color: "red", fontSize: 20 }}
+            />
+          )}
+        </Row>
       </Right>
     </ListItem>
   );

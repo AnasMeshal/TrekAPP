@@ -6,39 +6,62 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RootNavigationProfile from "./RootNavigationProfile";
 import RootNavigationExplore from "./RootNavigationExplore";
 
-// Styles
+//Styles
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import RootNavigationSearch from "./RootNavigationSearch";
 import DrawerNavigation from "./DrawerNavigation";
 
-const { Navigator, Screen } = createBottomTabNavigator();
+// const { Navigator, Screen } = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const BottomTab = () => {
   return (
-    <Navigator
+    <Tab.Navigator
       tabBarOptions={{
         showLabel: false,
       }}
       initialRouteName="Explore"
     >
-      <Screen
+      <Tab.Screen
         name="Explore"
         component={RootNavigationExplore}
         options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="earth" color={color} size={40} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={RootNavigationSearch}
+        options={{
+          //TODO ONCLICK OPEN KEYBOARD TO SEARCH
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="magnify" color={color} size={40} />
           ),
         }}
       />
-      <Screen
-        name="DrawerNavigation"
+
+<Tab.Screen
+        name="Profile"
+        component={RootNavigationProfile}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={40} />
           ),
         }}
-        component={DrawerNavigation}
       />
-    </Navigator>
+
+      <Tab.Screen
+        name="DrawerNavigation"
+        component={DrawerNavigation}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={40} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 

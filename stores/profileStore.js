@@ -9,10 +9,19 @@ class ProfileStore {
   // TODO SET LOADING TO FALSE ONCE YOU OPEN THE PROFILE
   // TODO: IF SIGNED IN FOR TOO LONG DELETE TOKEN OR ELSE ERRORS
 
-  profileUpdate = async (updatedProfile) => {
+  profileUpdate = async (updatedProfile, updatedFE) => {
     try {
-      await instance.put("/profiles", updatedProfile);
-      authStore.user.profile = updatedProfile;
+      const formData = new FormData();
+      for (const key in updatedProfile)
+        formData.append(key, updatedProfile[key]);
+      await instance.put("/profiles", formData);
+      if (updatedFE) {
+        authStore.user.profile = updatedFE;
+        await authStore.setUser(authStore.user);
+      } else {
+        authStore.user.profile = updatedProfile;
+        await authStore.setUser(authStore.user);
+      }
     } catch (error) {
       console.error("ProfileStore -> profileUpdate -> error", error);
     }
