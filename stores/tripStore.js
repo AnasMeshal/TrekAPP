@@ -53,6 +53,8 @@ class TripStore {
       console.log(error);
     }
   };
+
+  getTripById = (tripId) => this.trips.find((trip) => tripId === trip.id);
 }
 
 decorate(TripStore, {

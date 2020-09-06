@@ -1,6 +1,6 @@
 // Styled components
 import styled from "styled-components";
-import { Button, Text, View } from "native-base";
+import { Button, Text, View, Icon } from "native-base";
 import Markdown from "react-native-simple-markdown";
 
 export const TripImage = styled.Image`
@@ -28,7 +28,7 @@ export const TripDetails = styled.TextInput`
 
 export const ProfileButton = styled(Button)`
   background-color: #42d4f2;
-  margin-top: 75px;
+  margin-top: 50px;
   align-self: center;
   width: 70%;
   align-items: center;
@@ -43,6 +43,22 @@ export const DoneButton = styled(Button)`
 `;
 
 export const ProfileButtonText = styled(Text)`
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const WantToGoButton = styled(Button)`
+  background-color: #42d4f2;
+  margin-top: 10px;
+  align-self: center;
+  width: 50%;
+  align-items: center;
+`;
+
+export const WantToGoButtonText = styled(Text)`
   color: white;
   font-weight: bold;
   text-align: center;

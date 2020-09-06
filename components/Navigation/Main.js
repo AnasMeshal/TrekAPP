@@ -34,6 +34,8 @@ const Main = () => {
         component={Modal}
         options={{ headerShown: false }}
       />
+
+      <Stack.Screen name="Modal" component={Modal} />
       {authStore.user === null && (
         <Stack.Screen
           name="FirstTimeVisiting"

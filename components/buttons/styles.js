@@ -55,3 +55,27 @@ export const SortButtonStyled = styled(Button)`
   margin-top: 10px;
   margin-bottom: 4px;
 `;
+
+export const OpenDrawerIcon = styled(Icon)`
+  color: white;
+  font-size: 35px;
+  justify-content: center;
+  align-self: center;
+  margin-right: 5px;
+  margin-top: auto
+  margin-bottom: auto
+`;
+
+export const AddListButtonStyle = styled(Icon)`
+  color: white;
+  font-size: 40px;
+  align-self: center;
+  margin-left: 10px;
+`;
+
+export const StyledThreeDots = styled(Icon)`
+  color: white;
+  font-size: 40px;
+  align-self: center;
+  margin-left: 10px;
+`;

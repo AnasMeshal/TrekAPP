@@ -17,6 +17,9 @@ import FilterButton from "../buttons/FilterButton";
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useNavigation } from "@react-navigation/native";
 
+import AddTripToListButton from "../buttons/AddTripToListButton";
+
+
 // Navigation
 
 const Stack = createNativeStackNavigator();
@@ -66,6 +69,7 @@ const RootNavigator = () => {
             headerTintColor: "white",
             headerBackTitleVisible: false,
             // headerLeft: () => <GoBackButton navigation={navigation} />,
+            headerRight: () => <AddTripToListButton />,
           };
         }}
       />

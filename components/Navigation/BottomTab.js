@@ -9,6 +9,7 @@ import RootNavigationExplore from "./RootNavigationExplore";
 //Styles
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import RootNavigationSearch from "./RootNavigationSearch";
+import DrawerNavigation from "./DrawerNavigation";
 
 // const { Navigator, Screen } = createBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -40,9 +41,20 @@ const BottomTab = () => {
           ),
         }}
       />
-      <Tab.Screen
+
+<Tab.Screen
         name="Profile"
         component={RootNavigationProfile}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={40} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="DrawerNavigation"
+        component={DrawerNavigation}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={40} />
