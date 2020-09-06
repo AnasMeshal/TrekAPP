@@ -70,7 +70,7 @@ const Modal = ({ navigation }) => {
         {/* <Text>{authStore.error}</Text> */}
 
         <AuthButtonText>{error}</AuthButtonText>
-
+        {/* // TODO SIGN IN ON ENTER */}
         <AuthTextInput
           onChangeText={(username) => setUser({ ...user, username })}
           placeholder="Username"

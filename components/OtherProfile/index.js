@@ -21,18 +21,26 @@ import tripStore from "../../stores/tripStore";
 const OtherProfile = ({ route, navigation }) => {
   const { notMyProfile } = route.params;
 
-  const otherProfileTrips = tripStore.trips
+  const sortedTrips = tripStore.trips
     .filter((trip) => trip.userId === notMyProfile.userId)
-    .map((trip) => (
-      <TripItem trip={trip} navigation={navigation} key={trip.id} />
-    ));
+    .filter((trip) => trip.isFavorite === "T")
+    .concat(
+      tripStore.trips
+        .filter((trip) => trip.userId === notMyProfile.userId)
+        .filter((trip) => trip.isFavorite !== "T")
+    );
+
+  const otherProfileTrips = sortedTrips.map((trip) => (
+    <TripItem trip={trip} navigation={navigation} key={trip.id} />
+  ));
 
   return (
     <ScrollView>
       <ProfileImage
         source={{
           uri:
-            "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
+            notMyProfile.image ||
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png",
         }}
       />
 

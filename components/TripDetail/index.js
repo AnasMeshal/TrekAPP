@@ -13,11 +13,14 @@ import {
   OtherTripDetails,
   ProfileButton,
   ProfileButtonText,
+  DoneButton,
   StyledView,
   StyledDetailView,
 } from "./styles";
 import { ScrollView } from "react-native";
-import { Button, Text } from "native-base";
+import { Toast } from "native-base";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from "expo-permissions";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
@@ -33,40 +36,125 @@ const TripDetail = ({ route, navigation }) => {
       id: myTrip.id,
     });
 
+    const getPermissionAsync = async () => {
+      if (Platform.OS !== "web") {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
+        }
+      }
+    };
+
+    getPermissionAsync();
+
+    const pickImage = async () => {
+      try {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        if (!result.cancelled) {
+          // ImagePicker saves the taken photo to disk and returns a local URI to it
+          let localUri = result.uri;
+          let filename = localUri.split("/").pop();
+
+          // Infer the type of the image
+          let match = /\.(\w+)$/.exec(filename);
+          let type = match ? `image/${match[1]}` : `image`;
+
+          await tripStore.tripUpdate(
+            {
+              ...updatedTrip,
+              image: { uri: localUri, name: filename, type },
+            },
+            {
+              ...updatedTrip,
+              image: result.uri,
+            }
+          );
+
+          setUpdatedTrip({
+            ...updatedTrip,
+            image: result.uri,
+          });
+          Toast.show({
+            text: "Updated Trip Image",
+            textStyle: {
+              fontWeight: "bold",
+              textAlign: "center",
+              fontSize: 20,
+            },
+            style: { backgroundColor: "#42d4f2e6" },
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     return (
+      // TODO FIX SCROLL VIEW
       <ScrollView>
         <TripImage
           source={{
             uri:
+              updatedTrip.image ||
               "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
           }}
         />
+
         {editable ? (
           <>
+            <ProfileButton onPress={pickImage}>
+              <ProfileButtonText>Change Image (TEMP)</ProfileButtonText>
+            </ProfileButton>
             <TripName
               maxLength={37}
               blurOnSubmit={true}
               multiline={true}
-              placeholder={myTrip.title}
+              placeholder={updatedTrip.title}
               placeholderTextColor="black"
               onChangeText={(title) =>
                 setUpdatedTrip({ ...updatedTrip, title })
               }
               onEndEditing={async () => {
-                await tripStore.tripUpdate(updatedTrip);
+                await tripStore.tripUpdate(updatedTrip),
+                  navigation.setParams({ title: updatedTrip.title }),
+                  Toast.show({
+                    text: "Updated Trip Title",
+                    textStyle: {
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      fontSize: 20,
+                    },
+                    style: { backgroundColor: "#42d4f2e6" },
+                  });
               }}
             />
             <TripDetails
               multiline={true}
-              placeholder={myTrip.details}
+              placeholder={updatedTrip.details}
               placeholderTextColor="grey"
               onChangeText={(details) =>
                 setUpdatedTrip({ ...updatedTrip, details })
               }
               onEndEditing={async () => {
-                await tripStore.tripUpdate(updatedTrip);
+                await tripStore.tripUpdate(updatedTrip),
+                  Toast.show({
+                    text: "Updated Trip Title",
+                    textStyle: {
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      fontSize: 20,
+                    },
+                    style: { backgroundColor: "#42d4f2e6" },
+                  });
               }}
             />
+            <DoneButton onPress={() => setEditable(false)}>
+              <ProfileButtonText>Done</ProfileButtonText>
+            </DoneButton>
           </>
         ) : (
           <>
@@ -129,6 +217,7 @@ const TripDetail = ({ route, navigation }) => {
       <TripImage
         source={{
           uri:
+            notMyTrip.image ||
             "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
         }}
       />

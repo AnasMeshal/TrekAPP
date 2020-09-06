@@ -1,21 +1,26 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
 // Components
 import AddTrip from "../AddTrip";
 import Profile from "../Profile";
 import TripDetail from "../TripDetail";
+import Favorites from "../Profile/Favorites";
 
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
 import LogOutButton from "../buttons/LogOutButton";
+import { Button, Toast, Icon, Root } from "native-base";
+import tripStore from "../../stores/tripStore";
 
-const { Navigator, Screen } = createStackNavigator();
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
+import { useNavigation } from "@react-navigation/native";
+const Stack = createNativeStackNavigator();
 
 const RootNavigatorProfile = () => {
+  navigation = useNavigation();
   return (
-    <Navigator
+    <Stack.Navigator
       initialRouteName="Profile"
       screenOptions={{
         headerStyle: {
@@ -26,38 +31,143 @@ const RootNavigatorProfile = () => {
         },
       }}
     >
-      <Screen
+      <Stack.Screen
         name="Profile"
         component={Profile}
         options={{
           title: "Profile",
-          headerRight: null,
           headerLeft: () => <LogOutButton />,
         }}
       />
 
-      <Screen
+      <Stack.Screen
         name="AddTrip"
         component={AddTrip}
         options={{
           title: "Add a Trip",
-          headerLeft: () => <GoBackButton />,
+          headerTintColor: "white",
+          headerBackTitleVisible: false,
+          // headerLeft: (navigation) => <GoBackButton navigation={navigation} />,
         }}
       />
 
-      <Screen
+      <Stack.Screen
         name="Trip Detail"
         component={TripDetail}
         options={({ route }) => {
           const { myTrip } = route.params;
           return {
             title: myTrip.title,
-            headerLeft: () => <GoBackButton />,
+            headerTintColor: "white",
+            headerBackTitleVisible: false,
+            // headerLeft: () => <GoBackButton navigation={navigation} />,
+            // TODO  ADAPTIVE FAVORITE BUTTON
+            headerRight: () =>
+              myTrip.isFavorite === "T" ? (
+                <Button
+                  transparent
+                  onPress={async () => {
+                    await tripStore.tripUpdate({
+                      ...myTrip,
+                      isFavorite: "F",
+                    });
+                    Toast.show({
+                      text: `Removed ${myTrip.title} from Favorites`,
+                      type: "danger",
+                      position: "bottom",
+                    });
+                  }}
+                >
+                  <Icon
+                    type="Ionicons"
+                    name="ios-heart"
+                    style={{ color: "red", fontSize: 30, marginRight: 20 }}
+                  />
+                </Button>
+              ) : (
+                <Button
+                  transparent
+                  onPress={async () => {
+                    await tripStore.tripUpdate({
+                      ...myTrip,
+                      isFavorite: "T",
+                    });
+                    Toast.show({
+                      text: `Added ${myTrip.title} to Favorites`,
+                      type: "danger",
+                    });
+                  }}
+                >
+                  <Icon
+                    type="Ionicons"
+                    name="ios-heart-empty"
+                    style={{ color: "white", fontSize: 30, marginRight: 20 }}
+                  />
+                </Button>
+              ),
           };
         }}
       />
-    </Navigator>
+      <Stack.Screen
+        name="Favorites"
+        component={Favorites}
+        options={{
+          headerLargeTitle: true,
+          title: "Your Favorites",
+          headerTintColor: "white",
+          headerBackTitleVisible: false,
+          // headerLeft: () => <GoBackButton navigation={navigation} />,
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 
 export default observer(RootNavigatorProfile);
+
+// {
+//   myTrip.isFavorite === "T" ? (
+//     <Button
+//       transparent
+//       onPress={async () => {
+//         await tripStore.tripUpdate({
+//           ...trip,
+//           isFavorite: "F",
+//         });
+//         Toast.show({
+//           text: `Removed ${trip.title} from Favorites`,
+//           type: "danger",
+//           position: "bottom",
+//         });
+//       }}
+//     >
+//       <Icon
+//         type="Ionicons"
+//         name="ios-heart"
+//         style={{ color: "red", fontSize: 40 }}
+//       />
+//     </Button>
+//   ) : (
+//     <Button
+//       transparent
+//       onPress={async () => {
+//         await tripStore.tripUpdate({
+//           ...trip,
+//           isFavorite: "T",
+//         });
+//         Toast.show({
+//           text: `Added ${trip.title} to Favorites`,
+//           type: "danger",
+//           position: "bottom",
+//         });
+//       }}
+//     >
+//       <Icon
+//         type="Ionicons"
+//         name="ios-heart-empty"
+//         // TODO ASK ABOUT ICON ANIMATIONS?
+//         style={{ color: "black", fontSize: 40 }}
+//       />
+//     </Button>
+//   );
+// },

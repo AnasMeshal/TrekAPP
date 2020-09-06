@@ -5,6 +5,8 @@ import { Text, View } from "native-base";
 export const ProfileImage = styled.Image`
   width: 200px;
   height: 200px;
+  border-radius: 100px;
+  margin-top: 10px;
   align-self: center;
 `;
 

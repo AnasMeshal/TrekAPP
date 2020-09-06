@@ -8,12 +8,8 @@ const AddTripButton = () => {
   const navigation = useNavigation();
 
   return (
-    <IconWrapper>
-      <IconStyled
-        onPress={() => navigation.navigate("AddTrip")}
-        type="Ionicons"
-        name="add"
-      />
+    <IconWrapper onPress={() => navigation.navigate("AddTrip")}>
+      <IconStyled type="Ionicons" name="add" />
     </IconWrapper>
   );
 };
