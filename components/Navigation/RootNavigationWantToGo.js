@@ -3,23 +3,19 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
 // Components
-import Lists from "../Lists";
-import ListDetail from "../ListDetail";
 import TripDetail from "../TripDetail";
-import AddList from "../AddList";
+import WantToGoList from "../WantToGoList";
 
 // Buttons
 import OpenDrawer from "../buttons/OpenDrawer";
 import GoBackButton from "../buttons/GoBackButton";
-import AddListButton from "../buttons/AddListButton";
-import AddTripToListButton from "../buttons/AddTripToListButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
-const RootNavigationList = () => {
+const RootNavigationWantToGo = () => {
   return (
     <Navigator
-      initialRouteName="Lists"
+      initialRouteName="WantToGo"
       screenOptions={{
         headerStyle: {
           backgroundColor: "#42d4f2",
@@ -30,34 +26,16 @@ const RootNavigationList = () => {
       }}
     >
       <Screen
-        name="Lists"
-        component={Lists}
+        name="WantToGo"
+        component={WantToGoList}
         options={{
-          title: "Lists",
-          headerLeft: () => <AddListButton />,
+          title: "Want To Go",
           headerRight: () => <OpenDrawer />,
-        }}
-      />
-
-      <Screen
-        name="List Detail"
-        component={ListDetail}
-        options={{
-          headerLeft: () => <GoBackButton />,
         }}
       />
       <Screen
         name="Trip Detail"
         component={TripDetail}
-        options={{
-          headerRight: () => <AddTripToListButton />,
-          headerLeft: () => <GoBackButton />,
-        }}
-      />
-
-      <Screen
-        name="Add List"
-        component={AddList}
         options={{
           headerLeft: () => <GoBackButton />,
         }}
@@ -66,4 +44,4 @@ const RootNavigationList = () => {
   );
 };
 
-export default observer(RootNavigationList);
+export default observer(RootNavigationWantToGo);

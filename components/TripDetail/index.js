@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 // Stores
+import listStore from "../../stores/listStore";
 import tripStore from "../../stores/tripStore";
+import authStore from "../../stores/authStore";
 
 //Styles
-
 import {
   TripImage,
   TripName,
@@ -16,15 +17,21 @@ import {
   ProfileButtonText,
   StyledView,
   StyledDetailView,
+  WantToGoButton,
+  WantToGoButtonText,
 } from "./styles";
-import { ScrollView, StyleSheet, View, Dimensions } from "react-native";
-import { Button, Text, Spinner } from "native-base";
+import { ScrollView, View, Dimensions } from "react-native";
+import { Button, Text } from "native-base";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
   const { notMyTrip } = route.params;
   const { notMyProfile } = route.params;
   const [editable, setEditable] = useState(false);
+
+  const wantToGo = listStore.lists.find(
+    (list) => list.name === "Want To Go" && list.userId === authStore.user.id
+  );
 
   if (myTrip) {
     const [updatedTrip, setUpdatedTrip] = useState({
@@ -36,88 +43,96 @@ const TripDetail = ({ route, navigation }) => {
 
     return (
       <ScrollView>
-        <TripImage
-          source={{
-            uri:
-              "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
-          }}
-        />
-        {editable ? (
-          <>
-            <TripName
-              maxLength={37}
-              blurOnSubmit={true}
-              multiline={true}
-              placeholder={myTrip.title}
-              placeholderTextColor="black"
-              onChangeText={(title) =>
-                setUpdatedTrip({ ...updatedTrip, title })
-              }
-              onEndEditing={async () => {
-                await tripStore.tripUpdate(updatedTrip);
-              }}
-            />
-            <TripDetails
-              multiline={true}
-              placeholder={myTrip.details}
-              placeholderTextColor="grey"
-              onChangeText={(details) =>
-                setUpdatedTrip({ ...updatedTrip, details })
-              }
-              onEndEditing={async () => {
-                await tripStore.tripUpdate(updatedTrip);
-              }}
-            />
-          </>
-        ) : (
-          <>
-            <StyledView>
-              <OtherTripName
-                styles={{
-                  text: {
-                    fontSize: 40,
-                    color: "black",
-                    textAlign: "center",
-                  },
+        <View>
+          <TripImage
+            source={{
+              uri:
+                "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+            }}
+          />
+          {editable ? (
+            <>
+              <TripName
+                maxLength={37}
+                blurOnSubmit={true}
+                multiline={true}
+                placeholder={myTrip.title}
+                placeholderTextColor="black"
+                onChangeText={(title) =>
+                  setUpdatedTrip({ ...updatedTrip, title })
+                }
+                onEndEditing={async () => {
+                  await tripStore.tripUpdate(updatedTrip);
                 }}
-                whitelist={["strong", "em"]}
-              >
-                {myTrip.title}
-              </OtherTripName>
-            </StyledView>
-            <StyledDetailView>
-              <OtherTripDetails
-                styles={{
-                  text: {
-                    fontSize: 25,
-                    color: "grey",
-                    textAlign: "center",
-                  },
+              />
+              <TripDetails
+                multiline={true}
+                placeholder={myTrip.details}
+                placeholderTextColor="grey"
+                onChangeText={(details) =>
+                  setUpdatedTrip({ ...updatedTrip, details })
+                }
+                onEndEditing={async () => {
+                  await tripStore.tripUpdate(updatedTrip);
                 }}
-                whitelist={[
-                  "strong",
-                  "link",
-                  "url",
-                  "video",
-                  "image",
-                  "heading",
-                  "em",
-                ]}
-              >
-                {myTrip.details}
-              </OtherTripDetails>
-            </StyledDetailView>
+              />
+            </>
+          ) : (
+            <>
+              <StyledView>
+                <OtherTripName
+                  styles={{
+                    text: {
+                      fontSize: 40,
+                      color: "black",
+                      textAlign: "center",
+                    },
+                  }}
+                  whitelist={["strong", "em"]}
+                >
+                  {myTrip.title}
+                </OtherTripName>
+              </StyledView>
+              <StyledDetailView>
+                <OtherTripDetails
+                  styles={{
+                    text: {
+                      fontSize: 25,
+                      color: "grey",
+                      textAlign: "center",
+                    },
+                  }}
+                  whitelist={[
+                    "strong",
+                    "link",
+                    "url",
+                    "video",
+                    "image",
+                    "heading",
+                    "em",
+                  ]}
+                >
+                  {myTrip.details}
+                </OtherTripDetails>
+              </StyledDetailView>
 
-            <ProfileButton onPress={() => setEditable(true)}>
-              <ProfileButtonText>Edit Trip</ProfileButtonText>
-            </ProfileButton>
-            <Button
-              onPress={() => navigation.navigate("map", { myTrip: myTrip })}
-            >
-              <Text>View on Map</Text>
-            </Button>
-          </>
-        )}
+              <ProfileButton onPress={() => setEditable(true)}>
+                <ProfileButtonText>Edit Trip</ProfileButtonText>
+              </ProfileButton>
+
+              <WantToGoButton
+                onPress={() => listStore.addTripToList(wantToGo.id, myTrip.id)}
+              >
+                <WantToGoButtonText>Want To Go!</WantToGoButtonText>
+              </WantToGoButton>
+              <Button
+                onPress={() => navigation.navigate("map", { myTrip: myTrip })}
+              >
+                <Text>View on Map</Text>
+              </Button>
+            </>
+          )}
+        </View>
       </ScrollView>
     );
   }
@@ -132,59 +147,66 @@ const TripDetail = ({ route, navigation }) => {
 
   return (
     <ScrollView>
-      <TripImage
-        source={{
-          uri:
-            "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
-        }}
-      />
-      <StyledView>
-        <OtherTripName
-          styles={{
-            text: {
-              fontSize: 40,
-              color: "black",
-              textAlign: "center",
-            },
+      <View>
+        <TripImage
+          source={{
+            uri:
+              "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
           }}
-          whitelist={["strong", "em"]}
+        />
+        <StyledView>
+          <OtherTripName
+            styles={{
+              text: {
+                fontSize: 40,
+                color: "black",
+                textAlign: "center",
+              },
+            }}
+            whitelist={["strong", "em"]}
+          >
+            {notMyTrip.title}
+          </OtherTripName>
+        </StyledView>
+        <StyledDetailView>
+          <OtherTripDetails
+            styles={{
+              text: {
+                fontSize: 25,
+                color: "grey",
+                textAlign: "center",
+              },
+            }}
+            whitelist={[
+              "strong",
+              "link",
+              "url",
+              "video",
+              "image",
+              "heading",
+              "em",
+            ]}
+          >
+            {notMyTrip.details}
+          </OtherTripDetails>
+        </StyledDetailView>
+        <ProfileButton
+          onPress={() =>
+            navigation.navigate("OtherProfile", {
+              notMyProfile: notMyProfile,
+            })
+          }
         >
-          {notMyTrip.title}
-        </OtherTripName>
-      </StyledView>
-      <StyledDetailView>
-        <OtherTripDetails
-          styles={{
-            text: {
-              fontSize: 25,
-              color: "grey",
-              textAlign: "center",
-            },
-          }}
-          whitelist={[
-            "strong",
-            "link",
-            "url",
-            "video",
-            "image",
-            "heading",
-            "em",
-          ]}
+          <ProfileButtonText>
+            View {notMyProfile.username}'s Profile
+          </ProfileButtonText>
+        </ProfileButton>
+        <WantToGoButton
+          onPress={() => listStore.addTripToList(wantToGo.id, notMyTrip.id)}
         >
-          {notMyTrip.details}
-        </OtherTripDetails>
-      </StyledDetailView>
-      <ProfileButton
-        onPress={() =>
-          navigation.navigate("OtherProfile", {
-            notMyProfile: notMyProfile,
-          })
-        }
-      >
-        <ProfileButtonText>
-          View {notMyProfile.username}'s Profile
-        </ProfileButtonText>
-      </ProfileButton>
+          <WantToGoButtonText>Want To Go!</WantToGoButtonText>
+        </WantToGoButton>
+      </View>
     </ScrollView>
   );
 };

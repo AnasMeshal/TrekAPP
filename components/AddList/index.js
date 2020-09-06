@@ -24,7 +24,7 @@ const AddList = ({ navigation }) => {
   });
 
   const handleSubmit = async () => {
-    if (list.name !== "") {
+    if (list.name !== "" && list.name !== "Want To Go") {
       await listStore.listCreate(list);
       navigation.navigate("Lists");
       // TODO MAKE IT GLOBAL

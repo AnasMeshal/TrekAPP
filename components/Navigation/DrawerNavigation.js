@@ -3,9 +3,9 @@ import { observer } from "mobx-react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 // Component
-
 import RootNavigationList from "./RootNavigationList";
 import RootNavigationProfile from "./RootNavigationProfile";
+import RootNavigationWantToGo from "./RootNavigationWantToGo";
 
 const { Navigator, Screen } = createDrawerNavigator();
 
@@ -17,6 +17,7 @@ const DrawerNavigation = () => {
       initialRouteName="Profile"
     >
       <Screen name="Profile" component={RootNavigationProfile} />
+      <Screen name="Want to go" component={RootNavigationWantToGo} />
       <Screen name="Lists" component={RootNavigationList} />
     </Navigator>
   );

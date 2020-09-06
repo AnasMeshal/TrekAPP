@@ -1,5 +1,4 @@
 import React from "react";
-import { observer } from "mobx-react";
 
 // Styles
 import {
@@ -13,12 +12,14 @@ import {
 } from "native-base";
 import Swipeout from "react-native-swipeout";
 import Markdown from "react-native-simple-markdown";
+
+// Stores
 import authStore from "../../stores/authStore";
 import profileStore from "../../stores/profileStore";
 import listStore from "../../stores/listStore";
 
-const ListTrip = ({ list, trip, navigation }) => {
-  trip.listId = list.id;
+const WantToGoTrip = ({ trip, navigation, wantToGo }) => {
+  trip.listId = wantToGo.id;
 
   const swipeoutBtns = [
     {
@@ -156,4 +157,4 @@ const ListTrip = ({ list, trip, navigation }) => {
   );
 };
 
-export default observer(ListTrip);
+export default WantToGoTrip;

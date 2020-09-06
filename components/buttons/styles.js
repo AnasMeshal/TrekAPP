@@ -32,6 +32,7 @@ export const LogOutStyled = styled(Icon)`
 `;
 
 export const OpenDrawerIcon = styled(Icon)`
+  color: white;
   font-size: 35px;
   justify-content: center;
   align-self: center;
@@ -41,6 +42,14 @@ export const OpenDrawerIcon = styled(Icon)`
 `;
 
 export const AddListButtonStyle = styled(Icon)`
+  color: white;
+  font-size: 40px;
+  align-self: center;
+  margin-left: 10px;
+`;
+
+export const StyledThreeDots = styled(Icon)`
+  color: white;
   font-size: 40px;
   align-self: center;
   margin-left: 10px;
