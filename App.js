@@ -8,10 +8,14 @@ import { ThemeProvider } from "styled-components";
 //Components
 import Main from "./components/Navigation/Main";
 
+import { Root } from "native-base";
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <Main />
-    </NavigationContainer>
+    <Root>
+      <NavigationContainer>
+        <Main />
+      </NavigationContainer>
+    </Root>
   );
 }

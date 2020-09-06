@@ -12,6 +12,7 @@ import Maps from "../geolocation/maps";
 import GoBackButton from "../buttons/GoBackButton";
 import LogOutButton from "../buttons/LogOutButton";
 import OpenDrawer from "../buttons/OpenDrawer";
+import AddTripToListButton from "../buttons/AddTripToListButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -54,6 +55,7 @@ const RootNavigatorProfile = () => {
           const { myTrip } = route.params;
           return {
             title: myTrip.title,
+            headerRight: () => <AddTripToListButton />,
             headerLeft: () => <GoBackButton />,
           };
         }}

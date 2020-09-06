@@ -10,6 +10,7 @@ import TripDetail from "../TripDetail";
 
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
+import AddTripToListButton from "../buttons/AddTripToListButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -59,6 +60,7 @@ const RootNavigator = () => {
           return {
             //TODO MARKDOWN
             title: notMyTrip.title,
+            headerRight: () => <AddTripToListButton />,
             headerLeft: () => <GoBackButton />,
           };
         }}

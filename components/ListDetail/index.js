@@ -6,7 +6,12 @@ import ListTrip from "../ListTrip";
 
 // Styles
 import { Content, View, List } from "native-base";
-import { ListName } from "./styles";
+import {
+  ListNameInput,
+  ListNameText,
+  ProfileButton,
+  ProfileButtonText,
+} from "./styles";
 
 // Stores
 import tripStore from "../../stores/tripStore";
@@ -19,28 +24,37 @@ const ListDetail = ({ route, navigation }) => {
     name: list.name,
     id: list.id,
   });
-
+  const [editable, setEditable] = useState(false);
   const trips = list.trips.map((trip) => tripStore.getTripById(trip.id));
 
   const tripOfList = trips.map((trip) => (
-    <ListTrip trip={trip} navigation={navigation} key={trip.id} />
+    <ListTrip list={list} trip={trip} navigation={navigation} key={trip.id} />
   ));
 
   return (
     <Content>
       <View>
-        <ListName
-          maxLength={37}
-          blurOnSubmit={true}
-          multiline={true}
-          placeholder={list.name}
-          placeholderTextColor="black"
-          onChangeText={(name) => setUpdatedList({ ...updatedList, name })}
-          onEndEditing={async () => {
-            await listStore.listUpdate(updatedList);
-          }}
-        />
+        {editable ? (
+          <ListNameInput
+            maxLength={37}
+            blurOnSubmit={true}
+            multiline={true}
+            placeholder={list.name}
+            placeholderTextColor="grey"
+            onChangeText={(name) => setUpdatedList({ ...updatedList, name })}
+            onEndEditing={async () => {
+              await listStore.listUpdate(updatedList);
+            }}
+          />
+        ) : (
+          <ListNameText>{list.name}</ListNameText>
+        )}
         <List>{tripOfList}</List>
+        <ProfileButton onPress={() => setEditable(!editable)}>
+          <ProfileButtonText>
+            {editable ? "Apply Edits" : "Edit List"}
+          </ProfileButtonText>
+        </ProfileButton>
       </View>
     </Content>
   );
