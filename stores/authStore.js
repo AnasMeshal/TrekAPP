@@ -15,6 +15,7 @@ class AuthStore {
     await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
+    console.log("AuthStore -> user", this.user);
   };
 
   signup = async (userData) => {
@@ -23,7 +24,7 @@ class AuthStore {
       const res = await instance.post("/signup", userData);
       await this.setUser(res.data.token);
       this.loading = false;
-      listStore.fetchLists();
+      await listStore.fetchLists();
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
     }

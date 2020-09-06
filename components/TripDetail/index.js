@@ -20,6 +20,8 @@ import {
   StyledDetailView,
   WantToGoButton,
   WantToGoButtonText,
+  ChangeImageButton,
+  ChangeImageButtonText,
 } from "./styles";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -104,90 +106,68 @@ const TripDetail = ({ route, navigation }) => {
     return (
       // TODO FIX SCROLL VIEW
       <ScrollView>
-        <TripImage
-          source={{
-            uri:
-              updatedTrip.image ||
-              "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
-          }}
-        />
+        <View>
+          <TripImage
+            source={{
+              uri:
+                updatedTrip.image ||
+                "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
+            }}
+          />
 
-        {editable ? (
-          <>
-            <ProfileButton onPress={pickImage}>
-              <ProfileButtonText>Change Image (TEMP)</ProfileButtonText>
-            </ProfileButton>
-            <TripName
-              maxLength={37}
-              blurOnSubmit={true}
-              multiline={true}
-              placeholder={updatedTrip.title}
-              placeholderTextColor="black"
-              onChangeText={(title) =>
-                setUpdatedTrip({ ...updatedTrip, title })
-              }
-              onEndEditing={async () => {
-                await tripStore.tripUpdate(updatedTrip),
-                  navigation.setParams({ title: updatedTrip.title }),
-                  Toast.show({
-                    text: "Updated Trip Title",
-                    textStyle: {
-                      fontWeight: "bold",
-                      textAlign: "center",
-                      fontSize: 20,
-                    },
-                    style: { backgroundColor: "#42d4f2e6" },
-                  });
-              }}
-            />
-            <TripDetails
-              multiline={true}
-              placeholder={updatedTrip.details}
-              placeholderTextColor="grey"
-              onChangeText={(details) =>
-                setUpdatedTrip({ ...updatedTrip, details })
-              }
-              onEndEditing={async () => {
-                await tripStore.tripUpdate(updatedTrip),
-                  Toast.show({
-                    text: "Updated Trip Title",
-                    textStyle: {
-                      fontWeight: "bold",
-                      textAlign: "center",
-                      fontSize: 20,
-                    },
-                    style: { backgroundColor: "#42d4f2e6" },
-                  });
-              }}
-            />
-            <DoneButton onPress={() => setEditable(false)}>
-              <ProfileButtonText>Done</ProfileButtonText>
-            </DoneButton>
-          </>
-        ) : (
-          <>
-            <StyledView>
-              <OtherTripName
-                styles={{
-                  text: {
-                    fontSize: 40,
-                    color: "black",
-                    textAlign: "center",
-                  },
-
+          {editable ? (
+            <>
+              <ChangeImageButton transparent onPress={pickImage}>
+                <ChangeImageButtonText>
+                  Change Image (TEMP)
+                </ChangeImageButtonText>
+              </ChangeImageButton>
+              <TripName
+                maxLength={37}
+                blurOnSubmit={true}
+                multiline={true}
+                placeholder={updatedTrip.title}
+                placeholderTextColor="black"
+                onChangeText={(title) =>
+                  setUpdatedTrip({ ...updatedTrip, title })
+                }
+                onEndEditing={async () => {
+                  await tripStore.tripUpdate(updatedTrip),
+                    navigation.setParams({ title: updatedTrip.title }),
+                    Toast.show({
+                      text: "Updated Trip Title",
+                      textStyle: {
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        fontSize: 20,
+                      },
+                      style: { backgroundColor: "#42d4f2e6" },
+                    });
                 }}
               />
               <TripDetails
                 multiline={true}
-                placeholder={myTrip.details}
+                placeholder={updatedTrip.details}
                 placeholderTextColor="grey"
                 onChangeText={(details) =>
                   setUpdatedTrip({ ...updatedTrip, details })
                 }
                 onEndEditing={async () => {
-                  await tripStore.tripUpdate(updatedTrip);
+                  await tripStore.tripUpdate(updatedTrip),
+                    Toast.show({
+                      text: "Updated Trip Title",
+                      textStyle: {
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        fontSize: 20,
+                      },
+                      style: { backgroundColor: "#42d4f2e6" },
+                    });
                 }}
               />
+              <DoneButton onPress={() => setEditable(false)}>
+                <ProfileButtonText>Done</ProfileButtonText>
+              </DoneButton>
             </>
           ) : (
             <>
@@ -266,17 +246,7 @@ const TripDetail = ({ route, navigation }) => {
             "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
         }}
       />
-      <StyledView>
-        <OtherTripName
-          styles={{
-            text: {
-              fontSize: 40,
-              color: "black",
-              textAlign: "center",
-            },
-
-          }}
-        />
+      <View>
         <StyledView>
           <OtherTripName
             styles={{
@@ -333,5 +303,4 @@ const TripDetail = ({ route, navigation }) => {
     </ScrollView>
   );
 };
-
 export default observer(TripDetail);

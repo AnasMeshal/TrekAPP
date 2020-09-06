@@ -17,10 +17,14 @@ class ProfileStore {
       await instance.put("/profiles", formData);
       if (updatedFE) {
         authStore.user.profile = updatedFE;
-        await authStore.setUser(authStore.user);
+        // await authStore.setUser(authStore.user);
       } else {
         authStore.user.profile = updatedProfile;
-        await authStore.setUser(authStore.user);
+        // await authStore.setUser(authStore.user);
+        console.log(
+          "ProfileStore -> profileUpdate -> authStore.user",
+          authStore.user
+        );
       }
     } catch (error) {
       console.error("ProfileStore -> profileUpdate -> error", error);

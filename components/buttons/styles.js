@@ -61,9 +61,7 @@ export const OpenDrawerIcon = styled(Icon)`
   font-size: 35px;
   justify-content: center;
   align-self: center;
-  margin-right: 5px;
-  margin-top: auto
-  margin-bottom: auto
+  /* margin-right: 1px; */
 `;
 
 export const AddListButtonStyle = styled(Icon)`
@@ -77,5 +75,5 @@ export const StyledThreeDots = styled(Icon)`
   color: white;
   font-size: 40px;
   align-self: center;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 `;

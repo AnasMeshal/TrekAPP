@@ -1,5 +1,4 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
 // Components
@@ -10,11 +9,15 @@ import WantToGoList from "../WantToGoList";
 import OpenDrawer from "../buttons/OpenDrawer";
 import GoBackButton from "../buttons/GoBackButton";
 
-const { Navigator, Screen } = createStackNavigator();
+// Amazing Stack Navigator
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
+
+//TODO DESTRUCTURE
+const Stack = createNativeStackNavigator();
 
 const RootNavigationWantToGo = () => {
   return (
-    <Navigator
+    <Stack.Navigator
       initialRouteName="WantToGo"
       screenOptions={{
         headerStyle: {
@@ -25,7 +28,7 @@ const RootNavigationWantToGo = () => {
         },
       }}
     >
-      <Screen
+      <Stack.Screen
         name="WantToGo"
         component={WantToGoList}
         options={{
@@ -33,14 +36,15 @@ const RootNavigationWantToGo = () => {
           headerRight: () => <OpenDrawer />,
         }}
       />
-      <Screen
+      <Stack.Screen
         name="Trip Detail"
         component={TripDetail}
         options={{
-          headerLeft: () => <GoBackButton />,
+          headerTintColor: "white",
+          headerBackTitleVisible: false,
         }}
       />
-    </Navigator>
+    </Stack.Navigator>
   );
 };
 

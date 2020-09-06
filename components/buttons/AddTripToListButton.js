@@ -1,5 +1,4 @@
 import React from "react";
-import { useRoute } from "@react-navigation/native";
 import { observer } from "mobx-react";
 
 // Styles
@@ -10,11 +9,7 @@ import { ActionSheet, Toast } from "native-base";
 import listStore from "../../stores/listStore";
 import authStore from "../../stores/authStore";
 
-const AddTripToListButton = () => {
-  const route = useRoute();
-  const { myTrip } = route.params;
-  const { notMyTrip } = route.params;
-
+const AddTripToListButton = ({ notMyTrip, myTrip }) => {
   const listName = listStore.lists.filter(
     (list) => list.name !== "Want To Go" && list.userId === authStore.user.id
   );

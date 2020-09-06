@@ -12,11 +12,9 @@ class ListStore {
 
   fetchLists = async () => {
     try {
-      if (authStore.loading === false) {
-        const res = await instance.get("/lists");
-        this.lists = res.data;
-        this.loading = false;
-      }
+      const res = await instance.get("/lists");
+      this.lists = res.data;
+      this.loading = false;
     } catch (error) {
       console.log(error);
     }

@@ -33,9 +33,14 @@ export const ProfileButton = styled(Button)`
   width: 70%;
   align-items: center;
 `;
+export const ChangeImageButton = styled(Button)`
+  margin-top: 10px;
+  align-self: center;
+  align-items: center;
+`;
 
 export const DoneButton = styled(Button)`
-  background-color: green;
+  background-color: #42d4f2;
   margin-top: 45px;
   align-self: center;
   width: 30%;
@@ -50,16 +55,26 @@ export const ProfileButtonText = styled(Text)`
   margin-right: auto;
 `;
 
+export const ChangeImageButtonText = styled(Text)`
+  color: #42d4f2;
+  font-weight: bold;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 export const WantToGoButton = styled(Button)`
-  background-color: #42d4f2;
+  background-color: transparent;
   margin-top: 10px;
+  margin-bottom: 100px;
+
   align-self: center;
-  width: 50%;
+  width: 30%;
   align-items: center;
 `;
 
 export const WantToGoButtonText = styled(Text)`
-  color: white;
+  color: #42d4f2;
   font-weight: bold;
   text-align: center;
   margin-left: auto;
