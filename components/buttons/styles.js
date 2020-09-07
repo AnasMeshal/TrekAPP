@@ -29,7 +29,8 @@ export const IconStyled = styled(Icon)`
 
 export const LogOutStyled = styled(Icon)`
   color: #ff362e;
-  margin-left: 10px;
+  margin-left: 0.1px;
+  margin-bottom: 1px;
 `;
 
 export const FilterStyled = styled(Text)`
@@ -61,7 +62,8 @@ export const OpenDrawerIcon = styled(Icon)`
   font-size: 35px;
   justify-content: center;
   align-self: center;
-  /* margin-right: 1px; */
+  margin-right: 0.1px;
+  margin-bottom: 1px;
 `;
 
 export const AddListButtonStyle = styled(Icon)`
