@@ -18,18 +18,22 @@ import tripStore from "../../stores/tripStore";
 import listStore from "../../stores/listStore";
 
 const ListDetail = ({ route, navigation }) => {
+  const [editable, setEditable] = useState(false);
   const { list } = route.params;
-
   const [updatedList, setUpdatedList] = useState({
     name: list.name,
     id: list.id,
   });
-  const [editable, setEditable] = useState(false);
-  const trips = list.trips.map((trip) => tripStore.getTripById(trip.id));
 
-  const tripOfList = trips.map((trip) => (
-    <ListTrip list={list} trip={trip} navigation={navigation} key={trip.id} />
-  ));
+  let tripOfList = [];
+
+  if (list.trips) {
+    const trips = list.trips.map((trip) => tripStore.getTripById(trip.id));
+
+    tripOfList = trips.map((trip) => (
+      <ListTrip list={list} trip={trip} navigation={navigation} key={trip.id} />
+    ));
+  }
 
   return (
     <Content>

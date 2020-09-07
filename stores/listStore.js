@@ -23,6 +23,7 @@ class ListStore {
   listCreate = async (newList) => {
     try {
       const res = await instance.post("/lists", newList);
+      res.data.trips = [];
       this.lists.push(res.data);
     } catch (error) {
       console.log(error);
