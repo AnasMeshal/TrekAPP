@@ -1,5 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react";
+import AllMarkers from "../geolocation/AllMarkers";
 
 // TODO POSSIBLY DELETE ORIGINAL NAVIGATOR
 
@@ -9,10 +10,17 @@ import AddTrip from "../AddTrip";
 import OtherProfile from "../OtherProfile";
 import TripDetail from "../TripDetail";
 
+
+// Buttons
+import GoBackButton from "../buttons/GoBackButton";
+import authStore from "../../stores/authStore";
+import Maps from "../geolocation/maps";
+
 // Amazing Stack Navigator
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 
 import AddTripToListButton from "../buttons/AddTripToListButton";
+
 
 // Navigation
 
@@ -84,7 +92,28 @@ const RootNavigator = () => {
           headerLargeTitle: true,
         }}
       />
+
+      <Stack.Screen
+        name="AllMarkers"
+        component={AllMarkers}
+        options={({ route }) => {
+          return {
+            headerShown: false,
+          };
+        }}
+      />
+      <Stack.Screen
+        name="map"
+        component={Maps}
+        options={({ route }) => {
+          return {
+            headerShown: false,
+          };
+        }}
+      />
+
     </Stack.Navigator>
+
   );
 };
 

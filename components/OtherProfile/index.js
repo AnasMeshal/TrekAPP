@@ -15,6 +15,10 @@ import {
 import { ScrollView } from "react-native";
 import TripItem from "../TripList/TripItem";
 import tripStore from "../../stores/tripStore";
+import MapsButton from "../buttons/MapsButton";
+import { Root } from "native-base";
+import MapView from "react-native-maps";
+import { ProfileButton, ProfileButtonText } from "../TripDetail/styles";
 
 // TODO have only one profile component
 
@@ -35,6 +39,7 @@ const OtherProfile = ({ route, navigation }) => {
   ));
 
   return (
+
     <ScrollView>
       <ProfileImage
         source={{
@@ -58,13 +63,31 @@ const OtherProfile = ({ route, navigation }) => {
               //TODO CENTER IT FOR REAL
             },
           }}
-          whitelist={["strong", "em"]}
-        >
-          {notMyProfile.bio}
-        </Markdown>
-      </StyledBioView>
-      <TripList otherProfileTrips={otherProfileTrips} />
-    </ScrollView>
+        />
+
+        <ProfileName>{notMyProfile.username}</ProfileName>
+        <ProfileNames>
+          {notMyProfile.firstName} {notMyProfile.lastName}
+        </ProfileNames>
+        <StyledBioView>
+          <Markdown
+            styles={{
+              text: {
+                fontSize: 25,
+                color: "grey",
+                textAlign: "center",
+                //TODO CENTER IT FOR REAL
+              },
+            }}
+            whitelist={["strong", "em"]}
+          >
+            {notMyProfile.bio}
+          </Markdown>
+        </StyledBioView>
+        <TripList otherProfileTrips={otherProfileTrips} />
+      </ScrollView>
+      <MapsButton notMyProfile={notMyProfile} />
+    </Root>
   );
 };
 

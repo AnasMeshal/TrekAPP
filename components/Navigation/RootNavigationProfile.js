@@ -7,6 +7,7 @@ import Profile from "../Profile";
 import TripDetail from "../TripDetail";
 import Favorites from "../Profile/Favorites";
 import Maps from "../geolocation/maps";
+import AllMarkers from "../geolocation/AllMarkers";
 
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
@@ -14,7 +15,10 @@ import LogOutButton from "../buttons/LogOutButton";
 import { Button, Toast, Icon, Root, Row } from "native-base";
 import tripStore from "../../stores/tripStore";
 import OpenDrawer from "../buttons/OpenDrawer";
+import authStore from "../../stores/authStore";
+
 import AddTripToListButton from "../buttons/AddTripToListButton";
+
 
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useNavigation } from "@react-navigation/native";
@@ -133,7 +137,6 @@ const RootNavigatorProfile = () => {
         name="map"
         component={Maps}
         options={({ route }) => {
-          const { myTrip } = route.params;
           return {
             headerShown: false,
           };

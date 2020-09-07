@@ -1,10 +1,32 @@
 import React from "react";
+
+// Components
 import MapView, { Marker } from "react-native-maps";
+
+//Styles
 import { Text } from "native-base";
 import { MapButton } from "./styles";
 
-const Maps = ({ navigation, route }) => {
-  const { myTrip } = route.params;
+// Stores
+import tripStore from "../../stores/tripStore";
+
+const AllMarkers = ({ navigation, route }) => {
+  const { notMyProfile } = route.params;
+
+  const otherProfileTripMarkers = tripStore.trips
+    .filter((trip) => trip.userId === notMyProfile.userId)
+    .map((trip) => (
+      <Marker
+        coordinate={{
+          latitude: trip.latitude,
+          longitude: trip.longitude,
+        }}
+        title={trip.title}
+        description={trip.description}
+      />
+    ));
+
+  console.log("AllMarkers -> otherProfileTripMarkers", otherProfileTripMarkers);
 
   const mapStyle = [
     {
@@ -174,21 +196,8 @@ const Maps = ({ navigation, route }) => {
         customMapStyle={mapStyle}
         provider={MapView.PROVIDER_GOOGLE} // for google maps
         style={{ flex: 1 }}
-        initialRegion={{
-          latitude: myTrip.latitude,
-          longitude: myTrip.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
       >
-        <Marker
-          coordinate={{
-            latitude: myTrip.latitude,
-            longitude: myTrip.longitude,
-          }}
-          title={myTrip.title}
-          description={myTrip.description}
-        />
+        {otherProfileTripMarkers}
         <MapButton onPress={() => navigation.goBack()}>
           <Text>Back to profile</Text>
         </MapButton>
@@ -197,4 +206,4 @@ const Maps = ({ navigation, route }) => {
   );
 };
 
-export default Maps;
+export default AllMarkers;

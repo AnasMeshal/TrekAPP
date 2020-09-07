@@ -27,9 +27,10 @@ import {
   IconWrapper,
   IconStyled,
 } from "./styles";
-import { ScrollView } from "react-native";
-import { Text, Toast, Button } from "native-base";
 
+import MapsButton from "../buttons/MapsButton";
+import { ScrollView, StyleSheet } from "react-native";
+import { Text, Toast, Button, Root, View } from "native-base";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
@@ -126,6 +127,7 @@ const Profile = ({ navigation }) => {
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png",
             }}
           />
+
           <IconWrapper>
             <IconStyled type="Ionicons" name="add" />
           </IconWrapper>
@@ -145,6 +147,7 @@ const Profile = ({ navigation }) => {
             await profileStore.profileUpdate(updatedProfile);
             Toast.show({
               text: `Bio Has Been Changed to:
+
                 ${updatedProfile.bio}`,
             });
           }}

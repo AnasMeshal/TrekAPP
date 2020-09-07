@@ -28,6 +28,7 @@ const AddTrip = ({ navigation }) => {
     details: "",
     latitude: "",
     longitude: "",
+    location: "",
   });
 
   const [image, setImage] = useState(null);
@@ -121,6 +122,7 @@ const AddTrip = ({ navigation }) => {
                   ...trip,
                   latitude: details.geometry.location.lat,
                   longitude: details.geometry.location.lng,
+                  location: details.address_components[0].long_name,
                 });
               }}
               query={{

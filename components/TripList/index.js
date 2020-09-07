@@ -9,6 +9,7 @@ import TripItem from "./TripItem";
 
 // Stores
 import tripStore from "../../stores/tripStore";
+
 import authStore from "../../stores/authStore";
 import { ScrollView } from "react-native-gesture-handler";
 import FilterButton from "../buttons/FilterButton";
