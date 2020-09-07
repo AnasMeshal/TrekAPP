@@ -39,7 +39,6 @@ const OtherProfile = ({ route, navigation }) => {
   ));
 
   return (
-
     <ScrollView>
       <ProfileImage
         source={{
@@ -63,31 +62,14 @@ const OtherProfile = ({ route, navigation }) => {
               //TODO CENTER IT FOR REAL
             },
           }}
-        />
-
-        <ProfileName>{notMyProfile.username}</ProfileName>
-        <ProfileNames>
-          {notMyProfile.firstName} {notMyProfile.lastName}
-        </ProfileNames>
-        <StyledBioView>
-          <Markdown
-            styles={{
-              text: {
-                fontSize: 25,
-                color: "grey",
-                textAlign: "center",
-                //TODO CENTER IT FOR REAL
-              },
-            }}
-            whitelist={["strong", "em"]}
-          >
-            {notMyProfile.bio}
-          </Markdown>
-        </StyledBioView>
-        <TripList otherProfileTrips={otherProfileTrips} />
-      </ScrollView>
+          whitelist={["strong", "em"]}
+        >
+          {notMyProfile.bio}
+        </Markdown>
+      </StyledBioView>
+      <TripList otherProfileTrips={otherProfileTrips} />
       <MapsButton notMyProfile={notMyProfile} />
-    </Root>
+    </ScrollView>
   );
 };
 
