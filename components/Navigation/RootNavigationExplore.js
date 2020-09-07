@@ -1,7 +1,8 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 import AllMarkers from "../geolocation/AllMarkers";
+
+// TODO POSSIBLY DELETE ORIGINAL NAVIGATOR
 
 // Components
 import TripList from "../TripList";
@@ -9,16 +10,25 @@ import AddTrip from "../AddTrip";
 import OtherProfile from "../OtherProfile";
 import TripDetail from "../TripDetail";
 
+
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
 import authStore from "../../stores/authStore";
 import Maps from "../geolocation/maps";
 
-const { Navigator, Screen } = createStackNavigator();
+// Amazing Stack Navigator
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
+
+import AddTripToListButton from "../buttons/AddTripToListButton";
+
+
+// Navigation
+
+const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
   return (
-    <Navigator
+    <Stack.Navigator
       initialRouteName="Trips"
       screenOptions={{
         headerStyle: {
@@ -29,15 +39,7 @@ const RootNavigator = () => {
         },
       }}
     >
-      <Screen
-        name="Trips"
-        component={TripList}
-        options={{
-          title: "Explore Trips",
-          headerLeft: () => null,
-        }}
-      />
-      <Screen
+      <Stack.Screen
         name="OtherProfile"
         component={OtherProfile}
         options={({ route }) => {
@@ -50,11 +52,14 @@ const RootNavigator = () => {
             headerTitleStyle: {
               color: "white",
             },
-            headerLeft: () => <GoBackButton />,
+            headerTintColor: "white",
+            headerBackTitleVisible: false,
+            // headerLeft: () => <GoBackButton navigation={navigation} />,
           };
         }}
       />
-      <Screen
+
+      <Stack.Screen
         name="Trip Detail"
         component={TripDetail}
         options={({ route }) => {
@@ -62,19 +67,33 @@ const RootNavigator = () => {
           return {
             //TODO MARKDOWN
             title: notMyTrip.title,
-            headerLeft: () => <GoBackButton />,
+            headerTintColor: "white",
+            headerBackTitleVisible: false,
+            // headerLeft: () => <GoBackButton navigation={navigation} />,
+            headerRight: () => <AddTripToListButton notMyTrip={notMyTrip} />,
           };
         }}
       />
-      <Screen
+      <Stack.Screen
         name="AddTrip"
         component={AddTrip}
         options={{
           title: "Add a Trip",
-          headerLeft: () => <GoBackButton />,
+          headerTintColor: "white",
+          headerBackTitleVisible: false,
+          // headerLeft: () => <GoBackButton navigation={navigation} />,
         }}
       />
-      <Screen
+      <Stack.Screen
+        name="Trips"
+        component={TripList}
+        options={{
+          title: "Explore Trips",
+          headerLargeTitle: true,
+        }}
+      />
+
+      <Stack.Screen
         name="AllMarkers"
         component={AllMarkers}
         options={({ route }) => {
@@ -83,7 +102,7 @@ const RootNavigator = () => {
           };
         }}
       />
-      <Screen
+      <Stack.Screen
         name="map"
         component={Maps}
         options={({ route }) => {
@@ -92,7 +111,9 @@ const RootNavigator = () => {
           };
         }}
       />
-    </Navigator>
+
+    </Stack.Navigator>
+
   );
 };
 

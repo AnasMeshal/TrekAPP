@@ -7,13 +7,14 @@ export const GoBackIcon = styled(Icon)`
   margin-left: 10px;
 `;
 
-export const IconWrapper = styled.View`
+export const IconWrapper = styled(Button)`
   background-color: #42d4f2;
-  opacity: 0.8;
+  opacity: 0.95;
   border-radius: 50px;
-  width: 15%;
-  align-self: flex-end;
+  width: 60px;
+  height: 60px;
   position: absolute;
+  justify-content: center;
   bottom: 3%;
   right: 7%;
 `;
@@ -21,27 +22,60 @@ export const IconWrapper = styled.View`
 export const IconStyled = styled(Icon)`
   font-size: 50px;
   color: white;
-  padding-right: 5%;
-  padding-left: 5%;
+  margin: auto;
+  margin-top: -3px;
   align-self: center;
 `;
 
 export const LogOutStyled = styled(Icon)`
   color: #ff362e;
-  margin-left: 10px;
+  margin-left: 0.1px;
+  margin-bottom: 1px;
+`;
+
+export const FilterStyled = styled(Text)`
+  font-weight: 500;
+  color: white;
+  margin-right: -22px;
+  font-size: 15px;
+`;
+
+export const FilterButtonStyled = styled(Button)`
+  background-color: grey;
+  opacity: 0.95;
+  margin-left: auto;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+`;
+export const SortButtonStyled = styled(Button)`
+  background-color: grey;
+  opacity: 0.95;
+  margin-right: auto;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 4px;
 `;
 
 export const OpenDrawerIcon = styled(Icon)`
+  color: white;
   font-size: 35px;
   justify-content: center;
   align-self: center;
-  margin-right: 5px;
-  margin-top: auto
-  margin-bottom: auto
+  margin-right: 0.1px;
+  margin-bottom: 1px;
 `;
 
 export const AddListButtonStyle = styled(Icon)`
+  color: white;
   font-size: 40px;
   align-self: center;
   margin-left: 10px;
+`;
+
+export const StyledThreeDots = styled(Icon)`
+  color: white;
+  font-size: 40px;
+  align-self: center;
+  /* margin-left: 10px; */
 `;

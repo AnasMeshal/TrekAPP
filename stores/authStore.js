@@ -3,6 +3,9 @@ import instance from "./instance";
 import decode from "jwt-decode";
 import AsyncStorage from "@react-native-community/async-storage";
 
+// Stores
+import listStore from "./listStore";
+
 class AuthStore {
   user = null;
   error = "";
@@ -12,7 +15,6 @@ class AuthStore {
     await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
-    // this.signout();
   };
 
   signup = async (userData) => {
@@ -21,6 +23,7 @@ class AuthStore {
       const res = await instance.post("/signup", userData);
       await this.setUser(res.data.token);
       this.loading = false;
+      await listStore.fetchLists();
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
     }

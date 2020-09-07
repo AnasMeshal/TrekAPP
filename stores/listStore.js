@@ -1,6 +1,8 @@
 // React
 import { decorate, observable } from "mobx";
 import instance from "./instance";
+import tripStore from "./tripStore";
+import authStore from "./authStore";
 
 // TODO: SCROLL UP TO REFRESG
 
@@ -21,7 +23,18 @@ class ListStore {
   listCreate = async (newList) => {
     try {
       const res = await instance.post("/lists", newList);
+      res.data.trips = [];
       this.lists.push(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  listUpdate = async (updatedList) => {
+    try {
+      await instance.put(`/lists/${updatedList.id}`, updatedList);
+      const list = this.lists.find((list) => list.id === updatedList.id);
+      for (const key in updatedList) list[key] = updatedList[key];
     } catch (error) {
       console.log(error);
     }
@@ -36,11 +49,25 @@ class ListStore {
     }
   };
 
-  listUpdate = async (updatedList) => {
+  removeFromList = async (listId, tripId) => {
     try {
-      await instance.put(`/lists/${updatedList.id}`, updatedList);
-      const list = this.lists.find((list) => list.id === updatedList.id);
-      for (const key in updatedList) list[key] = updatedList[key];
+      const foundList = await this.lists.find((list) => list.id === listId);
+      await instance.delete(`/lists/${listId}/trips/${tripId}`);
+      const listTrip = foundList.trips.filter((trip) => trip.id !== tripId);
+      foundList.trips = listTrip;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  addTripToList = async (listId, tripId) => {
+    try {
+      const foundList = await this.lists.find((list) => list.id === listId);
+      const res = await instance.post(`/lists/${listId}/trips`, {
+        tripId: tripId,
+      });
+      const newTrip = tripStore.getTripById(res.data.tripId);
+      foundList.trips.push(newTrip);
     } catch (error) {
       console.log(error);
     }
