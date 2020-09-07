@@ -7,7 +7,7 @@ import * as Permissions from "expo-permissions";
 //Google Autocomplete
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-const GOOGLE_API_KEY = "AIzaSyBFHG_7XXBQV1JFCmHF6SnXoQ1JUklYnUg";
+const GOOGLE_API_KEY = "Google Api Here";
 
 // Styles
 import { Content, Form, Item, Label, Input, Text, Toast } from "native-base";
