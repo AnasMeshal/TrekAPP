@@ -28,7 +28,7 @@ export const TripDetails = styled.TextInput`
 
 export const ProfileButton = styled(Button)`
   background-color: #42d4f2;
-  margin-top: 75px;
+  margin-top: 30px;
   align-self: center;
   width: 70%;
   align-items: center;

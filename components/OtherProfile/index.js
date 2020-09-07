@@ -15,6 +15,10 @@ import {
 import { ScrollView } from "react-native";
 import TripItem from "../TripList/TripItem";
 import tripStore from "../../stores/tripStore";
+import MapsButton from "../buttons/MapsButton";
+import { Root } from "native-base";
+import MapView from "react-native-maps";
+import { ProfileButton, ProfileButtonText } from "../TripDetail/styles";
 
 // TODO have only one profile component
 
@@ -28,35 +32,38 @@ const OtherProfile = ({ route, navigation }) => {
     ));
 
   return (
-    <ScrollView>
-      <ProfileImage
-        source={{
-          uri:
-            "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
-        }}
-      />
-
-      <ProfileName>{notMyProfile.username}</ProfileName>
-      <ProfileNames>
-        {notMyProfile.firstName} {notMyProfile.lastName}
-      </ProfileNames>
-      <StyledBioView>
-        <Markdown
-          styles={{
-            text: {
-              fontSize: 25,
-              color: "grey",
-              textAlign: "center",
-              //TODO CENTER IT FOR REAL
-            },
+    <Root>
+      <ScrollView>
+        <ProfileImage
+          source={{
+            uri:
+              "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
           }}
-          whitelist={["strong", "em"]}
-        >
-          {notMyProfile.bio}
-        </Markdown>
-      </StyledBioView>
-      <TripList otherProfileTrips={otherProfileTrips} />
-    </ScrollView>
+        />
+
+        <ProfileName>{notMyProfile.username}</ProfileName>
+        <ProfileNames>
+          {notMyProfile.firstName} {notMyProfile.lastName}
+        </ProfileNames>
+        <StyledBioView>
+          <Markdown
+            styles={{
+              text: {
+                fontSize: 25,
+                color: "grey",
+                textAlign: "center",
+                //TODO CENTER IT FOR REAL
+              },
+            }}
+            whitelist={["strong", "em"]}
+          >
+            {notMyProfile.bio}
+          </Markdown>
+        </StyledBioView>
+        <TripList otherProfileTrips={otherProfileTrips} />
+      </ScrollView>
+      <MapsButton notMyProfile={notMyProfile} />
+    </Root>
   );
 };
 

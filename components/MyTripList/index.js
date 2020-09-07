@@ -2,12 +2,14 @@ import React from "react";
 import { observer } from "mobx-react";
 
 // Styles
-import { List, View } from "native-base";
+import { List, View, Text } from "native-base";
 
 // Stores
 import tripStore from "../../stores/tripStore";
 import TripItem from "../TripList/TripItem";
 import authStore from "../../stores/authStore";
+import Maps from "../geolocation/maps";
+import MapView, { Marker } from "react-native-maps";
 
 const MyTripList = ({ navigation }) => {
   if (!authStore.user) return null;
@@ -16,7 +18,9 @@ const MyTripList = ({ navigation }) => {
   const profileTrips = tripStore.trips
     .filter((trip) => trip.userId === authStore.user.id)
     .map((trip) => (
-      <TripItem isProfile trip={trip} navigation={navigation} key={trip.id} />
+      <>
+        <TripItem isProfile trip={trip} navigation={navigation} key={trip.id} />
+      </>
     ));
 
   return (

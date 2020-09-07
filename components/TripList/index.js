@@ -7,7 +7,6 @@ import { List, Content, View } from "native-base";
 // Stores
 import tripStore from "../../stores/tripStore";
 import TripItem from "./TripItem"; // not a store, move it elsewhere
-import AddTripButton from "../buttons/AddTripButton"; // unused import, remove it
 import authStore from "../../stores/authStore";
 
 const TripList = ({ navigation, otherProfileTrips }) => {

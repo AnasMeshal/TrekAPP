@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
+import AllMarkers from "../geolocation/AllMarkers";
 
 // Components
 import TripList from "../TripList";
@@ -10,6 +11,8 @@ import TripDetail from "../TripDetail";
 
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
+import authStore from "../../stores/authStore";
+import Maps from "../geolocation/maps";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -69,6 +72,24 @@ const RootNavigator = () => {
         options={{
           title: "Add a Trip",
           headerLeft: () => <GoBackButton />,
+        }}
+      />
+      <Screen
+        name="AllMarkers"
+        component={AllMarkers}
+        options={({ route }) => {
+          return {
+            headerShown: false,
+          };
+        }}
+      />
+      <Screen
+        name="map"
+        component={Maps}
+        options={({ route }) => {
+          return {
+            headerShown: false,
+          };
         }}
       />
     </Navigator>

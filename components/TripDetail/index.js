@@ -111,11 +111,11 @@ const TripDetail = ({ route, navigation }) => {
             <ProfileButton onPress={() => setEditable(true)}>
               <ProfileButtonText>Edit Trip</ProfileButtonText>
             </ProfileButton>
-            <Button
+            <ProfileButton
               onPress={() => navigation.navigate("map", { myTrip: myTrip })}
             >
-              <Text>View on Map</Text>
-            </Button>
+              <ProfileButtonText>View on Map</ProfileButtonText>
+            </ProfileButton>
           </>
         )}
       </ScrollView>
@@ -184,6 +184,15 @@ const TripDetail = ({ route, navigation }) => {
         <ProfileButtonText>
           View {notMyProfile.username}'s Profile
         </ProfileButtonText>
+      </ProfileButton>
+      <ProfileButton
+        onPress={() =>
+          navigation.navigate("map", {
+            myTrip: notMyTrip,
+          })
+        }
+      >
+        <ProfileButtonText>View on Map</ProfileButtonText>
       </ProfileButton>
     </ScrollView>
   );

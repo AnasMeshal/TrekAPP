@@ -1,6 +1,6 @@
 import React from "react";
-import MapView, { Marker, Callout } from "react-native-maps";
-import { Button, Text } from "native-base";
+import MapView, { Marker } from "react-native-maps";
+import { Text } from "native-base";
 import { MapButton } from "./styles";
 
 const Maps = ({ navigation, route }) => {

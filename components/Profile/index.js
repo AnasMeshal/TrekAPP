@@ -22,8 +22,9 @@ import {
   SignInOrSignUpButton,
   StyledText,
 } from "./styles";
-import { ScrollView } from "react-native";
-import { Text, Toast, Root } from "native-base";
+import { ScrollView, StyleSheet } from "react-native";
+import { Text, Toast, Root, View } from "native-base";
+import MapsButton from "../buttons/MapsButton";
 
 const Profile = ({ navigation }) => {
   if (!authStore.user) {
@@ -47,13 +48,14 @@ const Profile = ({ navigation }) => {
 
     return (
       <Root>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ProfileImage
             source={{
               uri:
                 "https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png",
             }}
           />
+
           <ProfileName>{userProfile.username}</ProfileName>
           <ProfileNames>
             {userProfile.firstName} {userProfile.lastName}

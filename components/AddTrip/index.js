@@ -30,6 +30,7 @@ const AddTrip = ({ navigation }) => {
     details: "",
     latitude: "",
     longitude: "",
+    location: "",
   });
 
   const handleSubmit = async () => {
@@ -74,6 +75,7 @@ const AddTrip = ({ navigation }) => {
                   ...trip,
                   latitude: details.geometry.location.lat,
                   longitude: details.geometry.location.lng,
+                  location: details.address_components[0].long_name,
                 });
               }}
               query={{

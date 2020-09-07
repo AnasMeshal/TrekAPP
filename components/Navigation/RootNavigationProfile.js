@@ -7,11 +7,13 @@ import AddTrip from "../AddTrip";
 import Profile from "../Profile";
 import TripDetail from "../TripDetail";
 import Maps from "../geolocation/maps";
+import AllMarkers from "../geolocation/AllMarkers";
 
 // Buttons
 import GoBackButton from "../buttons/GoBackButton";
 import LogOutButton from "../buttons/LogOutButton";
 import OpenDrawer from "../buttons/OpenDrawer";
+import authStore from "../../stores/authStore";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -62,7 +64,6 @@ const RootNavigatorProfile = () => {
         name="map"
         component={Maps}
         options={({ route }) => {
-          const { myTrip } = route.params;
           return {
             headerShown: false,
           };
