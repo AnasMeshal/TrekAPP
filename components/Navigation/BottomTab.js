@@ -10,7 +10,6 @@ import RootNavigationExplore from "./RootNavigationExplore";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import RootNavigationSearch from "./RootNavigationSearch";
 import DrawerNavigation from "./DrawerNavigation";
-import Searchbar from "../searchbar/Searchbar";
 
 // const { Navigator, Screen } = createBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -28,28 +27,16 @@ const BottomTab = () => {
         component={RootNavigationExplore}
         options={{
           tabBarIcon: ({ color }) => (
-
-            <MaterialCommunityIcons name="home" color={color} size={40} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Searchbar"
-        options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={40} />
-
             <MaterialCommunityIcons
               name="earth"
               color={color}
               size={40}
               style={{ marginTop: "7%" }}
             />
-
           ),
         }}
-        component={Searchbar}
       />
+
       <Tab.Screen
         name="Search"
         component={RootNavigationSearch}
