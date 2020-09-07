@@ -26,6 +26,7 @@ const RootNavigationWantToGo = () => {
         headerTitleStyle: {
           color: "white",
         },
+        headerRight: () => <OpenDrawer />,
       }}
     >
       <Stack.Screen
@@ -34,7 +35,6 @@ const RootNavigationWantToGo = () => {
         options={{
           headerLargeTitle: true,
           title: "Want To Go",
-          headerRight: () => <OpenDrawer />,
         }}
       />
       <Stack.Screen

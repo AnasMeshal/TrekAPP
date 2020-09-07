@@ -21,6 +21,12 @@ const AddList = ({ navigation }) => {
       // TODO MAKE IT GLOBAL
       Toast.show({
         text: "List Added",
+        textStyle: {
+          fontWeight: "bold",
+          textAlign: "center",
+          fontSize: 20,
+        },
+        style: { backgroundColor: "#42d4f2e6" },
       });
     } else {
       alert("You Must fill out all the fields");

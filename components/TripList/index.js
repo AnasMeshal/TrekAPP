@@ -19,7 +19,6 @@ const TripList = ({ navigation, otherProfileTrips, filteredList }) => {
   const [filter, setFilter] = useState("Remove Filters");
 
   const [sort, setSort] = useState("Sort Trips");
-  console.log("TripList -> filteredList", filteredList);
 
   // the .map() is repeated
   // remove the condition here

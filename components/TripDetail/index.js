@@ -22,11 +22,12 @@ import {
   WantToGoButtonText,
   ChangeImageButton,
   ChangeImageButtonText,
+  MapButtonStyled,
 } from "./styles";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
-import { ScrollView, View, Dimensions } from "react-native";
-import { Button, Text, Toast } from "native-base";
+import { ScrollView, View } from "react-native";
+import { Toast } from "native-base";
 
 const TripDetail = ({ route, navigation }) => {
   const { myTrip } = route.params;
@@ -34,9 +35,11 @@ const TripDetail = ({ route, navigation }) => {
   const { notMyProfile } = route.params;
   const [editable, setEditable] = useState(false);
 
-  const wantToGo = listStore.lists.find(
-    (list) => list.name === "Want To Go" && list.userId === authStore.user.id
-  );
+  if (authStore.user) {
+    const wantToGo = listStore.lists.find(
+      (list) => list.name === "Want To Go" && list.userId === authStore.user.id
+    );
+  }
 
   if (myTrip) {
     const [updatedTrip, setUpdatedTrip] = useState({
@@ -103,8 +106,10 @@ const TripDetail = ({ route, navigation }) => {
         console.log(error);
       }
     };
+
     return (
       // TODO FIX SCROLL VIEW
+
       <ScrollView>
         <View>
           <TripImage
@@ -114,13 +119,10 @@ const TripDetail = ({ route, navigation }) => {
                 "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
             }}
           />
-
           {editable ? (
             <>
               <ChangeImageButton transparent onPress={pickImage}>
-                <ChangeImageButtonText>
-                  Change Image (TEMP)
-                </ChangeImageButtonText>
+                <ChangeImageButtonText>Change Image</ChangeImageButtonText>
               </ChangeImageButton>
               <TripName
                 maxLength={37}
@@ -207,21 +209,35 @@ const TripDetail = ({ route, navigation }) => {
                   {myTrip.details}
                 </OtherTripDetails>
               </StyledDetailView>
+              <View>
+                <ProfileButton onPress={() => setEditable(true)}>
+                  <ProfileButtonText>Edit Trip</ProfileButtonText>
+                </ProfileButton>
 
-              <ProfileButton onPress={() => setEditable(true)}>
-                <ProfileButtonText>Edit Trip</ProfileButtonText>
-              </ProfileButton>
-
-              <WantToGoButton
-                onPress={() => listStore.addTripToList(wantToGo.id, myTrip.id)}
-              >
-                <WantToGoButtonText>Want To Go!</WantToGoButtonText>
-              </WantToGoButton>
-              <ProfileButton
-                onPress={() => navigation.navigate("map", { myTrip: myTrip })}
-              >
-                <ProfileButtonText>View on Map</ProfileButtonText>
-              </ProfileButton>
+                <MapButtonStyled
+                  onPress={() => navigation.navigate("map", { myTrip: myTrip })}
+                >
+                  <ProfileButtonText>View on Map</ProfileButtonText>
+                </MapButtonStyled>
+                {authStore.user && (
+                  <WantToGoButton
+                    onPress={() => {
+                      listStore.addTripToList(wantToGo.id, myTrip.id);
+                      Toast.show({
+                        text: "List Added to Want To Go List",
+                        textStyle: {
+                          fontWeight: "bold",
+                          textAlign: "center",
+                          fontSize: 20,
+                        },
+                        style: { backgroundColor: "#42d4f2e6" },
+                      });
+                    }}
+                  >
+                    <WantToGoButtonText>Want To Go!</WantToGoButtonText>
+                  </WantToGoButton>
+                )}
+              </View>
             </>
           )}
         </View>
@@ -283,32 +299,46 @@ const TripDetail = ({ route, navigation }) => {
             {notMyTrip.details}
           </OtherTripDetails>
         </StyledDetailView>
-        <ProfileButton
-          onPress={() =>
-            navigation.navigate("OtherProfile", {
-              notMyProfile: notMyProfile,
-            })
-          }
-        >
-          <ProfileButtonText>
-            View {notMyProfile.username}'s Profile
-          </ProfileButtonText>
-        </ProfileButton>
-        <ProfileButton
-          onPress={() =>
-            navigation.navigate("map", {
-              myTrip: notMyTrip,
-            })
-          }
-        >
-          <ProfileButtonText>View on Map</ProfileButtonText>
-        </ProfileButton>
-
-        <WantToGoButton
-          onPress={() => listStore.addTripToList(wantToGo.id, notMyTrip.id)}
-        >
-          <WantToGoButtonText>Want To Go!</WantToGoButtonText>
-        </WantToGoButton>
+        <View>
+          <ProfileButton
+            onPress={() =>
+              navigation.navigate("OtherProfile", {
+                notMyProfile: notMyProfile,
+              })
+            }
+          >
+            <ProfileButtonText>
+              View {notMyProfile.username}'s Profile
+            </ProfileButtonText>
+          </ProfileButton>
+          <MapButtonStyled
+            onPress={() =>
+              navigation.navigate("map", {
+                myTrip: notMyTrip,
+              })
+            }
+          >
+            <ProfileButtonText>View on Map</ProfileButtonText>
+          </MapButtonStyled>
+          {authStore.user && (
+            <WantToGoButton
+              onPress={() => {
+                listStore.addTripToList(wantToGo.id, notMyTrip.id);
+                Toast.show({
+                  text: "List Added to Want To Go List",
+                  textStyle: {
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    fontSize: 20,
+                  },
+                  style: { backgroundColor: "#42d4f2e6" },
+                });
+              }}
+            >
+              <WantToGoButtonText>Want To Go!</WantToGoButtonText>
+            </WantToGoButton>
+          )}
+        </View>
       </View>
     </ScrollView>
   );

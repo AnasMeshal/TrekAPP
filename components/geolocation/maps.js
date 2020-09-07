@@ -2,6 +2,7 @@ import React from "react";
 import MapView, { Marker } from "react-native-maps";
 import { Text } from "native-base";
 import { MapButton } from "./styles";
+import GoBackButton from "../buttons/GoBackButton";
 
 const Maps = ({ navigation, route }) => {
   const { myTrip } = route.params;
@@ -189,9 +190,8 @@ const Maps = ({ navigation, route }) => {
           title={myTrip.title}
           description={myTrip.description}
         />
-        <MapButton onPress={() => navigation.goBack()}>
-          <Text>Back to profile</Text>
-        </MapButton>
+
+        <GoBackButton />
       </MapView>
     </>
   );

@@ -159,7 +159,12 @@ const TripItem = ({ trip, navigation, isProfile }) => {
                     });
                     Toast.show({
                       text: `Added ${trip.title} to Favorites`,
-                      type: "danger",
+                      textStyle: {
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        fontSize: 20,
+                      },
+                      style: { backgroundColor: "#42d4f2e6" },
                       position: "bottom",
                     });
                   }}

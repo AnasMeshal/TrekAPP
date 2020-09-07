@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 // Styles
-import { ListItem, Text, Left, Right, Icon } from "native-base";
+import { ListItem, Text, Left, Right, Icon, Toast } from "native-base";
 import Swipeout from "react-native-swipeout";
 import listStore from "../../stores/listStore";
 import { Alert } from "react-native";
@@ -26,7 +26,15 @@ const ListItems = ({ list, navigation }) => {
             {
               text: "Delete List",
               onPress: async () => {
-                // TODO FIX LOGOUT AND BE CONSOLE WARNING
+                Toast.show({
+                  text: "List Deleted",
+                  type: "danger",
+                  textStyle: {
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    fontSize: 20,
+                  },
+                });
                 await listStore.listDelete(list.id);
               },
             },

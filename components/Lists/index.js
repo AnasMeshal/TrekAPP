@@ -5,7 +5,9 @@ import { observer } from "mobx-react";
 import ListItems from "./ListItems";
 
 // Styles
-import { Content, List, Spinner } from "native-base";
+import { Content, List } from "native-base";
+import { NoFavoritesText, NoFavoritesMsg } from "./styles";
+import { ScrollView } from "react-native";
 
 // Stores
 import listStore from "../../stores/listStore";
@@ -20,19 +22,18 @@ const Lists = ({ navigation }) => {
       <ListItems list={list} navigation={navigation} key={list.id} />
     ));
 
-  if (listStore.loading === true) {
-    <Spinner color="orange" />;
-  }
-
-  if (listList) {
-    return (
-      <Content>
-        <List>{listList}</List>
-      </Content>
-    );
-  }
-
-  return <Text>Currently you don't have any list, Create one!</Text>;
+  return listList.length > 0 ? (
+    <Content>
+      <List>{listList}</List>
+    </Content>
+  ) : (
+    <ScrollView>
+      <NoFavoritesText>You Have No Lists</NoFavoritesText>
+      <NoFavoritesMsg>
+        Please use the Add Button Above to Create Your First List
+      </NoFavoritesMsg>
+    </ScrollView>
+  );
 };
 
 export default observer(Lists);

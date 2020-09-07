@@ -39,37 +39,39 @@ const OtherProfile = ({ route, navigation }) => {
   ));
 
   return (
-    <ScrollView>
-      <ProfileImage
-        source={{
-          uri:
-            notMyProfile.image ||
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png",
-        }}
-      />
-
-      <ProfileName>{notMyProfile.username}</ProfileName>
-      <ProfileNames>
-        {notMyProfile.firstName} {notMyProfile.lastName}
-      </ProfileNames>
-      <StyledBioView>
-        <Markdown
-          styles={{
-            text: {
-              fontSize: 23,
-              color: "grey",
-              textAlign: "center",
-              //TODO CENTER IT FOR REAL
-            },
+    <>
+      <ScrollView>
+        <ProfileImage
+          source={{
+            uri:
+              notMyProfile.image ||
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png",
           }}
-          whitelist={["strong", "em"]}
-        >
-          {notMyProfile.bio}
-        </Markdown>
-      </StyledBioView>
-      <TripList otherProfileTrips={otherProfileTrips} />
+        />
+
+        <ProfileName>{notMyProfile.username}</ProfileName>
+        <ProfileNames>
+          {notMyProfile.firstName} {notMyProfile.lastName}
+        </ProfileNames>
+        <StyledBioView>
+          <Markdown
+            styles={{
+              text: {
+                fontSize: 23,
+                color: "grey",
+                textAlign: "center",
+                //TODO CENTER IT FOR REAL
+              },
+            }}
+            whitelist={["strong", "em"]}
+          >
+            {notMyProfile.bio}
+          </Markdown>
+        </StyledBioView>
+        <TripList otherProfileTrips={otherProfileTrips} />
+      </ScrollView>
       <MapsButton notMyProfile={notMyProfile} />
-    </ScrollView>
+    </>
   );
 };
 

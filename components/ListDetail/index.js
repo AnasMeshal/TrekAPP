@@ -11,7 +11,11 @@ import {
   ListNameText,
   ProfileButton,
   ProfileButtonText,
+  NoFavoritesText,
+  NoFavoritesMsg,
 } from "./styles";
+
+import { ScrollView } from "react-native";
 
 // Stores
 import tripStore from "../../stores/tripStore";
@@ -35,7 +39,7 @@ const ListDetail = ({ route, navigation }) => {
     ));
   }
 
-  return (
+  return tripOfList.length > 0 ? (
     <Content>
       <View>
         {editable ? (
@@ -61,6 +65,13 @@ const ListDetail = ({ route, navigation }) => {
         </ProfileButton>
       </View>
     </Content>
+  ) : (
+    <ScrollView>
+      <NoFavoritesText>This List Has No Trips</NoFavoritesText>
+      <NoFavoritesMsg>
+        Please add Trips to this List from Their Detail Views
+      </NoFavoritesMsg>
+    </ScrollView>
   );
 };
 

@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 // Components
 import Modal from "../Modal";
 import FirstTimeVisiting from "../FirstTimeVisiting";
+import Maps from "../geolocation/maps";
 
 // Navigation
 import BottomTab from "./BottomTab";
@@ -13,6 +14,8 @@ import authStore from "../../stores/authStore";
 
 // Amazing Navigator
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
+import AllMarkers from "../geolocation/AllMarkers";
+
 const Stack = createNativeStackNavigator();
 
 const Main = () => {
@@ -35,6 +38,28 @@ const Main = () => {
         options={{ headerShown: false }}
       />
 
+      <Stack.Screen
+        name="map"
+        component={Maps}
+        options={({ route }) => {
+          return {
+            headerShown: false,
+            animationTypeForReplace: "pop",
+            headerShown: false,
+          };
+        }}
+      />
+      <Stack.Screen
+        name="AllMarkers"
+        component={AllMarkers}
+        options={({ route }) => {
+          return {
+            headerShown: false,
+            animationTypeForReplace: "pop",
+            headerShown: false,
+          };
+        }}
+      />
       {authStore.user === null && (
         <Stack.Screen
           name="FirstTimeVisiting"
