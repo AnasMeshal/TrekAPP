@@ -32,6 +32,7 @@ const RootNavigationWantToGo = () => {
         name="WantToGo"
         component={WantToGoList}
         options={{
+          headerLargeTitle: true,
           title: "Want To Go",
           headerRight: () => <OpenDrawer />,
         }}
