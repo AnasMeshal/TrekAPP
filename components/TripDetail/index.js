@@ -217,20 +217,14 @@ const TripDetail = ({ route, navigation }) => {
               >
                 <WantToGoButtonText>Want To Go!</WantToGoButtonText>
               </WantToGoButton>
-                {myTrip.details}
-              </OtherTripDetails>
-            </StyledDetailView>
-            <ProfileButton
-              onPress={() => navigation.navigate("map", { myTrip: myTrip })}
-            >
-              <ProfileButtonText>View on Map</ProfileButtonText>
-            </ProfileButton>
-          </>
-        )}
-
-           
+              <ProfileButton
+                onPress={() => navigation.navigate("map", { myTrip: myTrip })}
+              >
+                <ProfileButtonText>View on Map</ProfileButtonText>
+              </ProfileButton>
+            </>
+          )}
         </View>
-
       </ScrollView>
     );
   }
@@ -286,39 +280,36 @@ const TripDetail = ({ route, navigation }) => {
               "em",
             ]}
           >
-         
-          {notMyTrip.details}
-        </OtherTripDetails>
-      </StyledDetailView>
-      <ProfileButton
-        onPress={() =>
-          navigation.navigate("OtherProfile", {
-            notMyProfile: notMyProfile,
-          })
-        }
-      >
-        <ProfileButtonText>
-          View {notMyProfile.username}'s Profile
-        </ProfileButtonText>
-      </ProfileButton>
-      <ProfileButton
-        onPress={() =>
-          navigation.navigate("map", {
-            myTrip: notMyTrip,
-          })
-        }
-      >
-        <ProfileButtonText>View on Map</ProfileButtonText>
-      </ProfileButton>
+            {notMyTrip.details}
+          </OtherTripDetails>
+        </StyledDetailView>
+        <ProfileButton
+          onPress={() =>
+            navigation.navigate("OtherProfile", {
+              notMyProfile: notMyProfile,
+            })
+          }
+        >
+          <ProfileButtonText>
+            View {notMyProfile.username}'s Profile
+          </ProfileButtonText>
+        </ProfileButton>
+        <ProfileButton
+          onPress={() =>
+            navigation.navigate("map", {
+              myTrip: notMyTrip,
+            })
+          }
+        >
+          <ProfileButtonText>View on Map</ProfileButtonText>
+        </ProfileButton>
 
-
-           <WantToGoButton
+        <WantToGoButton
           onPress={() => listStore.addTripToList(wantToGo.id, notMyTrip.id)}
         >
           <WantToGoButtonText>Want To Go!</WantToGoButtonText>
         </WantToGoButton>
       </View>
-
     </ScrollView>
   );
 };

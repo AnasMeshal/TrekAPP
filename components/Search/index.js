@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import {
   Title,
@@ -10,8 +10,32 @@ import {
   Header,
 } from "native-base";
 import TripList from "../TripList";
+import tripStore from "../../stores/tripStore";
+import TripItem from "../TripList/TripItem";
+import authStore from "../../stores/authStore";
 
-const Search = () => {
+const Search = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+    console.log(query);
+  };
+
+  const filteredList = authStore.user
+    ? tripStore.trips
+        .filter((trip) => trip.userId !== authStore.user.id)
+        .filter(
+          (trip) =>
+            trip.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            trip.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    : tripStore.trips.filter(
+        (trip) =>
+          trip.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          trip.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
   return (
     // <ScrollView>
     <Container>
@@ -34,10 +58,14 @@ const Search = () => {
               color: "#42d4f2",
             }}
           />
-          <Input placeholder="Search" />
+          <Input
+            placeholder="Search"
+            onChangeText={onChangeSearch}
+            value={searchQuery}
+          />
         </Item>
       </Header>
-      <TripList searchList />
+      <TripList filteredList={filteredList} />
     </Container>
     // </ScrollView>
   );

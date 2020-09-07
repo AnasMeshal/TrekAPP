@@ -15,10 +15,12 @@ import { ScrollView } from "react-native-gesture-handler";
 import FilterButton from "../buttons/FilterButton";
 import SortButton from "../buttons/SortButton";
 
-const TripList = ({ navigation, otherProfileTrips, searchList }) => {
+const TripList = ({ navigation, otherProfileTrips, filteredList }) => {
   const [filter, setFilter] = useState("Remove Filters");
 
   const [sort, setSort] = useState("Sort Trips");
+  console.log("TripList -> filteredList", filteredList);
+
   // the .map() is repeated
   // remove the condition here
   // add an if-statement below
@@ -28,61 +30,53 @@ const TripList = ({ navigation, otherProfileTrips, searchList }) => {
   //   <TripItem trip={trip} navigation={navigation} key={trip.id} />
   // ))
 
-  const filteredTrips =
-    filter === "Favorites"
-      ? authStore.user
-        ? tripStore.trips
-            .filter((trip) => trip.userId !== authStore.user.id)
-            .filter((trip) => trip.isFavorite === "T")
-            .map((trip) => (
-              <TripItem trip={trip} navigation={navigation} key={trip.id} />
-            ))
-        : tripStore.trips
-            .filter((trip) => trip.isFavorite === "T")
-            .map((trip) => (
-              <TripItem trip={trip} navigation={navigation} key={trip.id} />
-            ))
-      : filter === "Remove Filters"
-      ? authStore.user
-        ? tripStore.trips
-            .filter((trip) => trip.userId !== authStore.user.id)
-            .map((trip) => (
-              <TripItem trip={trip} navigation={navigation} key={trip.id} />
-            ))
-        : tripStore.trips.map((trip) => (
-            <TripItem trip={trip} navigation={navigation} key={trip.id} />
-          ))
-      : authStore.user
-      ? tripStore.trips
-          .filter((trip) => trip.userId !== authStore.user.id)
+  const filteredTrips = filteredList
+    ? filter === "Favorites"
+      ? filteredList
+          .filter((trip) => trip.isFavorite === "T")
           .map((trip) => (
             <TripItem trip={trip} navigation={navigation} key={trip.id} />
           ))
-      : tripStore.trips.map((trip) => (
+      : filter === "Remove Filters"
+      ? filteredList.map((trip) => (
           <TripItem trip={trip} navigation={navigation} key={trip.id} />
-        ));
+        ))
+      : filteredList.map((trip) => (
+          <TripItem trip={trip} navigation={navigation} key={trip.id} />
+        ))
+    : null;
 
-  const exploreTrips =
-    // sort === "Favorites"
-    //   ? filteredTrips
-    //       .filter((trip) => trip.isFavorite === "T")
-    //       //TODO.concat(filteredTrips.filter((trip) => trip.isFavorite !== "T"))
-    //       .map((trip) => (
-    //         <TripItem trip={trip} navigation={navigation} key={trip.id} />
-    //       ))
-    // : sort === "Alphabetical Order"
-    // ? filteredTrips
-    //     //TODO.sort((a, b) =>
-    //     //   a.title.localeCompare(b.title)
-    //     // ) /*//TODO ALPHABETICAL EXCLUDE MARKDOWN SYMBOLS*/
-    //     .map((trip) => (
-    //       <TripItem trip={trip} navigation={navigation} key={trip.id} />
-    //     )) :
-    filteredTrips;
+  // const sortTrips =
+  //   // sort === "Favorites"
+  //   //   ? filteredTrips
+  //   //       .filter((trip) => trip.isFavorite === "T")
+  //   //       //TODO.concat(filteredTrips.filter((trip) => trip.isFavorite !== "T"))
+  //   //       .map((trip) => (
+  //   //         <TripItem trip={trip} navigation={navigation} key={trip.id} />
+  //   //       ))
+  //   // : sort === "Alphabetical Order"
+  //   // ? filteredTrips
+  //   //     //TODO.sort((a, b) =>
+  //   //     //   a.title.localeCompare(b.title)
+  //   //     // ) /*//TODO ALPHABETICAL EXCLUDE MARKDOWN SYMBOLS*/
+  //   //     .map((trip) => (
+  //   //       <TripItem trip={trip} navigation={navigation} key={trip.id} />
+  //   //     )) :
+  //   filteredTrips;
+
+  const exploreTrips = authStore.user
+    ? tripStore.trips
+        .filter((trip) => trip.userId !== authStore.user.id)
+        .map((trip) => (
+          <TripItem trip={trip} navigation={navigation} key={trip.id} />
+        ))
+    : tripStore.trips.map((trip) => (
+        <TripItem trip={trip} navigation={navigation} key={trip.id} />
+      ));
 
   return (
     <ScrollView>
-      {!otherProfileTrips && searchList && (
+      {!otherProfileTrips && filteredList && (
         <Row>
           <SortButton sort={sort} setSort={setSort} />
           <FilterButton filter={filter} setFilter={setFilter} />
@@ -92,7 +86,13 @@ const TripList = ({ navigation, otherProfileTrips, searchList }) => {
         <View>
           {/* TODO how to optimize this? */}
           {/* TODO SORT PICKER */}
-          <List>{otherProfileTrips ? otherProfileTrips : exploreTrips}</List>
+          <List>
+            {otherProfileTrips
+              ? otherProfileTrips
+              : filteredTrips
+              ? filteredTrips
+              : exploreTrips}
+          </List>
         </View>
       </Content>
     </ScrollView>
