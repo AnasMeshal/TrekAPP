@@ -39,8 +39,8 @@ const RootNavigatorProfile = () => {
         component={Profile}
         options={{
           title: "Profile",
-          headerRight: () => <OpenDrawer />,
           headerLeft: () => <LogOutButton />,
+          headerRight: () => <OpenDrawer />,
         }}
       />
 
