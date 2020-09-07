@@ -7,7 +7,7 @@ import * as Permissions from "expo-permissions";
 //Google Autocomplete
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-const GOOGLE_API_KEY = "API KEY HERE";
+const GOOGLE_API_KEY = "AIzaSyBFHG_7XXBQV1JFCmHF6SnXoQ1JUklYnUg";
 
 // Styles
 import { Content, Form, Item, Label, Input, Text, Toast } from "native-base";
@@ -69,7 +69,13 @@ const AddTrip = ({ navigation }) => {
   };
 
   const handleSubmit = async () => {
-    if (trip.title !== "" && trip.image !== null && trip.details !== "") {
+    if (
+      trip.title !== "" &&
+      trip.image !== null &&
+      trip.details !== "" &&
+      trip.latitude !== "" &&
+      trip.longitude !== ""
+    ) {
       await tripStore.tripCreate(trip);
       navigation.navigate("Profile");
       Toast.show({
@@ -112,32 +118,30 @@ const AddTrip = ({ navigation }) => {
             style={{ textAlignVertical: "top" }}
             onChangeText={(details) => setTrip({ ...trip, details })}
           />
-        </Item>  
-          <Item>
-            <GooglePlacesAutocomplete
-              placeholder="Search"
-              fetchDetails={true}
-              onPress={(data, details = null) => {
-                setTrip({
-                  ...trip,
-                  latitude: details.geometry.location.lat,
-                  longitude: details.geometry.location.lng,
-                  location: details.address_components[0].long_name,
-                });
-              }}
-              query={{
-                key: GOOGLE_API_KEY,
-                language: "en",
-              }}
-            />
-          </Item>
+        </Item>
+        <Item>
+          <GooglePlacesAutocomplete
+            placeholder="Search"
+            fetchDetails={true}
+            onPress={(data, details = null) => {
+              setTrip({
+                ...trip,
+                latitude: details.geometry.location.lat,
+                longitude: details.geometry.location.lng,
+                location: details.address_components[0].long_name,
+              });
+            }}
+            query={{
+              key: GOOGLE_API_KEY,
+              language: "en",
+            }}
+          />
+        </Item>
       </Form>
       <AddTripButtonStyled block onPress={handleSubmit}>
         <Text>Add</Text>
       </AddTripButtonStyled>
     </Content>
-   
-       
   );
 };
 

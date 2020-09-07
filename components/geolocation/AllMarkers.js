@@ -10,8 +10,15 @@ import { MapButton } from "./styles";
 // Stores
 import tripStore from "../../stores/tripStore";
 
+// Buttons
+import GoBackButton from "../buttons/GoBackButton";
+
 const AllMarkers = ({ navigation, route }) => {
   const { notMyProfile } = route.params;
+
+  const firstTrip = tripStore.trips.filter(
+    (trip) => trip.userId === notMyProfile.userId
+  )[0];
 
   const otherProfileTripMarkers = tripStore.trips
     .filter((trip) => trip.userId === notMyProfile.userId)
@@ -25,8 +32,6 @@ const AllMarkers = ({ navigation, route }) => {
         description={trip.description}
       />
     ));
-
-  console.log("AllMarkers -> otherProfileTripMarkers", otherProfileTripMarkers);
 
   const mapStyle = [
     {
@@ -196,11 +201,15 @@ const AllMarkers = ({ navigation, route }) => {
         customMapStyle={mapStyle}
         provider={MapView.PROVIDER_GOOGLE} // for google maps
         style={{ flex: 1 }}
+        initialRegion={{
+          latitude: firstTrip.latitude,
+          longitude: firstTrip.longitude,
+          latitudeDelta: 10,
+          longitudeDelta: 10,
+        }}
       >
         {otherProfileTripMarkers}
-        <MapButton onPress={() => navigation.goBack()}>
-          <Text>Back to profile</Text>
-        </MapButton>
+        <GoBackButton />
       </MapView>
     </>
   );

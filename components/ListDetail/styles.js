@@ -35,3 +35,17 @@ export const ProfileButtonText = styled(Text)`
   margin-left: auto;
   margin-right: auto;
 `;
+
+export const NoFavoritesText = styled.Text`
+  font-size: 30px;
+  color: black;
+  text-align: center;
+  padding: 20px;
+`;
+
+export const NoFavoritesMsg = styled.Text`
+  font-size: 20px;
+  color: grey;
+  text-align: center;
+  padding: 20px;
+`;

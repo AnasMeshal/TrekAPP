@@ -7,6 +7,12 @@ import RootNavigationList from "./RootNavigationList";
 import RootNavigationProfile from "./RootNavigationProfile";
 import RootNavigationWantToGo from "./RootNavigationWantToGo";
 
+// Buttons
+import LogOutButton from "../buttons/LogOutButton";
+
+// Stores
+import authStore from "../../stores/authStore";
+
 const { Navigator, Screen } = createDrawerNavigator();
 
 const DrawerNavigation = () => {
@@ -15,10 +21,15 @@ const DrawerNavigation = () => {
       drawerPosition="left"
       drawerType="front"
       initialRouteName="Profile"
+      keyboardDismissMode="on-drag"
     >
       <Screen name="Profile" component={RootNavigationProfile} />
-      <Screen name="Want to go" component={RootNavigationWantToGo} />
-      <Screen name="Lists" component={RootNavigationList} />
+      {authStore.user && (
+        <>
+          <Screen name="Want to go" component={RootNavigationWantToGo} />
+          <Screen name="Lists" component={RootNavigationList} />
+        </>
+      )}
     </Navigator>
   );
 };

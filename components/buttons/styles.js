@@ -4,7 +4,9 @@ import { Icon, Text, Button } from "native-base";
 
 export const GoBackIcon = styled(Icon)`
   color: white;
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-top: 5px
+  font-size: 40px;
 `;
 
 export const IconWrapper = styled(Button)`
@@ -29,7 +31,7 @@ export const IconStyled = styled(Icon)`
 
 export const LogOutStyled = styled(Icon)`
   color: #ff362e;
-  margin-left: 0.1px;
+  margin-left: 10px;
   margin-bottom: 1px;
 `;
 
@@ -63,14 +65,13 @@ export const OpenDrawerIcon = styled(Icon)`
   justify-content: center;
   align-self: center;
   margin-right: 0.1px;
-  margin-bottom: 1px;
 `;
 
 export const AddListButtonStyle = styled(Icon)`
   color: white;
   font-size: 40px;
   align-self: center;
-  margin-left: 10px;
+  margin-left: auto;
 `;
 
 export const StyledThreeDots = styled(Icon)`

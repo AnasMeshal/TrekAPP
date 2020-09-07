@@ -1,31 +1,26 @@
 import React from "react";
 import { observer } from "mobx-react";
+import { createStackNavigator } from "@react-navigation/stack";
 
 // Components
 import AddTrip from "../AddTrip";
 import Profile from "../Profile";
 import TripDetail from "../TripDetail";
 import Favorites from "../Profile/Favorites";
-import Maps from "../geolocation/maps";
-import AllMarkers from "../geolocation/AllMarkers";
 
 // Buttons
-import GoBackButton from "../buttons/GoBackButton";
 import LogOutButton from "../buttons/LogOutButton";
-import { Button, Toast, Icon, Root, Row } from "native-base";
-import tripStore from "../../stores/tripStore";
+import { Button, Toast, Icon, Row } from "native-base";
 import OpenDrawer from "../buttons/OpenDrawer";
+
+// Stores
+import tripStore from "../../stores/tripStore";
+import AddTripToListButton from "../buttons/AddTripToListButton";
 import authStore from "../../stores/authStore";
 
-import AddTripToListButton from "../buttons/AddTripToListButton";
-
-
-import { createNativeStackNavigator } from "react-native-screens/native-stack";
-import { useNavigation } from "@react-navigation/native";
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const RootNavigatorProfile = () => {
-  navigation = useNavigation();
   return (
     <Stack.Navigator
       initialRouteName="Profile"
@@ -43,8 +38,13 @@ const RootNavigatorProfile = () => {
         component={Profile}
         options={{
           title: "Profile",
-          headerLeft: () => <LogOutButton />,
-          headerRight: () => <OpenDrawer />,
+
+          headerLeft: () => (
+            <Row>
+              <LogOutButton />
+              <OpenDrawer />
+            </Row>
+          ),
         }}
       />
 
@@ -55,7 +55,6 @@ const RootNavigatorProfile = () => {
           title: "Add a Trip",
           headerTintColor: "white",
           headerBackTitleVisible: false,
-          // headerLeft: (navigation) => <GoBackButton navigation={navigation} />,
         }}
       />
 
@@ -68,11 +67,11 @@ const RootNavigatorProfile = () => {
             title: myTrip.title,
             headerTintColor: "white",
             headerBackTitleVisible: false,
-            // headerLeft: () => <GoBackButton navigation={navigation} />,
+
             // TODO  ADAPTIVE FAVORITE BUTTON
             headerRight: () =>
               myTrip.isFavorite === "T" ? (
-                <>
+                <Row>
                   <Button
                     transparent
                     onPress={async () => {
@@ -94,9 +93,9 @@ const RootNavigatorProfile = () => {
                     />
                   </Button>
                   <AddTripToListButton myTrip={myTrip} />
-                </>
+                </Row>
               ) : (
-                <>
+                <Row>
                   <Button
                     transparent
                     onPress={async () => {
@@ -106,7 +105,13 @@ const RootNavigatorProfile = () => {
                       });
                       Toast.show({
                         text: `Added ${myTrip.title} to Favorites`,
-                        type: "danger",
+                        textStyle: {
+                          fontWeight: "bold",
+                          textAlign: "center",
+                          fontSize: 20,
+                        },
+                        style: { backgroundColor: "#42d4f2e6" },
+                        position: "bottom",
                       });
                     }}
                   >
@@ -117,7 +122,7 @@ const RootNavigatorProfile = () => {
                     />
                   </Button>
                   <AddTripToListButton myTrip={myTrip} />
-                </>
+                </Row>
               ),
           };
         }}
@@ -130,16 +135,6 @@ const RootNavigatorProfile = () => {
           title: "Your Favorites",
           headerTintColor: "white",
           headerBackTitleVisible: false,
-          // headerLeft: () => <GoBackButton navigation={navigation} />,
-        }}
-      />
-      <Stack.Screen
-        name="map"
-        component={Maps}
-        options={({ route }) => {
-          return {
-            headerShown: false,
-          };
         }}
       />
     </Stack.Navigator>

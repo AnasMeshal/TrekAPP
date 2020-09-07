@@ -35,7 +35,6 @@ const RootNavigationList = () => {
         name="Lists"
         component={Lists}
         options={{
-          headerLargeTitle: true,
           title: "Lists",
           headerLeft: () => <AddListButton />,
           headerRight: () => <OpenDrawer />,

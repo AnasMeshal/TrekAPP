@@ -5,7 +5,7 @@ import Markdown from "react-native-simple-markdown";
 
 export const TripImage = styled.Image`
   width: 100%;
-  min-height: 50%;
+  min-height: 45%;
   align-self: center;
 `;
 
@@ -28,10 +28,17 @@ export const TripDetails = styled.TextInput`
 
 export const ProfileButton = styled(Button)`
   background-color: #42d4f2;
-
-  margin-top: 50px;
+  margin-top: 15px;
   align-self: center;
   width: 70%;
+  align-items: center;
+`;
+
+export const MapButtonStyled = styled(Button)`
+  background-color: #42d4f2;
+  margin-top: 20px;
+  align-self: center;
+  width: 40%;
   align-items: center;
 `;
 export const ChangeImageButton = styled(Button)`
@@ -42,7 +49,7 @@ export const ChangeImageButton = styled(Button)`
 
 export const DoneButton = styled(Button)`
   background-color: #42d4f2;
-  margin-top: 45px;
+  margin-top: 25px;
   align-self: center;
   width: 30%;
   align-items: center;
@@ -88,7 +95,7 @@ export const StyledView = styled(View)`
   align-content: center;
   justify-content: center;
   display: flex;
-  margin-top: 20px;
+  margin-top: 10;
   padding-right: auto;
   padding-left: auto;
   margin-left: 5px;
@@ -120,7 +127,7 @@ export const StyledDetailView = styled(View)`
   align-content: center;
   justify-content: center;
   display: flex;
-  margin-top: 20px;
+  margin-top: 5px;
   padding-right: auto;
   padding-left: auto;
   margin-left: 5px;

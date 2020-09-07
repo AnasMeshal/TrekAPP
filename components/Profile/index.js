@@ -146,9 +146,13 @@ const Profile = ({ navigation }) => {
           onEndEditing={async () => {
             await profileStore.profileUpdate(updatedProfile);
             Toast.show({
-              text: `Bio Has Been Changed to:
-
-                ${updatedProfile.bio}`,
+              text: `Bio Has Been Changed to: ${updatedProfile.bio}`,
+              textStyle: {
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: 20,
+              },
+              style: { backgroundColor: "#42d4f2e6" },
             });
           }}
         />

@@ -19,21 +19,18 @@ const Search = ({ navigation }) => {
 
   const onChangeSearch = (query) => {
     setSearchQuery(query);
-    console.log(query);
   };
 
   const filteredList = authStore.user
     ? tripStore.trips
         .filter((trip) => trip.userId !== authStore.user.id)
-        .filter(
-          (trip) =>
-            trip.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            trip.title.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-    : tripStore.trips.filter(
-        (trip) =>
-          trip.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        .filter((trip) =>
+          // trip.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
           trip.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    : tripStore.trips.filter((trip) =>
+        // trip.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        trip.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
 
   return (
@@ -65,7 +62,7 @@ const Search = ({ navigation }) => {
           />
         </Item>
       </Header>
-      <TripList filteredList={filteredList} />
+      <TripList navigation={navigation} filteredList={filteredList} />
     </Container>
     // </ScrollView>
   );
