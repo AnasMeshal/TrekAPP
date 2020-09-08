@@ -24,7 +24,7 @@ const Favorites = ({ navigation }) => {
       <NoFavoritesText>You Have No Favorites</NoFavoritesText>
       <NoFavoritesMsg>
         Please mark some of your trips as favorites using the heart button on
-        their right
+        the right.
       </NoFavoritesMsg>
     </ScrollView>
   );

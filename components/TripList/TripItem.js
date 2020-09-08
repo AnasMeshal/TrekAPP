@@ -14,12 +14,19 @@ import {
   Icon,
   Toast,
   Row,
+  Card,
+  CardItem,
+  Thumbnail,
 } from "native-base";
+
+import { Image } from "react-native";
 import tripStore from "../../stores/tripStore";
 import { observer } from "mobx-react";
 import profileStore from "../../stores/profileStore";
 import Markdown from "react-native-simple-markdown";
 import { ImagePreview } from "./styles";
+import { TripImage } from "../TripDetail/styles";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const TripItem = ({ trip, navigation, isProfile }) => {
   const newTrip = {
@@ -184,55 +191,57 @@ const TripItem = ({ trip, navigation, isProfile }) => {
   }
 
   return (
-    <ListItem onPress={viewTrip} thumbnail>
-      <Left>
-        <ImagePreview
-          square
+    <TouchableOpacity onPress={viewTrip}>
+      <Card>
+        <Image
+          style={{ height: 200, width: null, flex: 1 }}
           source={{
             uri:
               trip.image ||
               "https://static.toiimg.com/photo/msid-66440799,width-96,height-65.cms",
           }}
         />
-      </Left>
-      <Body>
-        <Markdown
-          styles={{
-            text: { fontSize: 16 },
-          }}
-          whitelist={["strong", "em"]}
-        >
-          {trip.title}
-        </Markdown>
-        <Markdown
-          whitelist={["strong", "em"]}
-          numberOfLines={1}
-          styles={{
-            text: {
-              fontWeight: "200",
-              color: "grey",
-              marginTop: 7,
-            },
-          }}
-        >
-          {tripPreview}
-        </Markdown>
-      </Body>
-      <Right>
-        <Row>
-          <Button onPress={viewTrip} transparent>
-            <Text>View</Text>
-          </Button>
-          {trip.isFavorite === "T" && (
-            <Icon
-              type="Ionicons"
-              name="ios-heart"
-              style={{ color: "red", fontSize: 20 }}
-            />
-          )}
-        </Row>
-      </Right>
-    </ListItem>
+        <CardItem onPress={viewTrip}>
+          <Body>
+            <Markdown
+              styles={{
+                text: { fontSize: 16 },
+              }}
+              whitelist={["strong", "em"]}
+            >
+              {trip.title}
+            </Markdown>
+            <Markdown
+              whitelist={["strong", "em"]}
+              numberOfLines={1}
+              styles={{
+                text: {
+                  fontWeight: "200",
+                  color: "grey",
+                  marginTop: 7,
+                },
+              }}
+            >
+              {tripPreview}
+            </Markdown>
+          </Body>
+          <Right>
+            <Row>
+              <Button onPress={viewTrip} transparent>
+                <Text>View</Text>
+              </Button>
+              {trip.isFavorite === "T" && (
+                <Icon
+                  type="Ionicons"
+                  name="ios-heart"
+                  style={{ color: "red", fontSize: 20 }}
+                />
+              )}
+            </Row>
+          </Right>
+        </CardItem>
+      </Card>
+    </TouchableOpacity>
   );
 };
 
