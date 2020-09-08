@@ -15,10 +15,11 @@ import authStore from "../../stores/authStore";
 // Amazing Navigator
 import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import AllMarkers from "../geolocation/AllMarkers";
+import GoBackButton from "../buttons/GoBackButton";
 
 const Stack = createNativeStackNavigator();
 
-const Main = () => {
+const Main = ({ navigation }) => {
   return (
     <Stack.Navigator
       headerMode="none"
@@ -43,9 +44,9 @@ const Main = () => {
         component={Maps}
         options={({ route }) => {
           return {
+            statusBarStyle: "light",
             headerShown: false,
             animationTypeForReplace: "pop",
-            headerShown: false,
           };
         }}
       />
@@ -54,9 +55,9 @@ const Main = () => {
         component={AllMarkers}
         options={({ route }) => {
           return {
-            headerShown: false,
+            statusBarStyle: "light",
+            headerShown: true,
             animationTypeForReplace: "pop",
-            headerShown: false,
           };
         }}
       />

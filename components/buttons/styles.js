@@ -5,7 +5,7 @@ import { Icon, Text, Button } from "native-base";
 export const GoBackIcon = styled(Icon)`
   color: white;
   margin-left: 5px;
-  margin-top: 5px
+  margin-top: 35px;
   font-size: 40px;
 `;
 

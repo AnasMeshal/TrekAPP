@@ -38,6 +38,11 @@ const Modal = ({ navigation }) => {
         }}
       >
         <Spinner color="orange" />
+        <X
+          onPress={() => navigation.replace("BottomTab")}
+          name="close"
+          type="AntDesign"
+        />
       </BackgroundImage>
     );
 
