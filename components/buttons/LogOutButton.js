@@ -28,11 +28,7 @@ const LogOutButton = () => {
   };
   if (authStore.user)
     return (
-      <LogOutStyled
-        type="SimpleLineIcons"
-        name="logout"
-        onPress={handleLogOut}
-      />
+      <LogOutStyled type="AntDesign" name="logout" onPress={handleLogOut} />
     );
 };
 

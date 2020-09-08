@@ -31,8 +31,7 @@ export const IconStyled = styled(Icon)`
 
 export const LogOutStyled = styled(Icon)`
   color: #ff362e;
-  margin-left: 10px;
-  margin-bottom: 1px;
+  margin-right: 15px;
 `;
 
 export const FilterStyled = styled(Text)`
@@ -62,9 +61,7 @@ export const SortButtonStyled = styled(Button)`
 export const OpenDrawerIcon = styled(Icon)`
   color: white;
   font-size: 35px;
-  justify-content: center;
-  align-self: center;
-  margin-right: 0.1px;
+  margin-left: 15px;
 `;
 
 export const AddListButtonStyle = styled(Icon)`
@@ -78,5 +75,6 @@ export const StyledThreeDots = styled(Icon)`
   color: white;
   font-size: 40px;
   align-self: center;
+  padding-right: 5px;
   /* margin-left: 10px; */
 `;
