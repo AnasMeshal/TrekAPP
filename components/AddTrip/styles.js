@@ -24,3 +24,10 @@ export const ImagePreview = styled.Image`
 export const ImageButton = styled(Button)`
   background-color: #37a0db;
 `;
+
+export const LocationSearchItem = styled(Item)`
+  margin-top: 30px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+`;

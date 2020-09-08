@@ -48,6 +48,11 @@ const TripItem = ({ trip, navigation, isProfile }) => {
           Toast.show({
             text: `Duplicated ${trip.title}`,
             type: "success",
+            textStyle: {
+              fontWeight: "bold",
+              textAlign: "center",
+              fontSize: 20,
+            },
             position: "bottom",
           });
       },
@@ -61,6 +66,11 @@ const TripItem = ({ trip, navigation, isProfile }) => {
         Toast.show({
           text: `Deleted ${trip.title}`,
           type: "danger",
+          textStyle: {
+            fontWeight: "bold",
+            textAlign: "center",
+            fontSize: 20,
+          },
           position: "bottom",
         });
       },
@@ -146,6 +156,11 @@ const TripItem = ({ trip, navigation, isProfile }) => {
                     Toast.show({
                       text: `Removed ${trip.title} from Favorites`,
                       type: "danger",
+                      textStyle: {
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        fontSize: 20,
+                      },
                       position: "bottom",
                     });
                   }}

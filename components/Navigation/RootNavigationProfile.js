@@ -83,6 +83,11 @@ const RootNavigatorProfile = () => {
                       Toast.show({
                         text: `Removed ${myTrip.title} from Favorites`,
                         type: "danger",
+                        textStyle: {
+                          fontWeight: "bold",
+                          textAlign: "center",
+                          fontSize: 20,
+                        },
                         position: "bottom",
                       });
                     }}

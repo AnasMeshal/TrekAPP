@@ -7,7 +7,7 @@ import * as Permissions from "expo-permissions";
 //Google Autocomplete
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
-const GOOGLE_API_KEY = "Google Api Here";
+const GOOGLE_API_KEY = "AIzaSyBFHG_7XXBQV1JFCmHF6SnXoQ1JUklYnUg";
 
 // Styles
 import { Content, Form, Item, Label, Input, Text, Toast } from "native-base";
@@ -16,6 +16,7 @@ import {
   ImageItem,
   ImagePreview,
   ImageButton,
+  LocationSearchItem,
 } from "./styles";
 
 // Stores
@@ -119,10 +120,28 @@ const AddTrip = ({ navigation }) => {
             onChangeText={(details) => setTrip({ ...trip, details })}
           />
         </Item>
-        <Item>
+        <LocationSearchItem>
           <GooglePlacesAutocomplete
-            placeholder="Search"
+            placeholder="Please Insert your Trip's Location"
             fetchDetails={true}
+            enablePoweredByContainer={false}
+            styles={{
+              textInputContainer: {
+                backgroundColor: "rgba(0,0,0,0)",
+                borderTopWidth: 0,
+                borderBottomWidth: 0,
+              },
+              textInput: {
+                marginLeft: 0,
+                marginRight: 0,
+                height: 38,
+                color: "#5d5d5d",
+                fontSize: 16,
+              },
+              predefinedPlacesDescription: {
+                color: "#1faadb",
+              },
+            }}
             onPress={(data, details = null) => {
               setTrip({
                 ...trip,
@@ -136,7 +155,7 @@ const AddTrip = ({ navigation }) => {
               language: "en",
             }}
           />
-        </Item>
+        </LocationSearchItem>
       </Form>
       <AddTripButtonStyled block onPress={handleSubmit}>
         <Text>Add</Text>
