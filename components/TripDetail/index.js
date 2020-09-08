@@ -35,11 +35,21 @@ const TripDetail = ({ route, navigation }) => {
   const { notMyProfile } = route.params;
   const [editable, setEditable] = useState(false);
 
+  let wantToGo = [];
   if (authStore.user) {
-    const wantToGo = listStore.lists.find(
+    wantToGo = listStore.lists.find(
       (list) => list.name === "Want To Go" && list.userId === authStore.user.id
     );
   }
+  const inWantToGo = wantToGo.trips.map((trip) => trip.id);
+
+  // if () {
+  //   console.log("im inside the want to go list");
+  // } else if (hero.includes(notMyTrip && notMyTrip.id)) {
+  //   console.log("im inside the want to go list");
+  // } else {
+  //   console.log("im not inside the want to go list");
+  // }
 
   if (myTrip) {
     const [updatedTrip, setUpdatedTrip] = useState({
@@ -224,13 +234,17 @@ const TripDetail = ({ route, navigation }) => {
                     onPress={() => {
                       listStore.addTripToList(wantToGo.id, myTrip.id);
                       Toast.show({
-                        text: "List Added to Want To Go List",
+                        text: inWantToGo.includes(myTrip && myTrip.id)
+                          ? "List Already has been Added to Want To Go List"
+                          : "List Added to Want To Go List",
                         textStyle: {
                           fontWeight: "bold",
                           textAlign: "center",
                           fontSize: 20,
                         },
-                        style: { backgroundColor: "#42d4f2e6" },
+                        style: {
+                          backgroundColor: "#42d4f2e6",
+                        },
                       });
                     }}
                   >
@@ -325,7 +339,9 @@ const TripDetail = ({ route, navigation }) => {
               onPress={() => {
                 listStore.addTripToList(wantToGo.id, notMyTrip.id);
                 Toast.show({
-                  text: "List Added to Want To Go List",
+                  text: inWantToGo.includes(notMyTrip && notMyTrip.id)
+                    ? "List Already has been Added to Want To Go List"
+                    : "List Added to Want To Go List",
                   textStyle: {
                     fontWeight: "bold",
                     textAlign: "center",
