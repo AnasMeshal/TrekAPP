@@ -56,7 +56,7 @@ const Main = ({ navigation }) => {
         options={({ route }) => {
           return {
             statusBarStyle: "light",
-            headerShown: true,
+            headerShown: false,
             animationTypeForReplace: "pop",
           };
         }}

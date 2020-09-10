@@ -86,7 +86,7 @@ const TripItem = ({ trip, navigation, isProfile }) => {
   };
 
   const tripPreview =
-    trip.details.replace(/[^A-Za-z0-9.-:/$ ]/g, "").slice(0, 30) + "...";
+    trip.details.replace(/[^A-Za-z0-9.-:/$ ]/g, "").slice(0, 50) + "...";
 
   //TODO: better swipe button width and do it in one return
   if (isProfile) {

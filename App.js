@@ -11,6 +11,7 @@ import { enableScreens } from "react-native-screens";
 import { Root } from "native-base";
 
 export default function App() {
+  console.disableYellowBox = true;
   enableScreens();
   return (
     <Root>
